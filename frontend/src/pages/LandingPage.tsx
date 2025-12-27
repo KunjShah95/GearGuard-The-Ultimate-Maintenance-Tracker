@@ -3,6 +3,8 @@ import { Icon } from '@iconify/react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { MarketingNavbar } from '../components/layout/MarketingNavbar';
+import { MarketingFooter } from '../components/layout/MarketingFooter';
 
 const springTransition = {
     type: "spring" as const,
@@ -22,33 +24,7 @@ export function LandingPage() {
             <div className="fixed inset-0 z-0 bg-gradient-to-b from-surface to-white" />
 
             {/* Navigation */}
-            <nav className="fixed top-0 w-full z-50 px-6 py-6">
-                <div className="max-w-7xl mx-auto flex items-center justify-between glass-panel rounded-full px-8 h-14 border-white/40 shadow-sm bg-white/50 backdrop-blur-xl">
-                    <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/20">
-                            <Icon icon="solar:shield-bold-duotone" className="text-white w-5 h-5" />
-                        </div>
-                        <span className="text-lg font-display font-bold tracking-tight text-slate-900">
-                            GearGuard
-                        </span>
-                    </div>
-
-                    <div className="hidden md:flex items-center gap-10 text-[11px] uppercase tracking-[0.12em] font-semibold text-slate-500">
-                        <a href="#features" className="hover:text-primary transition-colors">Capabilities</a>
-                        <a href="#teams" className="hover:text-primary transition-colors">Ecosystem</a>
-                        <a href="#pricing" className="hover:text-primary transition-colors">Enterprise</a>
-                    </div>
-
-                    <div className="flex items-center gap-6">
-                        <Link to="/login" className="text-[11px] font-bold uppercase tracking-widest text-slate-500 hover:text-primary transition-colors">Sign In</Link>
-                        <Link to="/register">
-                            <Button className="rounded-full px-5 h-9 text-[11px] font-bold uppercase tracking-widest bg-primary text-white hover:bg-primary-dark transition-all shadow-lg shadow-primary/20">
-                                Get Started
-                            </Button>
-                        </Link>
-                    </div>
-                </div>
-            </nav>
+            <MarketingNavbar />
 
             {/* Hero Section */}
             <section className="relative pt-48 pb-32 px-6 z-10">
@@ -272,54 +248,7 @@ export function LandingPage() {
             </section>
 
             {/* Footer */}
-            <footer className="py-20 px-6 border-t border-slate-200 bg-white relative z-10">
-                <div className="max-w-7xl mx-auto">
-                    <div className="grid grid-cols-12 gap-12 mb-20">
-                        <div className="col-span-12 lg:col-span-4">
-                            <div className="flex items-center gap-3 mb-6">
-                                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                                    <Icon icon="solar:shield-bold-duotone" className="text-white w-5 h-5" />
-                                </div>
-                                <span className="text-xl font-display font-bold text-slate-900">GearGuard</span>
-                            </div>
-                            <p className="text-slate-500 leading-relaxed max-w-xs font-light">
-                                The industrial standard for asset orchestration and tactical intelligence.
-                            </p>
-                        </div>
-                        <div className="col-span-12 lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
-                            {[
-                                { title: "Product", links: ["Features", "Security", "Enterprise", "Pricing"] },
-                                { title: "Company", links: ["About", "Careers", "Blog", "Contact"] },
-                                { title: "Resources", links: ["Documentation", "API Reference", "Guides", "Support"] },
-                                { title: "Legal", links: ["Privacy", "Terms", "Cookie Policy", "SLA"] }
-                            ].map((col, i) => (
-                                <div key={i}>
-                                    <h4 className="text-[11px] font-bold text-slate-900 uppercase tracking-widest mb-6">{col.title}</h4>
-                                    <ul className="space-y-4">
-                                        {col.links.map((link, j) => (
-                                            <li key={j}>
-                                                <a href="#" className="text-sm text-slate-500 hover:text-primary transition-colors">{link}</a>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
-                        <div className="text-[11px] text-slate-400 font-bold uppercase tracking-widest">
-                            © 2025 GearGuard Inc. All rights reserved.
-                        </div>
-                        <div className="flex gap-6">
-                            {['solar:share-circle-bold', 'solar:clapperboard-edit-bold', 'solar:letter-bold'].map((icon, i) => (
-                                <a key={i} href="#" className="text-slate-400 hover:text-primary transition-colors">
-                                    <Icon icon={icon} className="w-5 h-5" />
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <MarketingFooter />
         </div>
     );
 }

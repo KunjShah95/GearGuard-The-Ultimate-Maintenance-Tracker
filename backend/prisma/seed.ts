@@ -21,6 +21,36 @@ async function main() {
     });
     console.log('✅ Created admin user:', admin.email);
 
+    // Create manager user
+    const managerPassword = await bcrypt.hash('manager123', 10);
+    const manager = await prisma.user.upsert({
+        where: { email: 'manager@gearguard.com' },
+        update: {},
+        create: {
+            email: 'manager@gearguard.com',
+            password: managerPassword,
+            name: 'Manager User',
+            role: 'MANAGER',
+            department: 'Operations',
+        },
+    });
+    console.log('✅ Created manager user:', manager.email);
+
+    // Create standard user
+    const userPassword = await bcrypt.hash('user123', 10);
+    const user = await prisma.user.upsert({
+        where: { email: 'user@gearguard.com' },
+        update: {},
+        create: {
+            email: 'user@gearguard.com',
+            password: userPassword,
+            name: 'Standard User',
+            role: 'USER',
+            department: 'General',
+        },
+    });
+    console.log('✅ Created standard user:', user.email);
+
     // Create technician users
     const techPassword = await bcrypt.hash('tech123', 10);
     const tech1 = await prisma.user.upsert({

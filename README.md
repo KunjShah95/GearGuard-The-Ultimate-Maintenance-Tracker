@@ -296,7 +296,11 @@ npm run dev
 
 ### 5. Running Locally
 -   Open your browser to `http://localhost:5173`.
--   Login with the seeded credentials (check `backend/prisma/seed.ts` for default logins, usually `admin@gearguard.com` / `password123`).
+- Login with the seeded credentials:
+    - **Admin**: `admin@gearguard.com` / `admin123`
+    - **Manager**: `manager@gearguard.com` / `manager123`
+    - **Technician**: `john@gearguard.com` / `tech123`
+    - **User**: `user@gearguard.com` / `user123`
 
 ---
 
@@ -347,7 +351,7 @@ Authenticate and retrieve a token.
 *   **Response**: `200 OK`
     ```json
     {
-      "token": "eyJhbGciOiJIUzI1NiIsIn...",
+      "token": "eyz...",
       "user": { "id": "...", "email": "..." }
     }
     ```
