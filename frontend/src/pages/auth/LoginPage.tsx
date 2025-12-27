@@ -1,9 +1,16 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Shield, Mail, Lock, Eye, EyeOff, ArrowRight, Loader2 } from 'lucide-react';
+import { Icon } from '@iconify/react';
 import { useAuth } from '../../context/AuthContext';
 import { Button } from '../../components/ui/Button';
-import { Input } from '../../components/ui/Input';
+import { motion } from 'framer-motion';
+
+const springTransition = {
+    type: "spring",
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+};
 
 export function LoginPage() {
     const { login } = useAuth();
@@ -33,132 +40,159 @@ export function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-surface-dark overflow-hidden">
-            {/* Left Side: Branding & Visuals */}
-            <div className="hidden lg:flex flex-col justify-center px-20 relative bg-primary overflow-hidden">
-                {/* Abstract shapes */}
-                <div className="absolute top-0 left-0 w-full h-full">
-                    <div className="absolute top-[-10%] right-[-10%] w-[80%] h-[80%] bg-blue-400/20 blur-[100px] rounded-full" />
-                    <div className="absolute bottom-[-20%] left-[-20%] w-[100%] h-[100%] bg-black/10 blur-[120px] rounded-full" />
-                </div>
+        <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-surface-dark overflow-hidden font-sans">
+            {/* Background Layers */}
+            <div className="fixed inset-0 dot-grid pointer-events-none opacity-[0.05]" />
 
-                <div className="relative z-10 animate-fade-in">
-                    <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center shadow-2xl mb-12 transform rotate-3 hover:rotate-0 transition-transform duration-500">
-                        <Shield className="w-12 h-12 text-primary" />
-                    </div>
-                    <h1 className="text-6xl font-black text-white leading-tight mb-8">
-                        Engineered for <br />
-                        <span className="text-blue-900/50">Modern Facilities.</span>
+            {/* Left Side: Industrial Showcase */}
+            <div className="hidden lg:flex flex-col justify-center px-24 relative overflow-hidden">
+                <div className="absolute inset-0 bg-primary/5 border-r border-white/5" />
+
+                <motion.div
+                    initial={{ opacity: 0, x: -60 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={springTransition}
+                    className="relative z-10"
+                >
+                    <Link to="/" className="inline-flex items-center gap-4 mb-20 group">
+                        <div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(99,102,241,0.4)] group-hover:scale-110 transition-transform duration-500">
+                            <Icon icon="solar:shield-bold-duotone" className="w-7 h-7 text-white" />
+                        </div>
+                        <span className="text-2xl font-black text-white tracking-tighter">GearGuard</span>
+                    </Link>
+
+                    <h1 className="text-7xl font-black text-white leading-[0.9] tracking-tighter mb-10">
+                        Enter the <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-400">Control Plane.</span>
                     </h1>
-                    <p className="text-xl text-blue-100 max-w-lg leading-relaxed mb-12">
-                        The intelligent layer between your equipment and your maintenance teams.
-                        Track, schedule, and optimize with surgical precision.
+
+                    <p className="text-2xl text-zinc-500 max-w-lg leading-tight mb-16 font-medium italic">
+                        "Precision orchestration for high-value assets. Transform hardware noise into tactical intelligence."
                     </p>
 
-                    <div className="grid grid-cols-2 gap-8 text-white/80">
-                        <div>
-                            <div className="text-3xl font-bold mb-1">94%</div>
-                            <div className="text-xs font-bold uppercase tracking-widest text-blue-200">Uptime Average</div>
-                        </div>
-                        <div>
-                            <div className="text-3xl font-bold mb-1">12M+</div>
-                            <div className="text-xs font-bold uppercase tracking-widest text-blue-200">Assets Secured</div>
-                        </div>
+                    <div className="grid grid-cols-2 gap-12 border-t border-white/[0.05] pt-12">
+                        {[
+                            { value: 'LIVE', label: 'OPERATIONAL_STATUS', color: 'text-emerald-500' },
+                            { value: 'v4.2.0', label: 'SYSTEM_VERSION', color: 'text-primary' },
+                        ].map((stat, i) => (
+                            <div key={i}>
+                                <div className={`text-2xl font-black ${stat.color} mb-2 tracking-widest`}>{stat.value}</div>
+                                <div className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-700">{stat.label}</div>
+                            </div>
+                        ))}
                     </div>
-                </div>
+                </motion.div>
+
+                {/* Abstract Visual Element */}
+                <div className="absolute bottom-0 right-0 w-[400px] h-[400px] opacity-10 blur-[100px] bg-primary rounded-full -mr-40 -mb-40" />
             </div>
 
-            {/* Right Side: Form */}
-            <div className="flex flex-col justify-center items-center p-8 bg-surface-dark relative">
-                <div className="w-full max-w-md animate-slide-up">
-                    <div className="text-center mb-10">
-                        <div className="lg:hidden flex justify-center mb-6">
-                            <div className="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
-                                <Shield className="w-8 h-8 text-white" />
-                            </div>
+            {/* Right Side: Authentication */}
+            <div className="flex flex-col justify-center items-center p-8 relative">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={springTransition}
+                    className="w-full max-w-md"
+                >
+                    <div className="mb-16">
+                        <div className="lg:hidden flex mb-12">
+                            <Link to="/" className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center shadow-lg">
+                                <Icon icon="solar:shield-bold-duotone" className="w-7 h-7 text-white" />
+                            </Link>
                         </div>
-                        <h2 className="text-4xl font-black text-white mb-3">Welcome Back</h2>
-                        <p className="text-slate-500 font-medium">Access your operations control center.</p>
+                        <span className="text-[10px] font-black text-primary uppercase tracking-[0.5em] block mb-4 italic">// AUTH_GATEWAY</span>
+                        <h2 className="text-5xl font-black text-white tracking-tighter mb-2 leading-none">Initialize Session</h2>
+                        <p className="text-zinc-500 font-bold">Verified credentials required for sector access.</p>
                     </div>
 
                     {error && (
-                        <div className="mb-8 p-4 bg-danger/10 border border-danger/20 rounded-2xl text-danger text-sm font-bold animate-shake text-center">
-                            {error}
-                        </div>
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="mb-8 p-6 bg-rose-500/10 border border-rose-500/20 rounded-[2rem] flex items-center gap-4"
+                        >
+                            <Icon icon="solar:danger-bold-duotone" className="text-rose-500 w-6 h-6 shrink-0" />
+                            <div className="text-[10px] font-black text-rose-500 uppercase tracking-widest">
+                                ERROR_CODE: AUTH_REJECTED <br />
+                                {error}
+                            </div>
+                        </motion.div>
                     )}
 
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div className="space-y-2">
-                            <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Corporate Email</label>
+                    <form onSubmit={handleSubmit} className="space-y-8">
+                        <div className="space-y-3">
+                            <label className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-700 ml-1 italic">Command_Identity (Email)</label>
                             <div className="relative group">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-600 group-focus-within:text-primary transition-colors" />
+                                <div className="absolute left-6 top-1/2 -translate-y-1/2 opacity-20 group-focus-within:opacity-100 transition-opacity">
+                                    <Icon icon="solar:user-bold-duotone" className="w-6 h-6 text-primary" />
+                                </div>
                                 <input
                                     type="email"
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    className="w-full pl-12 pr-4 h-14 bg-white/[0.03] border border-white/5 rounded-2xl outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all text-white font-medium"
-                                    placeholder="admin@gearguard.com"
+                                    className="w-full h-20 pl-16 pr-6 bg-zinc-900/50 border border-white/5 rounded-[2rem] outline-none focus:border-primary/50 focus:bg-zinc-900 transition-all text-white font-bold text-lg placeholder:text-zinc-700"
+                                    placeholder="operator@system.sys"
                                     required
                                 />
                             </div>
                         </div>
 
-                        <div className="space-y-2">
+                        <div className="space-y-3">
                             <div className="flex justify-between px-1">
-                                <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Security Key</label>
-                                <Link to="/forgot-password" size="sm" className="text-xs font-bold text-primary hover:underline">Lost access?</Link>
+                                <label className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-700 italic">Access_Cipher</label>
+                                <Link to="/forgot-password" size="sm" className="text-[10px] font-black text-zinc-600 hover:text-primary tracking-widest transition-colors">CIPHER_RECOVERY</Link>
                             </div>
                             <div className="relative group">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-600 group-focus-within:text-primary transition-colors" />
+                                <div className="absolute left-6 top-1/2 -translate-y-1/2 opacity-20 group-focus-within:opacity-100 transition-opacity">
+                                    <Icon icon="solar:lock-password-bold-duotone" className="w-6 h-6 text-primary" />
+                                </div>
                                 <input
                                     type={showPassword ? 'text' : 'password'}
                                     value={formData.password}
                                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                    className="w-full pl-12 pr-12 h-14 bg-white/[0.03] border border-white/5 rounded-2xl outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all text-white font-medium font-mono"
+                                    className="w-full h-20 pl-16 pr-16 bg-zinc-900/50 border border-white/5 rounded-[2rem] outline-none focus:border-primary/50 focus:bg-zinc-900 transition-all text-white font-mono text-xl tracking-[0.5em] placeholder:text-zinc-700"
                                     placeholder="••••••••"
                                     required
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-600 hover:text-white transition-colors"
+                                    className="absolute right-6 top-1/2 -translate-y-1/2 text-zinc-700 hover:text-primary transition-colors"
                                 >
-                                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                                    <Icon icon={showPassword ? "solar:eye-closed-bold-duotone" : "solar:eye-bold-duotone"} className="w-6 h-6" />
                                 </button>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-3 px-1">
-                            <input type="checkbox" id="remember" className="w-5 h-5 rounded-lg accent-primary bg-white/5 border-white/10" />
-                            <label htmlFor="remember" className="text-sm font-medium text-slate-400">Trust this device for 30 days</label>
-                        </div>
-
                         <Button
                             type="submit"
-                            className="w-full h-16 rounded-2xl text-lg group"
+                            className="w-full h-24 rounded-[2.5rem] text-xl font-black group relative overflow-hidden transition-all duration-500 shadow-[0_0_60px_rgba(99,102,241,0.1)] hover:shadow-[0_0_80px_rgba(99,102,241,0.2)]"
                             disabled={isLoading}
                         >
-                            {isLoading ? (
-                                <Loader2 className="w-6 h-6 animate-spin" />
-                            ) : (
-                                <>
-                                    Authenticate Now
-                                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                </>
-                            )}
+                            <span className="relative z-10 flex items-center justify-center gap-4">
+                                {isLoading ? (
+                                    <Icon icon="solar:restart-bold-duotone" className="w-8 h-8 animate-spin" />
+                                ) : (
+                                    <>
+                                        INITIALIZE_PROTOCOL
+                                        <Icon icon="solar:power-bold" className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                                    </>
+                                )}
+                            </span>
                         </Button>
                     </form>
 
-                    <p className="mt-10 text-center text-slate-500 font-medium">
-                        Need an infrastructure? <Link to="/register" className="text-primary font-bold hover:underline">Deploy GearGuard</Link>
+                    <p className="mt-16 text-center text-[10px] font-black text-zinc-700 uppercase tracking-[0.4em]">
+                        Unit unassigned? <Link to="/register" className="text-primary hover:text-white transition-colors underline underline-offset-8 decoration-primary/30">Request Provisioning</Link>
                     </p>
 
-                    <div className="mt-12 flex items-center justify-center gap-8 opacity-30 grayscale hover:grayscale-0 transition-all">
-                        <Shield className="w-8 h-8" />
-                        <div className="h-4 w-px bg-white/10" />
-                        <span className="text-[10px] uppercase font-black tracking-[0.2em]">ISO 27001 Certified System</span>
+                    <div className="mt-24 flex items-center justify-center gap-8 opacity-10 border-t border-white/[0.03] pt-12 grayscale">
+                        <Icon icon="solar:shield-check-bold" className="w-8 h-8" />
+                        <Icon icon="solar:mask-h-bold-duotone" className="w-8 h-8" />
+                        <Icon icon="solar:key-minimalistic-square-2-bold-duotone" className="w-8 h-8" />
                     </div>
-                </div>
+                </motion.div>
             </div>
         </div>
     );

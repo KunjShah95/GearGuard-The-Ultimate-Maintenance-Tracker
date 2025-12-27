@@ -1,14 +1,5 @@
 import { useState } from 'react';
-import {
-    Plus,
-    Search,
-    Wrench,
-    MapPin,
-    Calendar,
-    MoreVertical,
-    Filter,
-    Package,
-} from 'lucide-react';
+import { Icon } from '@iconify/react';
 import { Header } from '../components/layout/Header';
 import { Card, CardContent } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
@@ -95,12 +86,12 @@ export function EquipmentPage() {
 
     const getIcon = (cat: Category) => {
         switch (cat) {
-            case 'MACHINERY': return '⚙️';
-            case 'VEHICLE': return '🚛';
-            case 'IT_EQUIPMENT': return '🖥️';
-            case 'ELECTRICAL': return '⚡';
-            case 'HVAC': return '❄️';
-            default: return '📦';
+            case 'MACHINERY': return 'solar:settings-bold-duotone';
+            case 'VEHICLE': return 'solar:delivery-bold-duotone';
+            case 'IT_EQUIPMENT': return 'solar:monitor-bold-duotone';
+            case 'ELECTRICAL': return 'solar:bolt-bold-duotone';
+            case 'HVAC': return 'solar:wind-bold-duotone';
+            default: return 'solar:box-bold-duotone';
         }
     };
 
@@ -113,14 +104,14 @@ export function EquipmentPage() {
 
             <div className="px-8 mt-8 space-y-8 animate-fade-in">
                 {/* Toolbar */}
-                <div className="flex flex-col lg:flex-row gap-4 items-center justify-between bg-white/[0.02] p-4 rounded-3xl border border-white/5">
+                <div className="flex flex-col lg:flex-row gap-4 items-center justify-between bg-surface-light/50 backdrop-blur-xl p-4 rounded-3xl border border-white/5 shadow-2xl">
                     <div className="flex flex-1 gap-4 w-full">
                         <div className="relative flex-1 group">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-primary transition-colors" />
+                            <Icon icon="solar:magnifer-linear" className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-500 group-focus-within:text-primary transition-colors" />
                             <input
                                 type="text"
                                 placeholder="Search by name or serial..."
-                                className="w-full pl-12 pr-4 h-12 bg-white/5 border border-white/5 rounded-2xl outline-none focus:border-primary/50 text-sm font-medium transition-all"
+                                className="w-full pl-12 pr-4 h-12 bg-zinc-900/50 border border-white/5 rounded-2xl outline-none focus:border-primary/50 text-sm font-medium transition-all placeholder:text-zinc-600"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
@@ -142,8 +133,8 @@ export function EquipmentPage() {
                             />
                         </div>
                     </div>
-                    <Button className="h-12 rounded-2xl px-8 w-full lg:w-auto" onClick={() => setIsModalOpen(true)}>
-                        <Plus className="w-5 h-5" />
+                    <Button className="h-12 rounded-2xl px-8 w-full lg:w-auto shadow-lg shadow-primary/20" onClick={() => setIsModalOpen(true)}>
+                        <Icon icon="solar:add-circle-bold" className="w-5 h-5 mr-2" />
                         Register Asset
                     </Button>
                 </div>
@@ -151,36 +142,42 @@ export function EquipmentPage() {
                 {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
                     {filtered.map(eq => (
-                        <Card key={eq.id} className="group hover:border-primary/30 relative overflow-hidden">
+                        <Card key={eq.id} className="group hover:border-primary/30 relative overflow-hidden bg-surface-light/30 backdrop-blur-md border-white/5 transition-all duration-500 hover:-translate-y-1">
                             <CardContent className="p-0">
                                 {/* Top Bar */}
                                 <div className="p-6 pb-4 flex justify-between items-start">
                                     <div className="flex gap-4">
-                                        <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-3xl shadow-inner group-hover:scale-110 transition-transform duration-500">
-                                            {getIcon(eq.category)}
+                                        <div className="w-14 h-14 rounded-2xl bg-zinc-900/80 flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform duration-500 border border-white/5">
+                                            <Icon icon={getIcon(eq.category)} className="w-8 h-8 text-primary" />
                                         </div>
-                                        <div>
-                                            <h3 className="font-bold text-lg text-white group-hover:text-primary transition-colors truncate max-w-[150px]">{eq.name}</h3>
-                                            <p className="text-xs font-mono text-slate-500 font-bold uppercase tracking-wider">{eq.serialNumber}</p>
+                                        <div className="min-w-0">
+                                            <h3 className="font-bold text-lg text-white group-hover:text-primary transition-colors truncate">{eq.name}</h3>
+                                            <p className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-widest">{eq.serialNumber}</p>
                                         </div>
                                     </div>
-                                    <button className="p-2 text-slate-500 hover:text-white transition-colors">
-                                        <MoreVertical className="w-5 h-5" />
+                                    <button className="p-2 text-zinc-500 hover:text-white transition-colors rounded-xl hover:bg-white/5">
+                                        <Icon icon="solar:menu-dots-bold" className="w-5 h-5" />
                                     </button>
                                 </div>
 
                                 {/* Stats Area */}
-                                <div className="px-6 py-4 space-y-3 bg-white/[0.01]">
-                                    <div className="flex items-center gap-2 text-xs font-bold text-slate-400">
-                                        <MapPin className="w-3.5 h-3.5 text-primary" />
+                                <div className="px-6 py-4 space-y-3 bg-zinc-900/20">
+                                    <div className="flex items-center gap-3 text-xs font-bold text-zinc-400">
+                                        <div className="w-6 h-6 rounded-lg bg-primary/10 flex items-center justify-center">
+                                            <Icon icon="solar:map-point-bold-duotone" className="w-3.5 h-3.5 text-primary" />
+                                        </div>
                                         {eq.location}
                                     </div>
-                                    <div className="flex items-center gap-2 text-xs font-bold text-slate-400">
-                                        <Calendar className="w-3.5 h-3.5 text-blue-500" />
+                                    <div className="flex items-center gap-3 text-xs font-bold text-zinc-400">
+                                        <div className="w-6 h-6 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                                            <Icon icon="solar:calendar-bold-duotone" className="w-3.5 h-3.5 text-blue-500" />
+                                        </div>
                                         Deployed: {formatDate(eq.purchaseDate)}
                                     </div>
-                                    <div className="flex items-center gap-2 text-xs font-bold text-slate-400">
-                                        <Filter className="w-3.5 h-3.5 text-indigo-500" />
+                                    <div className="flex items-center gap-3 text-xs font-bold text-zinc-400">
+                                        <div className="w-6 h-6 rounded-lg bg-indigo-500/10 flex items-center justify-center">
+                                            <Icon icon="solar:users-group-rounded-bold-duotone" className="w-3.5 h-3.5 text-indigo-500" />
+                                        </div>
                                         {eq.department} Dept.
                                     </div>
                                 </div>
@@ -188,27 +185,28 @@ export function EquipmentPage() {
                                 {/* Footer */}
                                 <div className="p-6 pt-4 flex items-center justify-between border-t border-white/5">
                                     <StatusBadge status={eq.status} />
-                                    <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-tighter py-1 px-2.5 bg-primary/10 text-primary rounded-full">
-                                        <Wrench className="w-3 h-3" />
+                                    <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-tighter py-1.5 px-3 bg-primary/10 text-primary rounded-full border border-primary/20">
+                                        <Icon icon="solar:history-bold-duotone" className="w-3.5 h-3.5" />
                                         {eq.requestCount} Logs
                                     </div>
                                 </div>
                             </CardContent>
-                            <div className="absolute top-0 right-0 -trnaslate-y-1/2 w-32 h-32 bg-primary/5 blur-3xl -z-10" />
+                            {/* Decorative background element */}
+                            <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-primary/5 blur-3xl rounded-full -z-10 group-hover:bg-primary/10 transition-colors" />
                         </Card>
                     ))}
                 </div>
 
                 {filtered.length === 0 && (
-                    <div className="flex flex-col items-center justify-center py-32 text-center bg-white/[0.02] border border-dashed border-white/10 rounded-3xl">
-                        <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-6">
-                            <Package className="w-10 h-10 text-slate-600" />
+                    <div className="flex flex-col items-center justify-center py-32 text-center bg-surface-light/20 border border-dashed border-white/10 rounded-[2rem] backdrop-blur-sm">
+                        <div className="w-24 h-24 bg-zinc-900/50 rounded-3xl flex items-center justify-center mb-6 border border-white/5 shadow-2xl">
+                            <Icon icon="solar:box-minimalistic-bold-duotone" className="w-12 h-12 text-zinc-600" />
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-2">No hardware found</h3>
-                        <p className="text-slate-500 max-w-sm">
+                        <h3 className="text-2xl font-bold text-white mb-2">No hardware found</h3>
+                        <p className="text-zinc-500 max-w-sm mx-auto">
                             Try adjusting your search query or filters to find what you're looking for.
                         </p>
-                        <Button variant="outline" className="mt-8 px-8" onClick={() => { setSearchQuery(''); setCategoryFilter(''); setStatusFilter(''); }}>
+                        <Button variant="outline" className="mt-8 px-8 rounded-2xl" onClick={() => { setSearchQuery(''); setCategoryFilter(''); setStatusFilter(''); }}>
                             Clear All Filters
                         </Button>
                     </div>

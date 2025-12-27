@@ -1,0 +1,152 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User & Authentication
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  password      String
+  name          String
+  role          Role     @default(TECHNICIAN)
+  department    String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // Relations
+  teamMemberships  TeamMember[]
+  assignedEquipment Equipment[]
+  createdRequests   MaintenanceRequest[] @relation("CreatedBy")
+  assignedRequests  MaintenanceRequest[] @relation("AssignedTo")
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  TECHNICIAN
+  USER
+}
+
+// Equipment Module
+model Equipment {
+  id                String   @id @default(cuid())
+  name              String
+  serialNumber      String   @unique
+  category          Category
+  department        String
+  location          String
+  purchaseDate      DateTime
+  warrantyExpiry    DateTime?
+  status            EquipmentStatus @default(OPERATIONAL)
+  
+  // Relations
+  assignedToId      String?
+  assignedTo        User?    @relation(fields: [assignedToId], references: [id])
+  maintenanceTeamId String?
+  maintenanceTeam   MaintenanceTeam? @relation(fields: [maintenanceTeamId], references: [id])
+  requests          MaintenanceRequest[]
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+enum Category {
+  MACHINERY
+  VEHICLE
+  IT_EQUIPMENT
+  ELECTRICAL
+  HVAC
+  PLUMBING
+  OTHER
+}
+
+enum EquipmentStatus {
+  OPERATIONAL
+  UNDER_MAINTENANCE
+  SCRAPPED
+  DECOMMISSIONED
+}
+
+// Maintenance Team Module
+model MaintenanceTeam {
+  id          String   @id @default(cuid())
+  name        String
+  specialization String
+  description String?
+  
+  // Relations
+  members     TeamMember[]
+  equipment   Equipment[]
+  requests    MaintenanceRequest[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  userId    String
+  teamId    String
+  role      TeamRole @default(MEMBER)
+  
+  user      User @relation(fields: [userId], references: [id])
+  team      MaintenanceTeam @relation(fields: [teamId], references: [id])
+  
+  @@unique([userId, teamId])
+}
+
+enum TeamRole {
+  LEAD
+  MEMBER
+}
+
+// Maintenance Request Module
+model MaintenanceRequest {
+  id              String   @id @default(cuid())
+  subject         String
+  description     String
+  type            RequestType
+  priority        Priority @default(MEDIUM)
+  status          RequestStatus @default(NEW)
+  
+  scheduledDate   DateTime?
+  completedDate   DateTime?
+  duration        Float?   // Hours spent
+  
+  // Relations
+  equipmentId     String
+  equipment       Equipment @relation(fields: [equipmentId], references: [id])
+  teamId          String?
+  team            MaintenanceTeam? @relation(fields: [teamId], references: [id])
+  createdById     String
+  createdBy       User @relation("CreatedBy", fields: [createdById], references: [id])
+  assignedToId    String?
+  assignedTo      User? @relation("AssignedTo", fields: [assignedToId], references: [id])
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+enum RequestType {
+  CORRECTIVE
+  PREVENTIVE
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum RequestStatus {
+  NEW
+  IN_PROGRESS
+  REPAIRED
+  SCRAP
+}

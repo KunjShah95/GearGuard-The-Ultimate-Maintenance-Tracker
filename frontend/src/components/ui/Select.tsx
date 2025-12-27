@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '../../utils/helpers';
-import { ChevronDown } from 'lucide-react';
+import { Icon } from '@iconify/react';
 
 interface SelectOption {
     value: string;
@@ -37,28 +37,28 @@ export function Select({
             {label && (
                 <label
                     htmlFor={inputId}
-                    className="block text-sm font-medium text-secondary-light mb-2"
+                    className="block text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 mb-2 ml-1 italic"
                 >
                     {label}
                 </label>
             )}
-            <div className="relative">
+            <div className="relative group">
                 <select
                     id={inputId}
                     className={cn(
-                        'w-full px-4 py-2.5 bg-surface-dark border border-surface-light rounded-lg',
-                        'text-white appearance-none cursor-pointer',
-                        'focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent',
-                        'transition-all duration-200',
-                        error && 'border-danger focus:ring-danger',
-                        !value && 'text-secondary',
+                        'w-full px-5 py-3.5 bg-zinc-900/50 border border-white/5 rounded-2xl',
+                        'text-white appearance-none cursor-pointer font-bold',
+                        'focus:outline-none focus:border-primary/50 focus:bg-zinc-900',
+                        'transition-all duration-300',
+                        error && 'border-rose-500/50 focus:border-rose-500',
+                        !value && 'text-zinc-600',
                         className
                     )}
                     value={value}
                     onChange={handleChange}
                     {...props}
                 >
-                    <option value="" disabled className="text-secondary">
+                    <option value="" disabled className="bg-surface-dark text-zinc-600">
                         {placeholder}
                     </option>
                     {options.map((option) => (
@@ -71,10 +71,12 @@ export function Select({
                         </option>
                     ))}
                 </select>
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-secondary pointer-events-none" />
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-600 group-focus-within:text-primary transition-colors">
+                    <Icon icon="solar:alt-arrow-down-bold-duotone" className="w-5 h-5" />
+                </div>
             </div>
             {error && (
-                <p className="mt-1.5 text-sm text-danger">{error}</p>
+                <p className="mt-2 text-[10px] font-black uppercase tracking-widest text-rose-500 ml-1">{error}</p>
             )}
         </div>
     );

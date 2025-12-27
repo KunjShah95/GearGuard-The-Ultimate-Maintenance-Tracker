@@ -22,33 +22,33 @@ export function Input({
             {label && (
                 <label
                     htmlFor={inputId}
-                    className="block text-sm font-medium text-secondary-light mb-2"
+                    className="block text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 mb-2 ml-1 italic"
                 >
                     {label}
                 </label>
             )}
-            <div className="relative">
+            <div className="relative group">
                 {icon && (
-                    <div className="absolute left-3 top-1/2 -translate-y-1/2 text-secondary">
+                    <div className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-600 group-focus-within:text-primary transition-colors">
                         {icon}
                     </div>
                 )}
                 <input
                     id={inputId}
                     className={cn(
-                        'w-full px-4 py-2.5 bg-surface-dark border border-surface-light rounded-lg',
-                        'text-white placeholder:text-secondary',
-                        'focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent',
-                        'transition-all duration-200',
-                        icon && 'pl-10',
-                        error && 'border-danger focus:ring-danger',
+                        'w-full px-5 py-3.5 bg-zinc-900/50 border border-white/5 rounded-2xl',
+                        'text-white placeholder:text-zinc-700 text-sm font-bold',
+                        'focus:outline-none focus:border-primary/50 focus:bg-zinc-900',
+                        'transition-all duration-300',
+                        icon && 'pl-14',
+                        error && 'border-rose-500/50 focus:border-rose-500',
                         className
                     )}
                     {...props}
                 />
             </div>
             {error && (
-                <p className="mt-1.5 text-sm text-danger">{error}</p>
+                <p className="mt-2 text-[10px] font-black uppercase tracking-widest text-rose-500 ml-1">{error}</p>
             )}
         </div>
     );
@@ -73,7 +73,7 @@ export function TextArea({
             {label && (
                 <label
                     htmlFor={inputId}
-                    className="block text-sm font-medium text-secondary-light mb-2"
+                    className="block text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 mb-2 ml-1 italic"
                 >
                     {label}
                 </label>
@@ -81,18 +81,18 @@ export function TextArea({
             <textarea
                 id={inputId}
                 className={cn(
-                    'w-full px-4 py-2.5 bg-surface-dark border border-surface-light rounded-lg',
-                    'text-white placeholder:text-secondary resize-none',
-                    'focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent',
-                    'transition-all duration-200',
-                    error && 'border-danger focus:ring-danger',
+                    'w-full px-5 py-4 bg-zinc-900/50 border border-white/5 rounded-2xl',
+                    'text-white placeholder:text-zinc-700 text-sm font-bold resize-none',
+                    'focus:outline-none focus:border-primary/50 focus:bg-zinc-900',
+                    'transition-all duration-300',
+                    error && 'border-rose-500/50 focus:border-rose-500',
                     className
                 )}
                 rows={4}
                 {...props}
             />
             {error && (
-                <p className="mt-1.5 text-sm text-danger">{error}</p>
+                <p className="mt-2 text-[10px] font-black uppercase tracking-widest text-rose-500 ml-1">{error}</p>
             )}
         </div>
     );

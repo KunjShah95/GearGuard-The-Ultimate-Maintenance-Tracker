@@ -12,9 +12,9 @@ export function Card({ children, className, hover = false, onClick }: CardProps)
     return (
         <div
             className={cn(
-                'bg-surface rounded-xl border border-surface-light p-6',
-                'transition-all duration-200',
-                hover && 'hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 cursor-pointer',
+                'bg-zinc-900/50 rounded-2xl border border-zinc-800/50 p-6',
+                'transition-all duration-300',
+                hover && 'hover:border-primary/50 hover:bg-zinc-900 hover:shadow-xl hover:shadow-primary/5 cursor-pointer',
                 className
             )}
             onClick={onClick}
@@ -31,7 +31,7 @@ interface CardHeaderProps {
 
 export function CardHeader({ children, className }: CardHeaderProps) {
     return (
-        <div className={cn('flex items-center justify-between mb-4', className)}>
+        <div className={cn('flex items-center justify-between mb-6', className)}>
             {children}
         </div>
     );
@@ -44,7 +44,7 @@ interface CardTitleProps {
 
 export function CardTitle({ children, className }: CardTitleProps) {
     return (
-        <h3 className={cn('text-lg font-semibold text-white', className)}>
+        <h3 className={cn('text-lg font-display font-bold text-white tracking-tight', className)}>
             {children}
         </h3>
     );
@@ -56,7 +56,7 @@ interface CardContentProps {
 }
 
 export function CardContent({ children, className }: CardContentProps) {
-    return <div className={cn('text-secondary-light', className)}>{children}</div>;
+    return <div className={cn('text-zinc-400 font-light leading-relaxed', className)}>{children}</div>;
 }
 
 interface CardFooterProps {
@@ -66,7 +66,7 @@ interface CardFooterProps {
 
 export function CardFooter({ children, className }: CardFooterProps) {
     return (
-        <div className={cn('flex items-center justify-end gap-2 mt-4 pt-4 border-t border-surface-light', className)}>
+        <div className={cn('flex items-center justify-end gap-3 mt-6 pt-6 border-t border-zinc-800/50', className)}>
             {children}
         </div>
     );

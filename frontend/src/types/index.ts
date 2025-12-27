@@ -145,11 +145,12 @@ export interface RequestFormData {
 export interface DashboardStats {
     totalEquipment: number;
     operationalEquipment: number;
+    underMaintenance: number;
     totalTeams: number;
     totalRequests: number;
-    pendingRequests: number;
+    newRequests: number;
+    inProgressRequests: number;
     completedRequests: number;
-    overdueRequests: number;
 }
 
 // Kanban Types

@@ -1,22 +1,11 @@
-import {
-    Wrench,
-    Users,
-    ClipboardList,
-    AlertTriangle,
-    CheckCircle,
-    Clock,
-    TrendingUp,
-    ArrowRight,
-    Plus,
-    ExternalLink,
-} from 'lucide-react';
+import { Icon } from '@iconify/react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Header } from '../components/layout/Header';
-import { Card, CardContent } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { StatusBadge, PriorityBadge } from '../components/ui/Badge';
 import type { DashboardStats, MaintenanceRequest } from '../types';
-import { getRelativeTime } from '../utils/helpers';
+import { getRelativeTime, cn } from '../utils/helpers';
 
 const mockStats: DashboardStats = {
     totalEquipment: 156,
@@ -63,179 +52,219 @@ const mockRecentRequests: Partial<MaintenanceRequest>[] = [
     },
 ];
 
+const containerVariants = {
+    animate: {
+        transition: {
+            staggerChildren: 0.05
+        }
+    }
+};
+
+const itemVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 }
+};
+
 export function Dashboard() {
     return (
-        <div className="pb-12">
+        <div className="pb-12 min-h-screen bg-zinc-950">
             <Header
-                title="Dashboard Overview"
-                subtitle="Real-time operational health and maintenance intelligence."
+                title="Command Center"
+                subtitle="Operational Overview"
             />
 
-            <div className="px-8 mt-8 space-y-8 animate-fade-in">
+            <motion.div
+                initial="initial"
+                animate="animate"
+                variants={containerVariants}
+                className="px-8 mt-10 space-y-12"
+            >
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <StatCard
                         label="Total Assets"
                         value={mockStats.totalEquipment}
-                        icon={<Wrench />}
-                        trend={`${mockStats.operationalEquipment} active`}
-                        color="primary"
+                        icon="solar:box-minimalistic-bold-duotone"
+                        trend={`${mockStats.operationalEquipment} Active`}
+                        color="bg-primary"
                     />
                     <StatCard
-                        label="Specialized Teams"
+                        label="Deployed Teams"
                         value={mockStats.totalTeams}
-                        icon={<Users />}
-                        trend="Active & ready"
-                        color="blue"
+                        icon="solar:users-group-rounded-bold-duotone"
+                        trend="Ready for Dispatch"
+                        color="bg-indigo-600"
                     />
                     <StatCard
-                        label="Pending Work"
+                        label="Pending Tasks"
                         value={mockStats.pendingRequests}
-                        icon={<ClipboardList />}
-                        trend={`${mockStats.overdueRequests} overdue`}
-                        color="warning"
+                        icon="solar:clipboard-list-bold-duotone"
+                        trend={`${mockStats.overdueRequests} Overdue`}
+                        color="bg-amber-600"
                     />
                     <StatCard
-                        label="Resolved Tasks"
+                        label="Resolved Units"
                         value={mockStats.completedRequests}
-                        icon={<CheckCircle />}
-                        trend="98% success rate"
-                        color="success"
+                        icon="solar:check-circle-bold-duotone"
+                        trend="98.2% Efficiency"
+                        color="bg-emerald-600"
                     />
                 </div>
 
-                {/* Action Row */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Main List */}
-                    <div className="lg:col-span-2 space-y-6">
-                        <div className="flex items-center justify-between">
-                            <h2 className="text-xl font-bold flex items-center gap-3">
-                                <Clock className="text-primary w-5 h-5" />
-                                Live Monitoring
-                            </h2>
-                            <Link to="/app/requests" className="text-primary text-sm font-bold hover:underline flex items-center gap-1">
-                                View Tracking Board <ExternalLink className="w-3 h-3" />
+                {/* Main Content Area */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    {/* Activity Feed */}
+                    <div className="lg:col-span-2 space-y-8">
+                        <div className="flex items-center justify-between border-b border-zinc-800/50 pb-6">
+                            <div className="flex items-center gap-4">
+                                <div className="w-1.5 h-6 bg-primary rounded-full shadow-lg shadow-primary/20" />
+                                <h2 className="text-xl font-display font-bold text-white tracking-tight">
+                                    Operational Stream
+                                </h2>
+                            </div>
+                            <Link to="/app/requests" className="text-primary text-[10px] font-bold hover:underline tracking-widest flex items-center gap-2 uppercase">
+                                Full Board <Icon icon="solar:arrow-right-up-linear" />
                             </Link>
                         </div>
 
-                        <div className="grid gap-4">
+                        <div className="space-y-4">
                             {mockRecentRequests.map((request) => (
-                                <div key={request.id} className="group p-5 bg-white/[0.03] hover:bg-white/[0.05] border border-white/5 hover:border-white/10 rounded-2xl transition-all flex items-center justify-between">
-                                    <div className="flex items-center gap-6">
-                                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold shadow-lg ${request.priority === 'CRITICAL' ? 'bg-danger/20 text-danger' :
-                                                request.priority === 'HIGH' ? 'bg-warning/20 text-warning' : 'bg-blue-500/20 text-blue-400'
-                                            }`}>
+                                <motion.div
+                                    variants={itemVariants}
+                                    key={request.id}
+                                    className="group p-5 bg-zinc-900/30 hover:bg-zinc-900/50 border border-zinc-800/50 hover:border-primary/30 rounded-2xl transition-all duration-300 flex items-center justify-between"
+                                >
+                                    <div className="flex items-center gap-5">
+                                        <div className={cn(
+                                            "w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm border transition-colors",
+                                            request.priority === 'CRITICAL' ? 'bg-rose-500/10 text-rose-400 border-rose-500/20' :
+                                                request.priority === 'HIGH' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' :
+                                                    'bg-primary/10 text-primary border-primary/20'
+                                        )}>
                                             {request.priority?.substring(0, 1)}
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-white group-hover:text-primary transition-colors">{request.subject}</h4>
-                                            <p className="text-xs text-slate-500 font-medium mt-1">Reported {getRelativeTime(request.createdAt || '')}</p>
+                                            <h4 className="font-bold text-white group-hover:text-primary transition-colors tracking-tight">{request.subject}</h4>
+                                            <div className="flex items-center gap-3 mt-1">
+                                                <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">REF_{request.id}00X</span>
+                                                <span className="w-1 h-1 rounded-full bg-zinc-800" />
+                                                <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-wide">{getRelativeTime(request.createdAt || '')}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-4">
-                                        <PriorityBadge priority={request.priority!} />
-                                        <StatusBadge status={request.status!} />
-                                        <button className="p-2 rounded-lg bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <ArrowRight className="w-4 h-4" />
-                                        </button>
+                                    <div className="flex items-center gap-6">
+                                        <div className="hidden sm:flex flex-col items-end gap-1.5">
+                                            <PriorityBadge priority={request.priority!} />
+                                            <StatusBadge status={request.status!} />
+                                        </div>
+                                        <Link
+                                            to={`/app/requests/${request.id}`}
+                                            className="p-2.5 rounded-xl bg-zinc-800/50 text-zinc-500 hover:text-primary hover:bg-primary/10 border border-zinc-800 hover:border-primary/30 transition-all"
+                                        >
+                                            <Icon icon="solar:alt-arrow-right-linear" className="w-5 h-5" />
+                                        </Link>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
 
-                    {/* Quick Tools */}
-                    <div className="space-y-8">
-                        <div className="space-y-4">
-                            <h3 className="text-sm font-bold uppercase tracking-widest text-slate-500">Quick Operations</h3>
+                    {/* Quick Command & Alerts */}
+                    <div className="space-y-12">
+                        <section className="space-y-6">
+                            <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-600 ml-1">Directives</h3>
                             <div className="grid gap-3">
                                 <Link to="/app/requests" className="w-full">
-                                    <Button className="w-full h-14 rounded-2xl justify-between group">
-                                        Create Repair Request
-                                        <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
+                                    <Button className="w-full h-14 rounded-xl justify-between group px-5 bg-primary/10 border border-primary/20 text-primary hover:bg-primary hover:text-white transition-all">
+                                        <span className="font-bold tracking-tight">Initiate Request</span>
+                                        <Icon icon="solar:add-circle-bold-duotone" className="w-5 h-5 group-hover:rotate-90 transition-transform" />
                                     </Button>
                                 </Link>
                                 <Link to="/app/equipment" className="w-full">
-                                    <Button variant="outline" className="w-full h-14 rounded-2xl justify-between border-white/5 hover:bg-white/5">
-                                        Register New Asset
-                                        <Wrench className="w-5 h-5" />
+                                    <Button variant="outline" className="w-full h-14 rounded-xl justify-between border-zinc-800 bg-zinc-900/30 hover:bg-zinc-900 group px-5">
+                                        <span className="font-bold tracking-tight text-white group-hover:text-primary transition-colors">Catalog Asset</span>
+                                        <Icon icon="solar:pen-new-square-bold-duotone" className="w-5 h-5 group-hover:scale-110 transition-transform" />
                                     </Button>
                                 </Link>
                             </div>
-                        </div>
+                        </section>
 
-                        <div className="space-y-4">
-                            <h3 className="text-sm font-bold uppercase tracking-widest text-slate-500">System Alerts</h3>
+                        <section className="space-y-6">
+                            <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-600 ml-1">System Interrupts</h3>
                             <div className="space-y-3">
                                 <AlertItem
+                                    icon="solar:danger-bold-duotone"
                                     type="danger"
-                                    title="Overdue Maintenance"
-                                    desc="3 critical turbines require immediate checkup."
+                                    title="Critical Maintenance"
+                                    desc="3 core turbine nodes requesting immediate alignment."
                                 />
                                 <AlertItem
+                                    icon="solar:bomb-bold-duotone"
                                     type="warning"
-                                    title="Inventory Low"
-                                    desc="Mechanical filter stock below 15%."
+                                    title="Inventory Depleted"
+                                    desc="Consumable mechanical filters at 12% capacity."
                                 />
                                 <AlertItem
+                                    icon="solar:info-square-bold-duotone"
                                     type="primary"
-                                    title="Team Review"
-                                    desc="Electrical team performance report is ready."
+                                    title="Analytics Ready"
+                                    desc="Weekly performance vector analysis generated."
                                 />
                             </div>
-                        </div>
+                        </section>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </div>
     );
 }
 
 function StatCard({ label, value, icon, trend, color }: any) {
-    const colors: any = {
-        primary: 'bg-primary text-white shadow-primary/20',
-        blue: 'bg-blue-500 text-white shadow-blue-500/20',
-        warning: 'bg-warning text-white shadow-warning/20',
-        success: 'bg-success text-white shadow-success/20',
-    };
-
     return (
-        <div className="card group relative overflow-hidden">
+        <motion.div
+            variants={itemVariants}
+            className="group p-6 bg-zinc-900/30 border border-zinc-800/50 rounded-2xl hover:bg-zinc-900/50 hover:border-primary/30 transition-all duration-300 relative overflow-hidden"
+        >
             <div className="relative z-10 flex flex-col h-full justify-between">
-                <div className="flex items-center justify-between mb-4">
-                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg transition-transform group-hover:scale-110 ${colors[color]}`}>
-                        {icon}
+                <div className="flex items-center justify-between mb-6">
+                    <div className={cn(
+                        "w-10 h-10 rounded-xl flex items-center justify-center shadow-lg transition-all duration-300 group-hover:scale-110 text-white",
+                        color
+                    )}>
+                        <Icon icon={icon} className="w-5 h-5" />
                     </div>
-                    <TrendingUp className="w-5 h-5 text-slate-700" />
+                    <Icon icon="solar:chart-2-linear" className="w-4 h-4 text-zinc-800 group-hover:text-primary transition-colors" />
                 </div>
                 <div>
-                    <h3 className="text-3xl font-bold text-white mb-1">{value}</h3>
-                    <p className="text-sm text-slate-500 font-bold uppercase tracking-wider">{label}</p>
-                    <div className="mt-4 flex items-center gap-2 text-xs font-bold py-1 px-2 rounded-lg bg-white/5 w-fit">
-                        <div className={`w-1.5 h-1.5 rounded-full ${color === 'success' ? 'bg-success' : color === 'warning' ? 'bg-warning' : 'bg-primary'}`} />
+                    <h3 className="text-3xl font-display font-bold text-white mb-1 tracking-tight">{value}</h3>
+                    <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">{label}</p>
+                    <div className="mt-4 flex items-center gap-2 text-[10px] font-bold text-primary tracking-wide bg-primary/5 border border-primary/10 py-1.5 px-3 rounded-lg w-fit">
+                        <div className="w-1 h-1 rounded-full bg-primary animate-pulse" />
                         {trend}
                     </div>
                 </div>
             </div>
-            <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-white/[0.02] rounded-full blur-2xl group-hover:bg-primary/5 transition-colors" />
-        </div>
+        </motion.div>
     );
 }
 
-function AlertItem({ type, title, desc }: any) {
+function AlertItem({ type, title, desc, icon }: any) {
     const styles: any = {
-        danger: 'border-danger/30 bg-danger/5 text-danger',
-        warning: 'border-warning/30 bg-warning/5 text-warning',
-        primary: 'border-primary/30 bg-primary/5 text-primary',
+        danger: 'border-rose-500/20 bg-rose-500/5 text-rose-400',
+        warning: 'border-amber-500/20 bg-amber-500/5 text-amber-400',
+        primary: 'border-primary/20 bg-primary/5 text-primary',
     };
 
     return (
-        <div className={`p-4 rounded-2xl border ${styles[type]} space-y-1`}>
-            <div className="flex items-center gap-2 font-bold text-xs uppercase tracking-wider">
-                <AlertTriangle className="w-3 h-3" />
+        <div className={cn(
+            "p-4 rounded-xl border transition-all hover:bg-zinc-900/50 duration-300",
+            styles[type]
+        )}>
+            <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest mb-1">
+                <Icon icon={icon} className="w-4 h-4" />
                 {title}
             </div>
-            <p className="text-slate-300 text-xs leading-relaxed">{desc}</p>
+            <p className="text-zinc-500 text-xs leading-relaxed font-light">{desc}</p>
         </div>
     );
 }

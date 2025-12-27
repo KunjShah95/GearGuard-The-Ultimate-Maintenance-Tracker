@@ -21,38 +21,37 @@ export function Button({
 }: ButtonProps) {
     const baseStyles = `
     inline-flex items-center justify-center gap-2 
-    font-medium rounded-lg transition-all duration-200
-    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface-dark
+    font-bold rounded-xl transition-all duration-200
+    focus:outline-none focus:ring-2 focus:ring-primary/50
     disabled:opacity-50 disabled:cursor-not-allowed
   `;
 
     const variants = {
         primary: `
       bg-primary hover:bg-primary-dark text-white
-      focus:ring-primary shadow-lg shadow-primary/20
+      shadow-lg shadow-primary/20
     `,
         secondary: `
-      bg-surface-light hover:bg-surface text-white
-      focus:ring-secondary border border-surface-light
+      bg-zinc-800 hover:bg-zinc-700 text-white
+      border border-zinc-700
     `,
         danger: `
       bg-danger hover:bg-red-600 text-white
-      focus:ring-danger shadow-lg shadow-danger/20
+      shadow-lg shadow-danger/20
     `,
         ghost: `
-      bg-transparent hover:bg-surface-light text-secondary-light
-      focus:ring-secondary
+      bg-transparent hover:bg-zinc-900 text-zinc-400 hover:text-white
     `,
         outline: `
-      bg-transparent border border-surface-light
-      hover:bg-surface-light text-white focus:ring-primary
+      bg-transparent border border-zinc-800
+      hover:bg-zinc-900 text-white
     `,
     };
 
     const sizes = {
-        sm: 'px-3 py-1.5 text-sm',
-        md: 'px-4 py-2 text-sm',
-        lg: 'px-6 py-3 text-base',
+        sm: 'px-3 py-1.5 text-[11px] uppercase tracking-widest',
+        md: 'px-5 py-2.5 text-xs uppercase tracking-widest',
+        lg: 'px-8 py-4 text-sm uppercase tracking-widest',
     };
 
     return (

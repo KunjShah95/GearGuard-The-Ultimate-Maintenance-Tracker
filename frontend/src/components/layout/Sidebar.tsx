@@ -1,27 +1,16 @@
 import { NavLink, useLocation } from 'react-router-dom';
-import {
-    LayoutDashboard,
-    Wrench,
-    Users,
-    ClipboardList,
-    Calendar,
-    BarChart3,
-    Settings,
-    LogOut,
-    ChevronLeft,
-    ChevronRight,
-    Shield,
-} from 'lucide-react';
+import { Icon } from '@iconify/react';
 import { cn } from '../../utils/helpers';
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
-    { path: '/app', label: 'Dashboard', icon: LayoutDashboard },
-    { path: '/app/equipment', label: 'Equipment', icon: Wrench },
-    { path: '/app/teams', label: 'Teams', icon: Users },
-    { path: '/app/requests', label: 'Requests', icon: ClipboardList },
-    { path: '/app/calendar', label: 'Calendar', icon: Calendar },
-    { path: '/app/reports', label: 'Reports', icon: BarChart3 },
+    { path: '/app', label: 'Dashboard', icon: 'solar:widget-3-bold-duotone', code: 'SYS_DSB' },
+    { path: '/app/equipment', label: 'Equipment', icon: 'solar:box-minimalistic-bold-duotone', code: 'ASSET_REG' },
+    { path: '/app/teams', label: 'Teams', icon: 'solar:users-group-rounded-bold-duotone', code: 'UNIT_SYNC' },
+    { path: '/app/requests', label: 'Requests', icon: 'solar:clipboard-list-bold-duotone', code: 'ORD_PROC' },
+    { path: '/app/calendar', label: 'Calendar', icon: 'solar:calendar-bold-duotone', code: 'OPS_SCH' },
+    { path: '/app/reports', label: 'Reports', icon: 'solar:chart-2-bold-duotone', code: 'ANA_LOG' },
 ];
 
 interface SidebarProps {
@@ -35,27 +24,33 @@ export function Sidebar({ onLogout }: SidebarProps) {
     return (
         <aside
             className={cn(
-                'h-screen bg-surface border-r border-white/5 flex flex-col transition-all duration-300 relative z-50 shadow-2xl',
+                'h-screen bg-zinc-950 border-r border-zinc-800/50 flex flex-col transition-all duration-500 relative z-50 shadow-2xl overflow-hidden font-sans',
                 collapsed ? 'w-20' : 'w-72'
             )}
         >
-            {/* Logo */}
-            <div className="flex items-center gap-3 px-6 h-24 border-b border-white/5 bg-white/[0.02]">
-                <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/30">
-                    <Shield className="w-6 h-6 text-white" />
+            {/* Logo Section */}
+            <div className="flex items-center gap-4 px-6 h-24 border-b border-zinc-800/50 relative z-10">
+                <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20">
+                    <Icon icon="solar:shield-bold-duotone" className="w-6 h-6 text-white" />
                 </div>
                 {!collapsed && (
-                    <div className="animate-fade-in truncate">
-                        <h1 className="text-xl font-bold text-white tracking-tight">GearGuard</h1>
-                        <p className="text-[10px] text-primary font-bold uppercase tracking-widest">Asset Intelligence</p>
-                    </div>
+                    <motion.div
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="truncate"
+                    >
+                        <h1 className="text-xl font-display font-bold text-white tracking-tight">GearGuard</h1>
+                        <div className="flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
+                            <p className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest">System Active</p>
+                        </div>
+                    </motion.div>
                 )}
             </div>
 
             {/* Navigation */}
-            <nav className="flex-1 py-10 px-4 space-y-2 overflow-y-auto custom-scrollbar">
+            <nav className="flex-1 py-8 px-4 space-y-1 overflow-y-auto custom-scrollbar relative z-10">
                 {navItems.map((item) => {
-                    const Icon = item.icon;
                     const isActive = location.pathname === item.path;
 
                     return (
@@ -63,15 +58,33 @@ export function Sidebar({ onLogout }: SidebarProps) {
                             key={item.path}
                             to={item.path}
                             className={cn(
-                                'flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 group',
+                                'flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 group relative',
                                 isActive
-                                    ? 'bg-primary text-white shadow-lg shadow-primary/20'
-                                    : 'text-slate-400 hover:text-white hover:bg-white/5'
+                                    ? 'bg-primary/10 text-white'
+                                    : 'text-zinc-500 hover:text-white hover:bg-zinc-900'
                             )}
                         >
-                            <Icon className={cn('w-5 h-5 flex-shrink-0', isActive ? 'text-white' : 'group-hover:text-primary transition-colors')} />
+                            <div className={cn(
+                                'w-5 h-5 flex items-center justify-center flex-shrink-0 transition-all',
+                                isActive ? 'text-primary' : 'group-hover:text-primary'
+                            )}>
+                                <Icon icon={item.icon} className="w-full h-full" />
+                            </div>
+
                             {!collapsed && (
-                                <span className="font-semibold text-sm animate-fade-in">{item.label}</span>
+                                <div className="flex flex-col flex-1 truncate">
+                                    <span className={cn(
+                                        'text-sm font-bold tracking-tight transition-all',
+                                        isActive ? 'text-white' : 'group-hover:text-white'
+                                    )}>{item.label}</span>
+                                </div>
+                            )}
+
+                            {isActive && (
+                                <motion.div
+                                    layoutId="active-indicator"
+                                    className="absolute left-0 w-1 h-6 bg-primary rounded-r-full shadow-[0_0_10px_rgba(99,102,241,1)]"
+                                />
                             )}
                         </NavLink>
                     );
@@ -79,26 +92,29 @@ export function Sidebar({ onLogout }: SidebarProps) {
             </nav>
 
             {/* Footer Actions */}
-            <div className="p-4 border-t border-white/5 bg-white/[0.01] space-y-1">
-                <button className="flex items-center gap-4 w-full px-4 py-3.5 rounded-2xl text-slate-400 hover:text-white hover:bg-white/5 transition-all group">
-                    <Settings className="w-5 h-5 flex-shrink-0 group-hover:rotate-45 transition-transform" />
-                    {!collapsed && <span className="font-semibold text-sm">Settings</span>}
+            <div className="p-4 border-t border-zinc-800/50 space-y-1 relative z-10">
+                <button className="flex items-center gap-4 w-full px-4 py-3 rounded-xl text-zinc-500 hover:text-white hover:bg-zinc-900 transition-all group">
+                    <Icon icon="solar:settings-bold-duotone" className="w-5 h-5 flex-shrink-0 group-hover:rotate-45 transition-transform duration-500" />
+                    {!collapsed && <span className="text-sm font-bold tracking-tight">Settings</span>}
                 </button>
                 <button
                     onClick={onLogout}
-                    className="flex items-center gap-4 w-full px-4 py-3.5 rounded-2xl text-slate-400 hover:text-danger hover:bg-danger/10 transition-all"
+                    className="flex items-center gap-4 w-full px-4 py-3 rounded-xl text-zinc-500 hover:text-danger hover:bg-danger/10 transition-all group"
                 >
-                    <LogOut className="w-5 h-5 flex-shrink-0" />
-                    {!collapsed && <span className="font-semibold text-sm">Logout</span>}
+                    <Icon icon="solar:power-bold" className="w-5 h-5 flex-shrink-0" />
+                    {!collapsed && <span className="text-sm font-bold tracking-tight">Logout</span>}
                 </button>
             </div>
 
-            {/* Toggle Button */}
+            {/* Collapse Toggle */}
             <button
                 onClick={() => setCollapsed(!collapsed)}
-                className="absolute -right-3 top-28 w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center shadow-lg border-2 border-surface transition-transform hover:scale-110 active:scale-95 z-[60]"
+                className="absolute -right-3 top-12 w-6 h-6 bg-zinc-950 text-white rounded-full flex items-center justify-center shadow-xl border border-zinc-800 transition-all hover:scale-110 z-[60] group"
             >
-                {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+                <Icon
+                    icon={collapsed ? "solar:alt-arrow-right-bold-duotone" : "solar:alt-arrow-left-bold-duotone"}
+                    className="w-4 h-4 text-zinc-500 group-hover:text-primary transition-colors"
+                />
             </button>
         </aside>
     );

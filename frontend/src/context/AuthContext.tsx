@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import type { User, LoginCredentials, RegisterData } from '../types';
+import * as authApi from '../api/auth';
 
 interface AuthContextType {
     user: User | null;
@@ -12,17 +13,6 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Mock user for demo purposes - replace with actual API calls
-const MOCK_USER: User = {
-    id: '1',
-    email: 'admin@gearguard.com',
-    name: 'John Smith',
-    role: 'ADMIN',
-    department: 'Facilities',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-};
-
 interface AuthProviderProps {
     children: ReactNode;
 }
@@ -33,33 +23,31 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     // Check for existing session on mount
     useEffect(() => {
-        const storedUser = localStorage.getItem('gearguard_user');
-        const token = localStorage.getItem('gearguard_token');
+        const checkAuth = async () => {
+            const token = localStorage.getItem('gearguard_token');
+            if (token) {
+                try {
+                    const currentUser = await authApi.getMe();
+                    setUser(currentUser);
+                    localStorage.setItem('gearguard_user', JSON.stringify(currentUser));
+                } catch (error) {
+                    console.error('Failed to fetch current user:', error);
+                    logout();
+                }
+            }
+            setIsLoading(false);
+        };
 
-        if (storedUser && token) {
-            setUser(JSON.parse(storedUser));
-        }
-        setIsLoading(false);
+        checkAuth();
     }, []);
 
     const login = async (credentials: LoginCredentials) => {
         setIsLoading(true);
         try {
-            // TODO: Replace with actual API call
-            // const response = await authApi.login(credentials);
-
-            // Simulate API delay
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-
-            // Mock validation
-            if (credentials.email === 'admin@gearguard.com' && credentials.password === 'password') {
-                const token = 'mock-jwt-token-' + Date.now();
-                localStorage.setItem('gearguard_token', token);
-                localStorage.setItem('gearguard_user', JSON.stringify(MOCK_USER));
-                setUser(MOCK_USER);
-            } else {
-                throw new Error('Invalid email or password');
-            }
+            const response = await authApi.login(credentials);
+            localStorage.setItem('gearguard_token', response.token);
+            localStorage.setItem('gearguard_user', JSON.stringify(response.user));
+            setUser(response.user);
         } finally {
             setIsLoading(false);
         }
@@ -68,26 +56,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const register = async (data: RegisterData) => {
         setIsLoading(true);
         try {
-            // TODO: Replace with actual API call
-            // const response = await authApi.register(data);
-
-            // Simulate API delay
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-
-            const newUser: User = {
-                id: Date.now().toString(),
-                email: data.email,
-                name: data.name,
-                role: 'TECHNICIAN',
-                department: data.department,
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString(),
-            };
-
-            const token = 'mock-jwt-token-' + Date.now();
-            localStorage.setItem('gearguard_token', token);
-            localStorage.setItem('gearguard_user', JSON.stringify(newUser));
-            setUser(newUser);
+            const response = await authApi.register(data);
+            localStorage.setItem('gearguard_token', response.token);
+            localStorage.setItem('gearguard_user', JSON.stringify(response.user));
+            setUser(response.user);
         } finally {
             setIsLoading(false);
         }
