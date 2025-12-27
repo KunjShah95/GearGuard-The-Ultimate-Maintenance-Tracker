@@ -22,14 +22,14 @@ export function Input({
             {label && (
                 <label
                     htmlFor={inputId}
-                    className="block text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 mb-2 ml-1 italic"
+                    className="block text-xs font-semibold text-zinc-300 mb-2 ml-1"
                 >
                     {label}
                 </label>
             )}
             <div className="relative group">
                 {icon && (
-                    <div className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-600 group-focus-within:text-primary transition-colors">
+                    <div className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-primary transition-colors">
                         {icon}
                     </div>
                 )}
@@ -37,10 +37,10 @@ export function Input({
                     id={inputId}
                     className={cn(
                         'w-full px-5 py-3.5 bg-zinc-900/50 border border-white/5 rounded-2xl',
-                        'text-white placeholder:text-zinc-700 text-sm font-bold',
+                        'text-white placeholder:text-zinc-500 text-sm font-medium',
                         'focus:outline-none focus:border-primary/50 focus:bg-zinc-900',
                         'transition-all duration-300',
-                        icon && 'pl-14',
+                        !!icon && 'pl-14',
                         error && 'border-rose-500/50 focus:border-rose-500',
                         className
                     )}
@@ -73,7 +73,7 @@ export function TextArea({
             {label && (
                 <label
                     htmlFor={inputId}
-                    className="block text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 mb-2 ml-1 italic"
+                    className="block text-xs font-semibold text-zinc-300 mb-2 ml-1"
                 >
                     {label}
                 </label>
@@ -82,7 +82,7 @@ export function TextArea({
                 id={inputId}
                 className={cn(
                     'w-full px-5 py-4 bg-zinc-900/50 border border-white/5 rounded-2xl',
-                    'text-white placeholder:text-zinc-700 text-sm font-bold resize-none',
+                    'text-white placeholder:text-zinc-500 text-sm font-medium resize-none',
                     'focus:outline-none focus:border-primary/50 focus:bg-zinc-900',
                     'transition-all duration-300',
                     error && 'border-rose-500/50 focus:border-rose-500',

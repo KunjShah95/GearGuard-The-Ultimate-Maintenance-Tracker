@@ -15,3 +15,8 @@ export const getMe = async (): Promise<User> => {
     const { data } = await client.get<User>('/auth/me');
     return data;
 };
+
+export const googleLogin = async (credential: string): Promise<AuthResponse> => {
+    const { data } = await client.post<AuthResponse>('/auth/google', { credential });
+    return data;
+};

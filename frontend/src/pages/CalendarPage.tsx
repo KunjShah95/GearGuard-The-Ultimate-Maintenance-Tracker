@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
 import { Header } from '../components/layout/Header';
-import { Card, CardContent } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { PriorityBadge } from '../components/ui/Badge';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, addMonths, subMonths } from 'date-fns';

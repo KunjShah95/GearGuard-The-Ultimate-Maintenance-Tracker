@@ -6,7 +6,7 @@
 
 @layer base {
     :root {
-        --primary: 238.7 83.5% 66.7%;
+        --primary: 221 83% 53%;
         --primary-foreground: 210 40% 98%;
         --background: 240 10% 3.9%;
         --foreground: 0 0% 98%;
@@ -17,8 +17,12 @@
         --ring: 240 4.9% 83.9%;
     }
 
+    html {
+        @apply bg-surface-dark;
+    }
+
     body {
-        @apply bg-[#09090b] text-zinc-200 antialiased selection:bg-primary/30;
+        @apply bg-surface-dark text-zinc-100 antialiased selection:bg-primary/30;
         font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     }
 

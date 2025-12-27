@@ -7,6 +7,7 @@ interface AuthContextType {
     isAuthenticated: boolean;
     isLoading: boolean;
     login: (credentials: LoginCredentials) => Promise<void>;
+    loginWithGoogle: (credential: string) => Promise<void>;
     register: (data: RegisterData) => Promise<void>;
     logout: () => void;
 }
@@ -53,6 +54,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }
     };
 
+    const loginWithGoogle = async (credential: string) => {
+        setIsLoading(true);
+        try {
+            const response = await authApi.googleLogin(credential);
+            localStorage.setItem('gearguard_token', response.token);
+            localStorage.setItem('gearguard_user', JSON.stringify(response.user));
+            setUser(response.user);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     const register = async (data: RegisterData) => {
         setIsLoading(true);
         try {
@@ -78,6 +91,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 isAuthenticated: !!user,
                 isLoading,
                 login,
+                loginWithGoogle,
                 register,
                 logout,
             }}

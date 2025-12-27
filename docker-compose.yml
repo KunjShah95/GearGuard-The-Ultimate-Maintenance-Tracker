@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16
+    container_name: gearguard-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: gearguard
+      POSTGRES_USER: gearguard
+      POSTGRES_PASSWORD: gearguard
+    ports:
+      - "5432:5432"
+    volumes:
+      - gearguard_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  gearguard_postgres_data:

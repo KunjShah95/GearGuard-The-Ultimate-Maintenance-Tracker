@@ -2,7 +2,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { cn } from '../../utils/helpers';
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const navItems = [
     { path: '/app', label: 'Dashboard', icon: 'solar:widget-3-bold-duotone', code: 'SYS_DSB' },
@@ -42,7 +42,7 @@ export function Sidebar({ onLogout }: SidebarProps) {
                         <h1 className="text-xl font-display font-bold text-white tracking-tight">GearGuard</h1>
                         <div className="flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
-                            <p className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest">System Active</p>
+                            <p className="text-[10px] text-zinc-400 font-semibold tracking-wide">Online</p>
                         </div>
                     </motion.div>
                 )}
@@ -61,7 +61,7 @@ export function Sidebar({ onLogout }: SidebarProps) {
                                 'flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 group relative',
                                 isActive
                                     ? 'bg-primary/10 text-white'
-                                    : 'text-zinc-500 hover:text-white hover:bg-zinc-900'
+                                    : 'text-zinc-300 hover:text-white hover:bg-zinc-900/70'
                             )}
                         >
                             <div className={cn(
@@ -83,7 +83,7 @@ export function Sidebar({ onLogout }: SidebarProps) {
                             {isActive && (
                                 <motion.div
                                     layoutId="active-indicator"
-                                    className="absolute left-0 w-1 h-6 bg-primary rounded-r-full shadow-[0_0_10px_rgba(99,102,241,1)]"
+                                    className="absolute left-0 w-1 h-6 bg-primary rounded-r-full shadow-[0_0_10px_rgba(37,99,235,1)]"
                                 />
                             )}
                         </NavLink>
@@ -113,7 +113,7 @@ export function Sidebar({ onLogout }: SidebarProps) {
             >
                 <Icon
                     icon={collapsed ? "solar:alt-arrow-right-bold-duotone" : "solar:alt-arrow-left-bold-duotone"}
-                    className="w-4 h-4 text-zinc-500 group-hover:text-primary transition-colors"
+                    className="w-4 h-4 text-zinc-300 group-hover:text-primary transition-colors"
                 />
             </button>
         </aside>
