@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 
 const springTransition = {
-    type: "spring",
+    type: "spring" as const,
     stiffness: 100,
     damping: 30,
     restDelta: 0.001
@@ -16,19 +16,8 @@ export function LandingPage() {
     const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.98]);
 
     return (
-        <div className="min-h-screen bg-zinc-950 selection:bg-primary/30 font-sans overflow-x-hidden text-zinc-200">
-            {/* Background Infrastructure */}
-            <div className="fixed inset-0 z-0">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.05),transparent_50%)]" />
-                <div className="absolute inset-0 noise opacity-[0.02]" />
-                
-                {/* Vertical Grid Lines */}
-                <div className="absolute inset-0 flex justify-around px-6 pointer-events-none opacity-[0.03]">
-                    {[...Array(6)].map((_, i) => (
-                        <div key={i} className="w-px h-full bg-white" />
-                    ))}
-                </div>
-            </div>
+        <div className="min-h-screen bg-surface-dark selection:bg-primary/30 font-sans overflow-x-hidden text-zinc-100">
+            <div className="fixed inset-0 z-0 bg-gradient-to-b from-surface-dark to-surface-light/30" />
 
             {/* Navigation */}
             <nav className="fixed top-0 w-full z-50 px-6 py-6">
@@ -42,7 +31,7 @@ export function LandingPage() {
                         </span>
                     </div>
 
-                    <div className="hidden md:flex items-center gap-10 text-[11px] uppercase tracking-[0.15em] font-bold text-zinc-500">
+                    <div className="hidden md:flex items-center gap-10 text-[11px] uppercase tracking-[0.12em] font-semibold text-zinc-300">
                         <a href="#features" className="hover:text-white transition-colors">Capabilities</a>
                         <a href="#teams" className="hover:text-white transition-colors">Ecosystem</a>
                         <a href="#pricing" className="hover:text-white transition-colors">Enterprise</a>
@@ -51,7 +40,7 @@ export function LandingPage() {
                     <div className="flex items-center gap-6">
                         <Link to="/login" className="text-[11px] font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">Sign In</Link>
                         <Link to="/register">
-                            <Button className="rounded-full px-5 h-9 text-[11px] font-bold uppercase tracking-widest bg-white text-black hover:bg-zinc-200 transition-all">
+                            <Button className="rounded-full px-5 h-9 text-[11px] font-bold uppercase tracking-widest bg-primary text-white hover:bg-primary-dark transition-all shadow-lg shadow-primary/20">
                                 Get Started
                             </Button>
                         </Link>
@@ -74,7 +63,7 @@ export function LandingPage() {
                                 className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-[10px] font-bold text-primary mb-8 uppercase tracking-widest"
                             >
                                 <span className="flex h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                                Industrial Intelligence v4.0
+                                Maintenance made simple
                             </motion.div>
 
                             <motion.h1
@@ -83,19 +72,20 @@ export function LandingPage() {
                                 transition={{ ...springTransition, delay: 0.1 }}
                                 className="text-6xl md:text-8xl font-display font-bold tracking-tight leading-[0.9] mb-8 text-white"
                             >
-                                Orchestrate <br />
-                                <span className="text-zinc-500">Industrial</span> <br />
-                                <span className="text-primary">Excellence.</span>
+                                Track equipment.
+                                <br />
+                                Plan maintenance.
+                                <br />
+                                <span className="text-primary">Stay ahead.</span>
                             </motion.h1>
 
                             <motion.p
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ ...springTransition, delay: 0.2 }}
-                                className="text-lg md:text-xl text-zinc-400 max-w-xl leading-relaxed mb-12 font-light"
+                                className="text-lg md:text-xl text-zinc-300 max-w-xl leading-relaxed mb-12"
                             >
-                                The unified operating system for high-stakes asset management. 
-                                Precision tracking, predictive maintenance, and elite team coordination.
+                                A clean, practical dashboard for teams to manage assets, requests, and schedules in one place.
                             </motion.p>
 
                             <motion.div
@@ -106,11 +96,11 @@ export function LandingPage() {
                             >
                                 <Link to="/register">
                                     <Button className="h-14 px-8 rounded-2xl text-lg font-display font-bold bg-primary text-white hover:bg-primary-dark transition-all shadow-xl shadow-primary/20">
-                                        Start Deploying
+                                        Create account
                                     </Button>
                                 </Link>
                                 <button className="h-14 px-8 rounded-2xl text-sm font-bold text-white border border-zinc-800 hover:bg-zinc-900 transition-all">
-                                    View Documentation
+                                    Learn more
                                 </button>
                             </motion.div>
                         </div>
@@ -168,7 +158,7 @@ export function LandingPage() {
                                 
                                 {/* Decorative Elements */}
                                 <div className="absolute -top-12 -right-12 w-48 h-48 bg-primary/10 blur-[100px] -z-10" />
-                                <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-indigo-500/10 blur-[100px] -z-10" />
+                                <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-primary/10 blur-[100px] -z-10" />
                             </motion.div>
                         </div>
                     </div>
@@ -263,7 +253,7 @@ export function LandingPage() {
                         </p>
                         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
                             <Link to="/register">
-                                <Button className="h-16 px-10 rounded-2xl text-lg font-display font-bold bg-white text-black hover:bg-zinc-200 transition-all">
+                                <Button className="h-16 px-10 rounded-2xl text-lg font-display font-bold bg-primary text-white hover:bg-primary-dark transition-all shadow-xl shadow-primary/20">
                                     Get Started Now
                                 </Button>
                             </Link>

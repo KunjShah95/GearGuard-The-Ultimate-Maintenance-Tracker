@@ -1,5 +1,5 @@
 import client from './client.js';
-import { MaintenanceTeam } from '../types/index.js';
+import type { MaintenanceTeam } from '../types/index.js';
 
 export const getAllTeams = async (): Promise<MaintenanceTeam[]> => {
     const { data } = await client.get<MaintenanceTeam[]>('/teams');

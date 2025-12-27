@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
 import { Header } from '../components/layout/Header';
-import { Card, CardContent } from '../components/ui/Card';
+import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Input, TextArea } from '../components/ui/Input';
 import { Modal, ModalActions } from '../components/ui/Modal';

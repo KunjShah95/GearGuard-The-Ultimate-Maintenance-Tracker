@@ -21,6 +21,16 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
     }
 };
 
+export const google = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { credential } = req.body as { credential?: string };
+        const result = await authService.loginWithGoogleIdToken(credential);
+        res.json(result);
+    } catch (error) {
+        next(error);
+    }
+};
+
 export const me = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // @ts-ignore

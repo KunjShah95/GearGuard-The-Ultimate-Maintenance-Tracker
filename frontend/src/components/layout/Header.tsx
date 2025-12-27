@@ -17,7 +17,7 @@ export function Header({ title, subtitle }: HeaderProps) {
                 <div className="animate-fade-in">
                     <h1 className="text-2xl font-display font-bold text-white tracking-tight leading-none">{title}</h1>
                     {subtitle && (
-                        <p className="text-[10px] text-zinc-500 mt-2 font-bold uppercase tracking-[0.2em]">{subtitle}</p>
+                        <p className="text-[12px] text-zinc-300 mt-2 font-medium tracking-wide">{subtitle}</p>
                     )}
                 </div>
 
@@ -29,7 +29,7 @@ export function Header({ title, subtitle }: HeaderProps) {
                         <input
                             type="text"
                             placeholder="Search assets..."
-                            className="bg-transparent border-none outline-none text-xs font-bold text-white placeholder:text-zinc-700 w-full tracking-wide"
+                            className="bg-transparent border-none outline-none text-sm font-medium text-white placeholder:text-zinc-500 w-full"
                         />
                     </div>
 

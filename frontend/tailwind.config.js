@@ -5,10 +5,10 @@ export default {
         extend: {
             colors: {
                 primary: {
-                    DEFAULT: '#6366f1',
-                    light: '#818cf8',
-                    dark: '#4f46e5',
-                    glow: 'rgba(99, 102, 241, 0.5)',
+                    DEFAULT: '#2563eb',
+                    light: '#3b82f6',
+                    dark: '#1d4ed8',
+                    glow: 'rgba(37, 99, 235, 0.5)',
                 },
                 surface: {
                     dark: '#09090b',

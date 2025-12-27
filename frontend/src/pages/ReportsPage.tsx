@@ -1,7 +1,6 @@
 import { Icon } from '@iconify/react';
 import { Header } from '../components/layout/Header';
 import { Card } from '../components/ui/Card';
-import { Button } from '../components/ui/Button';
 import { cn } from '../utils/helpers';
 
 export function ReportsPage() {
@@ -47,7 +46,7 @@ export function ReportsPage() {
                                         className="w-full bg-primary/10 group-hover/bar:bg-primary/20 transition-all rounded-t-xl relative"
                                         style={{ height: `${h}%` }}
                                     >
-                                        <div className="absolute top-0 left-0 w-full h-1 bg-primary rounded-full shadow-[0_0_15px_rgba(99,102,241,0.8)]" />
+                                        <div className="absolute top-0 left-0 w-full h-1 bg-primary rounded-full shadow-lg shadow-primary/30" />
                                         <div className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover/bar:opacity-100 transition-all bg-zinc-900 border border-white/10 text-primary text-[10px] font-black px-2 py-1 rounded-lg pointer-events-none shadow-2xl scale-90 group-hover/bar:scale-100">
                                             {h}%
                                         </div>

@@ -7,19 +7,8 @@ export function MainLayout() {
     const { logout } = useAuth();
 
     return (
-        <div className="flex h-screen w-full bg-zinc-950 overflow-hidden">
-            {/* Ambient Background Infrastructure */}
-            <div className="fixed inset-0 z-0">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.03),transparent_50%)]" />
-                <div className="absolute inset-0 noise opacity-[0.02]" />
-                
-                {/* Vertical Grid Lines */}
-                <div className="absolute inset-0 flex justify-around px-6 pointer-events-none opacity-[0.02]">
-                    {[...Array(6)].map((_, i) => (
-                        <div key={i} className="w-px h-full bg-white" />
-                    ))}
-                </div>
-            </div>
+        <div className="flex h-screen w-full bg-surface-dark overflow-hidden">
+            <div className="fixed inset-0 z-0 bg-gradient-to-b from-surface-dark to-surface-light/30" />
 
             <Sidebar onLogout={logout} />
 

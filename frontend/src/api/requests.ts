@@ -1,5 +1,5 @@
 import client from './client.js';
-import { MaintenanceRequest } from '../types/index.js';
+import type { MaintenanceRequest } from '../types/index.js';
 
 export const getAllRequests = async (): Promise<MaintenanceRequest[]> => {
     const { data } = await client.get<MaintenanceRequest[]>('/requests');
