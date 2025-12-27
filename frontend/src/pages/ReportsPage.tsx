@@ -184,7 +184,7 @@ export function ReportsPage() {
             >
                 {/* Toolbar */}
                 <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-between gap-4">
-                    <div className="flex items-center gap-2 p-1 bg-white/[0.03] rounded-xl border border-white/[0.06]">
+                    <div className="flex items-center gap-2 p-1 bg-slate-100 rounded-xl border border-slate-200">
                         {timeframes.map(tf => (
                             <button
                                 key={tf.value}
@@ -192,8 +192,8 @@ export function ReportsPage() {
                                 className={cn(
                                     'px-4 py-2 rounded-lg text-sm font-medium transition-all',
                                     selectedTimeframe === tf.value
-                                        ? 'bg-primary text-white'
-                                        : 'text-slate-500 hover:text-white'
+                                        ? 'bg-white shadow text-primary'
+                                        : 'text-slate-500 hover:text-slate-900'
                                 )}
                             >
                                 {tf.label}
@@ -266,14 +266,14 @@ export function ReportsPage() {
                     <div className="glass-card rounded-2xl p-6">
                         <div className="flex items-center justify-between mb-8">
                             <div>
-                                <h3 className="text-lg font-bold text-white mb-1">Workload Distribution</h3>
+                                <h3 className="text-lg font-bold text-slate-900 mb-1">Workload Distribution</h3>
                                 <p className="text-sm text-slate-500">Work orders completed per week</p>
                             </div>
                             <div className="flex gap-2">
-                                <button className="p-2 rounded-lg bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.06] transition-all">
+                                <button className="p-2 rounded-lg bg-slate-50 border border-slate-200 hover:bg-slate-100 transition-all">
                                     <BarChart3 className="w-4 h-4 text-slate-500" />
                                 </button>
-                                <button className="p-2 rounded-lg bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.06] transition-all">
+                                <button className="p-2 rounded-lg bg-slate-50 border border-slate-200 hover:bg-slate-100 transition-all">
                                     <LineChart className="w-4 h-4 text-slate-500" />
                                 </button>
                             </div>
@@ -282,7 +282,7 @@ export function ReportsPage() {
                         <div className="h-64 flex items-end gap-3">
                             {[40, 65, 45, 90, 75, 55, 85, 30, 95, 60, 45, 80].map((h, i) => (
                                 <div key={i} className="flex-1 flex flex-col items-center gap-3 group">
-                                    <div className="w-full bg-white/[0.02] rounded-xl h-full flex items-end relative">
+                                    <div className="w-full bg-slate-50 rounded-xl h-full flex items-end relative">
                                         <motion.div
                                             initial={{ height: 0 }}
                                             animate={{ height: `${h}%` }}
@@ -304,7 +304,7 @@ export function ReportsPage() {
                     <div className="glass-card rounded-2xl p-6">
                         <div className="flex items-center justify-between mb-8">
                             <div>
-                                <h3 className="text-lg font-bold text-white mb-1">Asset Health Index</h3>
+                                <h3 className="text-lg font-bold text-slate-900 mb-1">Asset Health Index</h3>
                                 <p className="text-sm text-slate-500">Equipment status by category</p>
                             </div>
                             <Button variant="ghost" size="sm">
@@ -328,7 +328,7 @@ export function ReportsPage() {
                     <div className="glass-card rounded-2xl p-6">
                         <div className="flex items-center justify-between mb-6">
                             <div>
-                                <h3 className="text-lg font-bold text-white mb-1">Requests per Team</h3>
+                                <h3 className="text-lg font-bold text-slate-900 mb-1">Requests per Team</h3>
                                 <p className="text-sm text-slate-500">Maintenance workload distribution</p>
                             </div>
                             <Badge variant="primary" size="sm">Pivot Report</Badge>
@@ -346,12 +346,12 @@ export function ReportsPage() {
                                     <div className="flex items-center justify-between mb-2">
                                         <div className="flex items-center gap-3">
                                             <div className={cn("w-3 h-3 rounded-full", item.color)} />
-                                            <span className="text-sm font-medium text-slate-400 group-hover:text-white transition-colors">
+                                            <span className="text-sm font-medium text-slate-600 group-hover:text-slate-900 transition-colors">
                                                 {item.team}
                                             </span>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <span className="text-sm font-bold text-white">{item.count}</span>
+                                            <span className="text-sm font-bold text-slate-900">{item.count}</span>
                                             <span className="text-xs text-slate-600">({item.percentage}%)</span>
                                         </div>
                                     </div>
@@ -367,7 +367,7 @@ export function ReportsPage() {
                             ))}
                         </div>
 
-                        <div className="mt-6 pt-4 border-t border-white/[0.05] flex items-center justify-between">
+                        <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                             <span className="text-xs text-slate-500">Total Requests: 80</span>
                             <Button variant="ghost" size="sm">
                                 <Download className="w-3.5 h-3.5 mr-1.5" />
@@ -380,7 +380,7 @@ export function ReportsPage() {
                     <div className="glass-card rounded-2xl p-6">
                         <div className="flex items-center justify-between mb-6">
                             <div>
-                                <h3 className="text-lg font-bold text-white mb-1">Requests per Category</h3>
+                                <h3 className="text-lg font-bold text-slate-900 mb-1">Requests per Category</h3>
                                 <p className="text-sm text-slate-500">Equipment type breakdown</p>
                             </div>
                             <Badge variant="success" size="sm">Graph Report</Badge>
@@ -420,7 +420,7 @@ export function ReportsPage() {
                                     })}
                                 </svg>
                                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                    <span className="text-2xl font-bold text-white">80</span>
+                                    <span className="text-2xl font-bold text-slate-900">80</span>
                                     <span className="text-xs text-slate-500">Total</span>
                                 </div>
                             </div>
@@ -437,17 +437,17 @@ export function ReportsPage() {
                                     <div key={i} className="flex items-center justify-between group cursor-pointer">
                                         <div className="flex items-center gap-2">
                                             <div className={cn("w-2.5 h-2.5 rounded-sm", item.color)} />
-                                            <span className="text-xs text-slate-400 group-hover:text-white transition-colors">
+                                            <span className="text-xs text-slate-500 group-hover:text-slate-900 transition-colors">
                                                 {item.category}
                                             </span>
                                         </div>
-                                        <span className="text-xs font-bold text-white">{item.count}</span>
+                                        <span className="text-xs font-bold text-slate-900">{item.count}</span>
                                     </div>
                                 ))}
                             </div>
                         </div>
 
-                        <div className="mt-6 pt-4 border-t border-white/[0.05] flex items-center justify-between">
+                        <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                             <span className="text-xs text-slate-500">Data from last 30 days</span>
                             <Button variant="ghost" size="sm">
                                 <Download className="w-3.5 h-3.5 mr-1.5" />
@@ -460,19 +460,19 @@ export function ReportsPage() {
                 {/* Reports List with Search */}
                 <motion.div variants={itemVariants}>
                     <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-                        <h3 className="text-lg font-bold text-white">Generated Reports</h3>
+                        <h3 className="text-lg font-bold text-slate-900">Generated Reports</h3>
 
                         {/* Search and Filter */}
                         <div className="flex items-center gap-3">
                             {/* Search Input */}
                             <div className="relative">
-                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                                 <input
                                     type="text"
                                     placeholder="Search reports..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="pl-10 pr-10 py-2.5 w-72 bg-white/[0.03] border border-white/[0.06] rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-primary/50 transition-colors"
+                                    className="pl-10 pr-10 py-2.5 w-72 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-primary/50 transition-colors"
                                 />
                                 {searchQuery && (
                                     <button
@@ -488,10 +488,10 @@ export function ReportsPage() {
                             <select
                                 value={selectedCategory || 'All'}
                                 onChange={(e) => setSelectedCategory(e.target.value === 'All' ? null : e.target.value)}
-                                className="px-4 py-2.5 bg-white/[0.03] border border-white/[0.06] rounded-xl text-sm text-white focus:outline-none focus:border-primary/50 transition-colors cursor-pointer"
+                                className="px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-primary/50 transition-colors cursor-pointer"
                             >
                                 {categories.map(cat => (
-                                    <option key={cat} value={cat} className="bg-surface-dark text-white">
+                                    <option key={cat} value={cat} className="bg-white text-slate-900">
                                         {cat}
                                     </option>
                                 ))}
@@ -527,8 +527,8 @@ export function ReportsPage() {
                         </div>
                     ) : (
                         <div className="glass-card rounded-2xl p-12 text-center">
-                            <FileText className="w-12 h-12 text-slate-600 mx-auto mb-4" />
-                            <h4 className="text-lg font-semibold text-white mb-2">No reports found</h4>
+                            <FileText className="w-12 h-12 text-slate-400 mx-auto mb-4" />
+                            <h4 className="text-lg font-semibold text-slate-900 mb-2">No reports found</h4>
                             <p className="text-sm text-slate-500">
                                 Try adjusting your search or filter criteria
                             </p>
@@ -599,8 +599,8 @@ function KPICard({ title, value, trend, description, icon: Icon }: KPICardProps)
                     {trend.value}
                 </div>
             </div>
-            <div className="text-3xl font-bold text-white mb-1">{value}</div>
-            <div className="text-sm font-medium text-slate-400 mb-1">{title}</div>
+            <div className="text-3xl font-bold text-slate-900 mb-1">{value}</div>
+            <div className="text-sm font-medium text-slate-500 mb-1">{title}</div>
             <p className="text-xs text-slate-600">{description}</p>
         </div>
     );
@@ -630,16 +630,16 @@ function HealthRow({ icon: Icon, label, percentage, color }: HealthRowProps) {
         <div className="group">
             <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-white/[0.03] flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center">
                         <Icon className={cn('w-4 h-4', colorClasses[color].split(' ')[1])} />
                     </div>
-                    <span className="text-sm font-medium text-slate-400 group-hover:text-white transition-colors">
+                    <span className="text-sm font-medium text-slate-500 group-hover:text-slate-900 transition-colors">
                         {label}
                     </span>
                 </div>
-                <span className="text-sm font-bold text-white">{percentage}%</span>
+                <span className="text-sm font-bold text-slate-900">{percentage}%</span>
             </div>
-            <div className="h-2 w-full bg-white/[0.03] rounded-full overflow-hidden">
+            <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
                 <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${percentage}%` }}
@@ -670,11 +670,11 @@ function ReportCard({ title, date, size, type, isDownloading, onDownload }: Repo
     return (
         <div className="glass-card rounded-2xl p-5 flex items-center justify-between group hover:border-primary/30 transition-all">
             <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center group-hover:border-primary/30 transition-all">
-                    <FileText className="w-6 h-6 text-slate-500 group-hover:text-primary transition-colors" />
+                <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center group-hover:border-primary/30 transition-all">
+                    <FileText className="w-6 h-6 text-slate-400 group-hover:text-primary transition-colors" />
                 </div>
                 <div>
-                    <h4 className="font-semibold text-white group-hover:text-primary transition-colors line-clamp-1">
+                    <h4 className="font-semibold text-slate-900 group-hover:text-primary transition-colors line-clamp-1">
                         {title}
                     </h4>
                     <div className="flex items-center gap-2 mt-1 text-xs text-slate-500">
@@ -694,7 +694,7 @@ function ReportCard({ title, date, size, type, isDownloading, onDownload }: Repo
                     "p-2.5 rounded-xl border transition-all",
                     isDownloading
                         ? "bg-primary/10 border-primary/20 cursor-wait"
-                        : "bg-white/[0.03] border-white/[0.06] opacity-0 group-hover:opacity-100 hover:bg-primary/10 hover:border-primary/30"
+                        : "bg-slate-50 border-slate-200 opacity-0 group-hover:opacity-100 hover:bg-primary/10 hover:border-primary/30"
                 )}
             >
                 {isDownloading ? (

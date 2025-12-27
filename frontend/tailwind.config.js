@@ -9,6 +9,10 @@ export default {
             colors: {
                 // Primary Brand Colors
                 primary: {
+                    DEFAULT: '#2563eb',
+                    light: '#3b82f6',
+                    dark: '#1d4ed8',
+                    glow: 'rgba(37, 99, 235, 0.5)',
                     DEFAULT: 'hsl(217, 91%, 50%)',
                     light: 'hsl(213, 94%, 60%)',
                     dark: 'hsl(221, 83%, 43%)',

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export function MarketingFooter() {
     return (
-        <footer className="py-20 px-6 border-t border-zinc-900 relative z-10 bg-zinc-950">
+        <footer className="py-20 px-6 border-t border-slate-200 relative z-10 bg-slate-50">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-12 gap-12 mb-20">
                     <div className="col-span-12 lg:col-span-4">
@@ -11,9 +11,9 @@ export function MarketingFooter() {
                             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                                 <Icon icon="solar:shield-bold-duotone" className="text-white w-5 h-5" />
                             </div>
-                            <span className="text-xl font-display font-bold text-white">GearGuard</span>
+                            <span className="text-xl font-display font-bold text-slate-900">GearGuard</span>
                         </div>
-                        <p className="text-zinc-500 leading-relaxed max-w-xs font-light">
+                        <p className="text-slate-500 leading-relaxed max-w-xs font-light">
                             The industrial standard for asset orchestration and tactical intelligence.
                         </p>
                     </div>
@@ -25,11 +25,11 @@ export function MarketingFooter() {
                             { title: "Legal", links: [{ label: "Privacy", path: "/privacy" }, { label: "Terms", path: "/terms" }, { label: "Cookie Policy", path: "#" }, { label: "SLA", path: "#" }] }
                         ].map((col, i) => (
                             <div key={i}>
-                                <h4 className="text-[11px] font-bold text-white uppercase tracking-widest mb-6">{col.title}</h4>
+                                <h4 className="text-[11px] font-bold text-slate-900 uppercase tracking-widest mb-6">{col.title}</h4>
                                 <ul className="space-y-4">
                                     {col.links.map((link, j) => (
                                         <li key={j}>
-                                            <Link to={link.path} className="text-sm text-zinc-500 hover:text-primary transition-colors">{link.label}</Link>
+                                            <Link to={link.path} className="text-sm text-slate-500 hover:text-primary transition-colors">{link.label}</Link>
                                         </li>
                                     ))}
                                 </ul>
@@ -37,13 +37,13 @@ export function MarketingFooter() {
                         ))}
                     </div>
                 </div>
-                <div className="pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <div className="text-[11px] text-zinc-600 font-bold uppercase tracking-widest">
+                <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div className="text-[11px] text-slate-400 font-bold uppercase tracking-widest">
                         © 2025 GearGuard Inc. All rights reserved.
                     </div>
                     <div className="flex gap-6">
                         {['solar:share-circle-bold', 'solar:clapperboard-edit-bold', 'solar:letter-bold'].map((icon, i) => (
-                            <a key={i} href="#" className="text-zinc-600 hover:text-white transition-colors">
+                            <a key={i} href="#" className="text-slate-400 hover:text-slate-900 transition-colors">
                                 <Icon icon={icon} className="w-5 h-5" />
                             </a>
                         ))}

@@ -90,7 +90,7 @@ export function CalendarPage() {
                                     <CalendarIcon className="w-7 h-7 text-primary" />
                                 </div>
                                 <div>
-                                    <h2 className="text-2xl font-bold text-white">
+                                    <h2 className="text-2xl font-bold text-slate-900">
                                         {format(currentDate, 'MMMM yyyy')}
                                     </h2>
                                     <p className="text-sm text-slate-500">
@@ -108,15 +108,15 @@ export function CalendarPage() {
                                 <div className="flex items-center gap-1">
                                     <button
                                         onClick={prevMonth}
-                                        className="p-2.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.06] transition-all"
+                                        className="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-all"
                                     >
-                                        <ChevronLeft className="w-5 h-5 text-slate-400" />
+                                        <ChevronLeft className="w-5 h-5 text-slate-500" />
                                     </button>
                                     <button
                                         onClick={nextMonth}
-                                        className="p-2.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.06] transition-all"
+                                        className="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-all"
                                     >
-                                        <ChevronRight className="w-5 h-5 text-slate-400" />
+                                        <ChevronRight className="w-5 h-5 text-slate-500" />
                                     </button>
                                 </div>
                                 <Button onClick={() => setIsModalOpen(true)}>
@@ -129,9 +129,9 @@ export function CalendarPage() {
                         {/* Calendar Grid */}
                         <div className="glass-card rounded-2xl overflow-hidden">
                             {/* Day Headers */}
-                            <div className="grid grid-cols-7 border-b border-white/[0.05] bg-white/[0.02]">
+                            <div className="grid grid-cols-7 border-b border-slate-200 bg-slate-50">
                                 {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                                    <div key={day} className="py-4 text-center text-xs font-bold uppercase tracking-wider text-slate-500 border-r border-white/[0.05] last:border-0">
+                                    <div key={day} className="py-4 text-center text-xs font-bold uppercase tracking-wider text-slate-500 border-r border-slate-200 last:border-0">
                                         {day}
                                     </div>
                                 ))}
@@ -150,18 +150,18 @@ export function CalendarPage() {
                                             key={day.toString()}
                                             onClick={() => setSelectedDate(day)}
                                             className={cn(
-                                                "min-h-[120px] p-3 border-r border-b border-white/[0.05] cursor-pointer transition-all",
-                                                !isCurrentMonth && "opacity-30 bg-black/20",
+                                                "min-h-[120px] p-3 border-r border-b border-slate-200 cursor-pointer transition-all",
+                                                !isCurrentMonth && "opacity-40 bg-slate-50",
                                                 isSelected && "bg-primary/5 border-primary/20",
-                                                !isSelected && "hover:bg-white/[0.02]",
+                                                !isSelected && "hover:bg-slate-50",
                                                 (idx + 1) % 7 === 0 && "border-r-0"
                                             )}
                                         >
                                             <span className={cn(
                                                 "inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-semibold transition-all",
                                                 isTodayDate && "bg-primary text-white shadow-lg shadow-primary/30",
-                                                isSelected && !isTodayDate && "bg-white/10 text-white",
-                                                !isTodayDate && !isSelected && "text-slate-400"
+                                                isSelected && !isTodayDate && "bg-slate-200 text-slate-900",
+                                                !isTodayDate && !isSelected && "text-slate-500"
                                             )}>
                                                 {format(day, 'd')}
                                             </span>
@@ -231,7 +231,7 @@ export function CalendarPage() {
                                                     </Badge>
                                                 </div>
                                             </div>
-                                            <h4 className="font-semibold text-white mb-3 group-hover:text-primary transition-colors">
+                                            <h4 className="font-semibold text-slate-900 mb-3 group-hover:text-primary transition-colors">
                                                 {evt.title}
                                             </h4>
                                             <div className="space-y-2 text-xs text-slate-500">
@@ -252,7 +252,7 @@ export function CalendarPage() {
                                     ))
                                 ) : (
                                     <div className="glass-card rounded-2xl p-8 text-center">
-                                        <CalendarIcon className="w-10 h-10 text-slate-700 mx-auto mb-4" />
+                                        <CalendarIcon className="w-10 h-10 text-slate-400 mx-auto mb-4" />
                                         <p className="text-slate-500 text-sm">
                                             {selectedDate ? 'No events scheduled' : 'Select a date to view events'}
                                         </p>
@@ -269,13 +269,13 @@ export function CalendarPage() {
                             {mockEvents.slice(0, 3).map(evt => (
                                 <div
                                     key={evt.id}
-                                    className="p-4 bg-white/[0.02] border border-white/[0.06] rounded-xl flex items-center gap-4 hover:bg-white/[0.04] transition-all cursor-pointer group"
+                                    className="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-center gap-4 hover:bg-slate-100 transition-all cursor-pointer group"
                                 >
                                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
                                         <Clock className="w-5 h-5 text-primary" />
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <h4 className="font-medium text-white text-sm truncate group-hover:text-primary transition-colors">
+                                        <h4 className="font-medium text-slate-900 text-sm truncate group-hover:text-primary transition-colors">
                                             {evt.title}
                                         </h4>
                                         <p className="text-xs text-slate-500 mt-0.5">
@@ -293,9 +293,9 @@ export function CalendarPage() {
                                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                                     <Lightbulb className="w-5 h-5 text-primary" />
                                 </div>
-                                <h4 className="font-bold text-white">AI Insight</h4>
+                                <h4 className="font-bold text-slate-900">AI Insight</h4>
                             </div>
-                            <p className="text-sm text-slate-400 leading-relaxed">
+                            <p className="text-sm text-slate-500 leading-relaxed">
                                 Based on historical patterns, consider scheduling an HVAC filter check before the cooling season begins. This could prevent 3 potential breakdowns.
                             </p>
                             <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-primary/10 blur-3xl rounded-full" />

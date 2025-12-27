@@ -103,17 +103,17 @@ export function Select({
                     disabled={disabled}
                     className={cn(
                         'w-full h-12 px-4 rounded-xl flex items-center justify-between',
-                        'bg-white/[0.03] border border-white/[0.08]',
+                        'bg-white border border-slate-200',
                         'transition-all duration-200',
-                        'hover:bg-white/[0.05] hover:border-white/[0.12]',
-                        isOpen && 'bg-white/[0.06] border-primary/50 ring-2 ring-primary/10',
+                        'hover:bg-slate-50 hover:border-slate-300',
+                        isOpen && 'bg-white border-primary ring-2 ring-primary/10',
                         error && 'border-danger/50',
                         disabled && 'opacity-50 cursor-not-allowed'
                     )}
                 >
                     <span className={cn(
                         'text-sm font-medium truncate',
-                        selectedOption ? 'text-white' : 'text-slate-600'
+                        selectedOption ? 'text-slate-900' : 'text-slate-500'
                     )}>
                         {selectedOption ? (
                             <span className="flex items-center gap-2">
@@ -123,7 +123,7 @@ export function Select({
                         ) : placeholder}
                     </span>
                     <ChevronDown className={cn(
-                        'w-4 h-4 text-slate-500 transition-transform',
+                        'w-4 h-4 text-slate-400 transition-transform',
                         isOpen && 'rotate-180'
                     )} />
                 </button>
@@ -136,7 +136,7 @@ export function Select({
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.15 }}
-                            className="absolute top-full left-0 right-0 mt-2 py-2 rounded-xl bg-surface-light border border-white/[0.08] shadow-2xl z-50 max-h-60 overflow-y-auto custom-scrollbar"
+                            className="absolute top-full left-0 right-0 mt-2 py-2 rounded-xl bg-white border border-slate-200 shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar"
                         >
                             {options.map((option, index) => (
                                 <button
@@ -151,15 +151,15 @@ export function Select({
                                     onMouseEnter={() => setHighlightedIndex(index)}
                                     className={cn(
                                         'w-full px-4 py-2.5 flex items-center justify-between text-left transition-colors',
-                                        highlightedIndex === index && 'bg-white/[0.05]',
-                                        option.value === value && 'bg-primary/10',
+                                        highlightedIndex === index && 'bg-slate-50',
+                                        option.value === value && 'bg-primary/5',
                                         option.disabled && 'opacity-50 cursor-not-allowed'
                                     )}
                                     disabled={option.disabled}
                                 >
                                     <span className={cn(
                                         'text-sm font-medium flex items-center gap-2',
-                                        option.value === value ? 'text-primary' : 'text-slate-300'
+                                        option.value === value ? 'text-primary' : 'text-slate-700'
                                     )}>
                                         {option.icon}
                                         {option.label}
@@ -254,10 +254,10 @@ export function MultiSelect({
                     disabled={disabled}
                     className={cn(
                         'w-full min-h-12 px-3 py-2 rounded-xl flex items-center flex-wrap gap-2',
-                        'bg-white/[0.03] border border-white/[0.08]',
+                        'bg-white border border-slate-200',
                         'transition-all duration-200',
-                        'hover:bg-white/[0.05] hover:border-white/[0.12]',
-                        isOpen && 'bg-white/[0.06] border-primary/50 ring-2 ring-primary/10',
+                        'hover:bg-slate-50 hover:border-slate-300',
+                        isOpen && 'bg-white border-primary ring-2 ring-primary/10',
                         error && 'border-danger/50',
                         disabled && 'opacity-50 cursor-not-allowed'
                     )}
@@ -278,10 +278,10 @@ export function MultiSelect({
                             </span>
                         ))
                     ) : (
-                        <span className="text-sm text-slate-600">{placeholder}</span>
+                        <span className="text-sm text-slate-500">{placeholder}</span>
                     )}
                     <ChevronDown className={cn(
-                        'w-4 h-4 text-slate-500 ml-auto transition-transform',
+                        'w-4 h-4 text-slate-400 ml-auto transition-transform',
                         isOpen && 'rotate-180'
                     )} />
                 </button>
@@ -294,7 +294,7 @@ export function MultiSelect({
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.15 }}
-                            className="absolute top-full left-0 right-0 mt-2 py-2 rounded-xl bg-surface-light border border-white/[0.08] shadow-2xl z-50 max-h-60 overflow-y-auto custom-scrollbar"
+                            className="absolute top-full left-0 right-0 mt-2 py-2 rounded-xl bg-white border border-slate-200 shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar"
                         >
                             {options.map((option) => (
                                 <button
@@ -303,15 +303,15 @@ export function MultiSelect({
                                     onClick={() => !option.disabled && toggleOption(option.value)}
                                     className={cn(
                                         'w-full px-4 py-2.5 flex items-center justify-between text-left transition-colors',
-                                        'hover:bg-white/[0.05]',
-                                        value.includes(option.value) && 'bg-primary/10',
+                                        'hover:bg-slate-50',
+                                        value.includes(option.value) && 'bg-primary/5',
                                         option.disabled && 'opacity-50 cursor-not-allowed'
                                     )}
                                     disabled={option.disabled}
                                 >
                                     <span className={cn(
                                         'text-sm font-medium',
-                                        value.includes(option.value) ? 'text-primary' : 'text-slate-300'
+                                        value.includes(option.value) ? 'text-primary' : 'text-slate-700'
                                     )}>
                                         {option.label}
                                     </span>

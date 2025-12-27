@@ -25,23 +25,23 @@ export function Card({
 }: CardProps) {
     const variants: Record<string, string> = {
         default: `
-            bg-gradient-to-br from-surface-light/80 to-surface/60
-            border border-white/[0.06]
-            shadow-elevation-1
+            bg-white
+            border border-slate-200
+            shadow-sm
         `,
         elevated: `
-            bg-surface-light
-            border border-white/[0.08]
-            shadow-elevation-2
+            bg-white
+            border border-slate-200
+            shadow-md hover:shadow-lg
         `,
         outlined: `
             bg-transparent
-            border border-white/[0.08]
+            border border-slate-200
         `,
         glass: `
-            bg-white/[0.03] backdrop-blur-xl
-            border border-white/[0.08]
-            shadow-elevation-1
+            bg-white/80 backdrop-blur-xl
+            border border-slate-200
+            shadow-sm
         `,
     };
 
@@ -60,9 +60,8 @@ export function Card({
                 paddings[padding],
                 hover && `
                     cursor-pointer
-                    hover:border-primary/30
-                    hover:shadow-elevation-2
-                    hover:bg-surface-light/90
+                    hover:border-primary/50
+                    hover:shadow-md
                     hover:-translate-y-0.5
                     active:translate-y-0
                 `,
@@ -128,7 +127,7 @@ interface CardTitleProps {
 export function CardTitle({ children, className, subtitle }: CardTitleProps) {
     return (
         <div>
-            <h3 className={cn('text-lg font-bold text-white tracking-tight', className)}>
+            <h3 className={cn('text-lg font-bold text-slate-900 tracking-tight', className)}>
                 {children}
             </h3>
             {subtitle && (
@@ -149,7 +148,7 @@ interface CardContentProps {
 
 export function CardContent({ children, className }: CardContentProps) {
     return (
-        <div className={cn('text-slate-400 leading-relaxed', className)}>
+        <div className={cn('text-slate-600 leading-relaxed', className)}>
             {children}
         </div>
     );
@@ -175,7 +174,7 @@ export function CardFooter({ children, className, align = 'right' }: CardFooterP
 
     return (
         <div className={cn(
-            'flex items-center gap-3 mt-6 pt-6 border-t border-white/[0.05]',
+            'flex items-center gap-3 mt-6 pt-6 border-t border-slate-100',
             alignments[align],
             className
         )}>
@@ -217,7 +216,7 @@ export function StatCard({ label, value, icon, trend, className }: StatCardProps
                             'text-xs font-bold px-2 py-1 rounded-lg',
                             trend.direction === 'up' && 'bg-success/10 text-success',
                             trend.direction === 'down' && 'bg-danger/10 text-danger',
-                            trend.direction === 'neutral' && 'bg-slate-500/10 text-slate-400'
+                            trend.direction === 'neutral' && 'bg-slate-100 text-slate-500'
                         )}>
                             {trend.direction === 'up' && '↑'}
                             {trend.direction === 'down' && '↓'}
@@ -225,7 +224,7 @@ export function StatCard({ label, value, icon, trend, className }: StatCardProps
                         </span>
                     )}
                 </div>
-                <div className="text-3xl font-bold text-white mb-1">{value}</div>
+                <div className="text-3xl font-bold text-slate-900 mb-1">{value}</div>
                 <div className="text-sm text-slate-500 font-medium">{label}</div>
             </div>
         </Card>
@@ -254,10 +253,10 @@ export function FeatureCard({ title, description, icon, gradient = 'from-primary
             )}>
                 <span className="text-white">{icon}</span>
             </div>
-            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
+            <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">
                 {title}
             </h3>
-            <p className="text-slate-400 leading-relaxed">
+            <p className="text-slate-500 leading-relaxed">
                 {description}
             </p>
         </Card>

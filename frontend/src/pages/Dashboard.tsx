@@ -15,18 +15,17 @@ import {
     Filter,
     Calendar,
     Activity,
-    Zap,
-    Target,
-    Bell,
+
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/layout/Header';
-import { Card, CardContent } from '../components/ui/Card';
+import { EquipmentHealthChart } from '../components/dashboard/EquipmentHealthChart';
+
 import { Button } from '../components/ui/Button';
 import { StatusBadge, PriorityBadge } from '../components/ui/Badge';
 import type { DashboardStats, MaintenanceRequest } from '../types';
 import { getRelativeTime } from '../utils/helpers';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 // Mock Data
 const mockStats: DashboardStats = {
@@ -175,13 +174,13 @@ export function Dashboard() {
                                         <Activity className="w-5 h-5 text-primary" />
                                     </div>
                                     <div>
-                                        <h2 className="text-lg font-bold text-white">Live Work Orders</h2>
+                                        <h2 className="text-lg font-bold text-slate-900">Live Work Orders</h2>
                                         <p className="text-xs text-slate-500">Real-time maintenance tracking</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <button className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
-                                        <Filter className="w-4 h-4 text-slate-400" />
+                                    <button className="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 transition-colors">
+                                        <Filter className="w-4 h-4 text-slate-500" />
                                     </button>
                                     <Link to="/app/requests" className="flex items-center gap-2 text-primary text-sm font-semibold hover:underline">
                                         View All
@@ -206,7 +205,7 @@ export function Dashboard() {
 
                         {/* Equipment Health Chart */}
                         <motion.div variants={itemVariants}>
-                            <HealthIndexChart timeframe={selectedTimeframe} onTimeframeChange={setSelectedTimeframe} />
+                            <EquipmentHealthChart timeframe={selectedTimeframe} onTimeframeChange={setSelectedTimeframe} />
                         </motion.div>
                     </div>
 
@@ -228,7 +227,7 @@ export function Dashboard() {
                                     </Button>
                                 </Link>
                                 <Link to="/app/equipment">
-                                    <Button variant="outline" className="w-full h-14 rounded-2xl justify-between border-white/5 hover:bg-white/5 group">
+                                    <Button variant="outline" className="w-full h-14 rounded-2xl justify-between border-slate-200 hover:bg-slate-50 group">
                                         <span className="flex items-center gap-3">
                                             <Wrench className="w-5 h-5" />
                                             Register New Asset
@@ -237,7 +236,7 @@ export function Dashboard() {
                                     </Button>
                                 </Link>
                                 <Link to="/app/calendar">
-                                    <Button variant="outline" className="w-full h-14 rounded-2xl justify-between border-white/5 hover:bg-white/5 group">
+                                    <Button variant="outline" className="w-full h-14 rounded-2xl justify-between border-slate-200 hover:bg-slate-50 group">
                                         <span className="flex items-center gap-3">
                                             <Calendar className="w-5 h-5" />
                                             Schedule Maintenance
@@ -297,10 +296,10 @@ export function Dashboard() {
                                         </div>
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center justify-between mb-1.5">
-                                                <span className="font-semibold text-white text-sm truncate">{team.name}</span>
+                                                <span className="font-semibold text-slate-800 text-sm truncate">{team.name}</span>
                                                 <span className="text-xs font-bold text-success">{team.score}%</span>
                                             </div>
-                                            <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                            <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
                                                 <motion.div
                                                     initial={{ width: 0 }}
                                                     animate={{ width: `${team.score}%` }}
@@ -381,21 +380,21 @@ function StatCard({ label, value, sublabel, icon, trend, color, progress, alert 
                 </div>
 
                 <div className="space-y-1">
-                    <h3 className="text-3xl font-bold text-white tracking-tight">{value}</h3>
+                    <h3 className="text-3xl font-bold text-slate-900 tracking-tight">{value}</h3>
                     <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider">{label}</p>
                     <p className="text-xs text-slate-600">{sublabel}</p>
                 </div>
 
                 {progress !== undefined && (
                     <div className="mt-4">
-                        <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
+                        <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
                             <motion.div
                                 initial={{ width: 0 }}
                                 animate={{ width: `${progress}%` }}
                                 transition={{ duration: 1, ease: "easeOut" }}
                                 className={`h-full rounded-full bg-gradient-to-r ${progress >= 90 ? 'from-success to-emerald-400' :
-                                        progress >= 70 ? 'from-primary to-blue-400' :
-                                            'from-warning to-yellow-400'
+                                    progress >= 70 ? 'from-primary to-blue-400' :
+                                        'from-warning to-yellow-400'
                                     }`}
                             />
                         </div>
@@ -432,7 +431,7 @@ function WorkOrderCard({ request }: WorkOrderCardProps) {
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-white group-hover:text-primary transition-colors truncate mb-1">
+                    <h4 className="font-semibold text-slate-900 group-hover:text-primary transition-colors truncate mb-1">
                         {request.subject}
                     </h4>
                     <div className="flex items-center gap-3 text-xs text-slate-500">
@@ -449,8 +448,8 @@ function WorkOrderCard({ request }: WorkOrderCardProps) {
                 <div className="flex items-center gap-3">
                     <PriorityBadge priority={request.priority!} />
                     <StatusBadge status={request.status!} />
-                    <button className="p-2 rounded-lg bg-white/5 opacity-0 group-hover:opacity-100 hover:bg-white/10 transition-all">
-                        <MoreHorizontal className="w-4 h-4 text-slate-400" />
+                    <button className="p-2 rounded-lg bg-slate-50 opacity-0 group-hover:opacity-100 hover:bg-slate-100 transition-all">
+                        <MoreHorizontal className="w-4 h-4 text-slate-500" />
                     </button>
                 </div>
             </div>
@@ -502,87 +501,13 @@ function AlertCard({ type, title, description, time }: AlertCardProps) {
                 <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2 mb-1">
                         <h4 className={`text-sm font-bold ${styles.title}`}>{title}</h4>
-                        <span className="text-[10px] text-slate-600 whitespace-nowrap">{time}</span>
+                        <span className="text-[10px] text-slate-500 whitespace-nowrap">{time}</span>
                     </div>
-                    <p className="text-xs text-slate-400 leading-relaxed">{description}</p>
+                    <p className="text-xs text-slate-500 leading-relaxed">{description}</p>
                 </div>
             </div>
         </div>
     );
 }
 
-// =============================================
-// HEALTH INDEX CHART COMPONENT
-// =============================================
 
-interface HealthIndexChartProps {
-    timeframe: string;
-    onTimeframeChange: (tf: string) => void;
-}
-
-function HealthIndexChart({ timeframe, onTimeframeChange }: HealthIndexChartProps) {
-    const timeframes = ['24h', '7d', '30d', '90d'];
-    const chartData = [65, 72, 68, 78, 74, 82, 79, 85, 81, 88, 84, 91];
-
-    return (
-        <div className="glass-card rounded-3xl p-6">
-            <div className="flex items-center justify-between mb-6">
-                <div>
-                    <h3 className="text-lg font-bold text-white mb-1">Equipment Health Index</h3>
-                    <p className="text-sm text-slate-500">Overall operational efficiency trending</p>
-                </div>
-                <div className="flex items-center gap-1 p-1 bg-white/5 rounded-xl">
-                    {timeframes.map((tf) => (
-                        <button
-                            key={tf}
-                            onClick={() => onTimeframeChange(tf)}
-                            className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${timeframe === tf
-                                    ? 'bg-primary text-white'
-                                    : 'text-slate-500 hover:text-white'
-                                }`}
-                        >
-                            {tf}
-                        </button>
-                    ))}
-                </div>
-            </div>
-
-            {/* Chart Area */}
-            <div className="h-48 flex items-end gap-3">
-                {chartData.map((value, i) => (
-                    <div key={i} className="flex-1 flex flex-col items-center gap-2">
-                        <motion.div
-                            initial={{ height: 0 }}
-                            animate={{ height: `${value}%` }}
-                            transition={{ duration: 0.5, delay: i * 0.05 }}
-                            className="w-full rounded-t-lg bg-gradient-to-t from-primary/40 to-primary relative group cursor-pointer"
-                        >
-                            {/* Tooltip */}
-                            <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-white text-surface-dark text-xs font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                                {value}%
-                            </div>
-                        </motion.div>
-                    </div>
-                ))}
-            </div>
-
-            {/* Legend */}
-            <div className="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
-                <div className="flex items-center gap-6">
-                    <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-primary" />
-                        <span className="text-xs text-slate-500">Health Score</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <Target className="w-4 h-4 text-success" />
-                        <span className="text-xs text-slate-500">Target: 85%</span>
-                    </div>
-                </div>
-                <div className="flex items-center gap-2 text-success text-sm font-semibold">
-                    <TrendingUp className="w-4 h-4" />
-                    <span>+12% vs last period</span>
-                </div>
-            </div>
-        </div>
-    );
-}

@@ -266,7 +266,7 @@ export function Drawer({
         lg: 'w-[480px]',
     };
 
-    const slideDirection = position === 'right' ? 'translateX(100%)' : 'translateX(-100%)';
+
 
     return (
         <AnimatePresence>

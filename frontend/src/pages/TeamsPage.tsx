@@ -100,7 +100,7 @@ export function TeamsPage() {
     const stats = [
         { label: 'Total Teams', value: mockTeams.length, icon: Users },
         { label: 'Team Members', value: mockTeams.reduce((acc, t) => acc + t.members.length, 0), icon: UserPlus },
-        { label: 'Assets Managed', value: mockTeams.reduce((acc, t) => acc + t.equipmentCount, 0), icon: Wrench },
+        { label: 'Assets Managed', value: mockTeams.reduce((acc, t) => acc + (t.equipmentCount || 0), 0), icon: Wrench },
     ];
 
     return (
@@ -124,7 +124,7 @@ export function TeamsPage() {
                                 <stat.icon className="w-6 h-6 text-primary" />
                             </div>
                             <div>
-                                <div className="text-3xl font-bold text-white">{stat.value}</div>
+                                <div className="text-3xl font-bold text-slate-900">{stat.value}</div>
                                 <div className="text-sm text-slate-500 font-medium">{stat.label}</div>
                             </div>
                         </div>
@@ -138,11 +138,11 @@ export function TeamsPage() {
                 >
                     {/* Search */}
                     <div className="relative w-full lg:w-96 group">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600 group-focus-within:text-primary transition-colors" />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary transition-colors" />
                         <input
                             type="text"
                             placeholder="Search teams or specializations..."
-                            className="w-full pl-11 pr-4 h-12 bg-white/[0.03] border border-white/[0.06] rounded-xl outline-none focus:border-primary/50 focus:bg-white/[0.06] text-sm text-white transition-all placeholder:text-slate-600"
+                            className="w-full pl-11 pr-4 h-12 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:bg-white text-sm text-slate-900 transition-all placeholder:text-slate-400"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
@@ -193,7 +193,7 @@ export function TeamsPage() {
                                 >
                                     <div className="flex flex-col lg:flex-row">
                                         {/* Left Side: Team Identity */}
-                                        <div className="lg:w-48 p-8 bg-white/[0.02] border-b lg:border-b-0 lg:border-r border-white/[0.05] flex flex-col items-center justify-center gap-4">
+                                        <div className="lg:w-48 p-8 bg-slate-50 border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col items-center justify-center gap-4">
                                             <div className={cn(
                                                 "w-20 h-20 rounded-2xl flex items-center justify-center transition-all duration-300",
                                                 "bg-gradient-to-br group-hover:scale-110",
@@ -213,7 +213,7 @@ export function TeamsPage() {
                                             {/* Header Row */}
                                             <div className="flex items-start justify-between mb-4">
                                                 <div>
-                                                    <h3 className="text-xl font-bold text-white group-hover:text-primary transition-colors mb-1">
+                                                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors mb-1">
                                                         {team.name}
                                                     </h3>
                                                     <div className="flex items-center gap-2 text-sm text-slate-500">
@@ -222,7 +222,7 @@ export function TeamsPage() {
                                                     </div>
                                                 </div>
                                                 <button
-                                                    className="p-2 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.06] transition-colors"
+                                                    className="p-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-colors"
                                                     onClick={(e) => e.stopPropagation()}
                                                 >
                                                     <MoreVertical className="w-4 h-4 text-slate-500" />
@@ -230,12 +230,12 @@ export function TeamsPage() {
                                             </div>
 
                                             {/* Description */}
-                                            <p className="text-sm text-slate-400 leading-relaxed mb-6 line-clamp-2">
+                                            <p className="text-sm text-slate-500 leading-relaxed mb-6 line-clamp-2">
                                                 {team.description}
                                             </p>
 
                                             {/* Footer Row */}
-                                            <div className="flex items-center justify-between pt-6 border-t border-white/[0.05]">
+                                            <div className="flex items-center justify-between pt-6 border-t border-slate-100">
                                                 {/* Team Members */}
                                                 <div className="flex items-center gap-3">
                                                     <div className="flex -space-x-2">
@@ -250,21 +250,21 @@ export function TeamsPage() {
                                                             </div>
                                                         ))}
                                                         {team.members.length > 4 && (
-                                                            <div className="w-9 h-9 rounded-xl bg-white/[0.05] border-2 border-surface flex items-center justify-center text-[10px] font-bold text-slate-400">
+                                                            <div className="w-9 h-9 rounded-xl bg-slate-50 border-2 border-surface flex items-center justify-center text-[10px] font-bold text-slate-500">
                                                                 +{team.members.length - 4}
                                                             </div>
                                                         )}
                                                     </div>
-                                                    <button className="w-9 h-9 rounded-xl bg-white/[0.03] border-2 border-dashed border-white/[0.1] flex items-center justify-center hover:bg-primary/10 hover:border-primary/50 transition-all">
-                                                        <UserPlus className="w-4 h-4 text-slate-600 hover:text-primary" />
+                                                    <button className="w-9 h-9 rounded-xl bg-slate-50 border-2 border-dashed border-slate-200 flex items-center justify-center hover:bg-primary/10 hover:border-primary/50 transition-all">
+                                                        <UserPlus className="w-4 h-4 text-slate-400 hover:text-primary" />
                                                     </button>
                                                 </div>
 
                                                 {/* Stats & CTA */}
                                                 <div className="flex items-center gap-6">
                                                     <div className="text-right">
-                                                        <div className="text-xl font-bold text-white">{team.equipmentCount}</div>
-                                                        <div className="text-[10px] font-semibold text-slate-600 uppercase tracking-wider">Assets</div>
+                                                        <div className="text-xl font-bold text-slate-900">{team.equipmentCount}</div>
+                                                        <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Assets</div>
                                                     </div>
                                                     <Button
                                                         variant="ghost"
@@ -291,10 +291,10 @@ export function TeamsPage() {
                         animate={{ opacity: 1 }}
                         className="text-center py-20"
                     >
-                        <div className="w-20 h-20 rounded-2xl bg-white/[0.03] flex items-center justify-center mx-auto mb-6">
-                            <Users className="w-10 h-10 text-slate-600" />
+                        <div className="w-20 h-20 rounded-2xl bg-slate-50 flex items-center justify-center mx-auto mb-6">
+                            <Users className="w-10 h-10 text-slate-400" />
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-2">No teams found</h3>
+                        <h3 className="text-xl font-bold text-slate-900 mb-2">No teams found</h3>
                         <p className="text-slate-500 mb-6">Try adjusting your search or create a new team.</p>
                         <Button onClick={() => setIsModalOpen(true)}>
                             <Plus className="w-4 h-4 mr-2" />

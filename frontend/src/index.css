@@ -4,11 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===================================================================
-   GEARGUARD ENTERPRISE DESIGN SYSTEM
-   Amazon-Grade Production Design (Senior Level)
-   =================================================================== */
-
 @layer base {
   :root {
     /* Core Brand Colors - Refined Palette */
@@ -16,7 +11,7 @@
     --primary-light: 213 94% 60%;
     --primary-dark: 221 83% 43%;
     --primary-muted: 217 33% 85%;
-    
+
     /* Semantic Colors */
     --success: 142 71% 40%;
     --success-muted: 142 35% 90%;
@@ -26,7 +21,7 @@
     --danger-muted: 0 40% 92%;
     --info: 199 89% 45%;
     --info-muted: 199 40% 92%;
-    
+
     /* Surface System - Light Blue Theme */
     --background: 210 50% 96%;
     --surface-0: 210 45% 98%;
@@ -34,25 +29,25 @@
     --surface-2: 210 35% 92%;
     --surface-3: 210 30% 88%;
     --surface-elevated: 0 0% 100%;
-    
+
     /* Text Hierarchy - Dark text for light background */
     --text-primary: 220 30% 15%;
     --text-secondary: 220 15% 40%;
     --text-tertiary: 217 10% 55%;
     --text-disabled: 215 8% 70%;
-    
+
     /* Border System - Subtle for light theme */
     --border-subtle: 210 20% 88%;
     --border-default: 210 18% 82%;
     --border-prominent: 210 15% 75%;
     --border-focus: 217 91% 50%;
-    
+
     /* Spacing Scale */
     --spacing-unit: 4px;
-    
+
     /* Shadow System - Softer for light theme */
     --shadow-color: 210 30% 70%;
-    
+
     /* Animation Timing */
     --duration-fast: 150ms;
     --duration-normal: 250ms;
@@ -80,7 +75,7 @@
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     line-height: 1.6;
   }
-  
+
   ::selection {
     background-color: hsl(var(--primary) / 0.2);
     color: hsl(var(--text-primary));
@@ -91,62 +86,58 @@
   /* ===========================================
      GLASS MORPHISM SYSTEM - Light Theme
      =========================================== */
-  
+
   .glass-panel {
     @apply relative overflow-hidden;
-    background: linear-gradient(
-      135deg,
-      hsl(0 0% 100% / 0.95) 0%,
-      hsl(0 0% 100% / 0.9) 100%
-    );
+    background: linear-gradient(135deg,
+        hsl(0 0% 100% / 0.95) 0%,
+        hsl(0 0% 100% / 0.9) 100%);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border: 1px solid hsl(var(--border-subtle));
-    box-shadow: 
+    box-shadow:
       0 1px 3px hsl(var(--shadow-color) / 0.1),
       0 4px 24px -4px hsl(var(--shadow-color) / 0.15),
       0 12px 48px -8px hsl(var(--shadow-color) / 0.1);
   }
-  
+
   .glass-card {
     @apply relative overflow-hidden transition-all;
-    background: linear-gradient(
-      145deg,
-      hsl(0 0% 100% / 0.9) 0%,
-      hsl(0 0% 100% / 0.8) 100%
-    );
+    background: linear-gradient(145deg,
+        hsl(0 0% 100% / 0.9) 0%,
+        hsl(0 0% 100% / 0.8) 100%);
     backdrop-filter: blur(12px) saturate(150%);
     -webkit-backdrop-filter: blur(12px) saturate(150%);
     border: 1px solid hsl(var(--border-subtle));
-    box-shadow: 
+    box-shadow:
       0 1px 2px hsl(var(--shadow-color) / 0.08),
       0 4px 16px -4px hsl(var(--shadow-color) / 0.12);
   }
-  
+
   .glass-card:hover {
     border-color: hsl(var(--primary) / 0.4);
-    box-shadow: 
+    box-shadow:
       0 1px 2px hsl(var(--shadow-color) / 0.08),
       0 8px 24px -8px hsl(var(--primary) / 0.2);
   }
-  
+
   .glass-subtle {
     background: hsl(0 0% 100% / 0.6);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid hsl(var(--border-subtle));
   }
-  
+
   .glass-interactive {
     @apply glass-card cursor-pointer;
     transition: all var(--duration-normal) var(--easing-default);
   }
-  
+
   .glass-interactive:hover {
     transform: translateY(-2px);
     border-color: hsl(var(--primary) / 0.4);
   }
-  
+
   .glass-interactive:active {
     transform: translateY(0);
   }
@@ -154,14 +145,14 @@
   /* ===========================================
      NAVIGATION SYSTEM
      =========================================== */
-  
+
   .nav-link {
     @apply flex items-center gap-3 px-4 py-3 rounded-xl;
     @apply transition-all duration-200;
     @apply text-slate-400 font-medium;
     position: relative;
   }
-  
+
   .nav-link::before {
     content: '';
     position: absolute;
@@ -174,15 +165,15 @@
     border-radius: 0 4px 4px 0;
     transition: transform var(--duration-normal) var(--easing-spring);
   }
-  
+
   .nav-link:hover {
     @apply text-white bg-white/[0.03];
   }
-  
+
   .nav-link-active {
     @apply text-white bg-primary/10;
   }
-  
+
   .nav-link-active::before {
     transform: translateY(-50%) scaleY(1);
   }
@@ -190,7 +181,7 @@
   /* ===========================================
      BUTTON SYSTEM - Enterprise Grade
      =========================================== */
-  
+
   .btn-primary {
     @apply relative overflow-hidden;
     @apply bg-primary hover:bg-primary-dark text-white;
@@ -198,11 +189,11 @@
     @apply transition-all duration-200;
     @apply flex items-center justify-center gap-2;
     @apply shadow-lg;
-    box-shadow: 
+    box-shadow:
       0 0 0 0 hsl(var(--primary) / 0),
       0 4px 16px -2px hsl(var(--primary) / 0.3);
   }
-  
+
   .btn-primary::before {
     content: '';
     position: absolute;
@@ -211,90 +202,90 @@
     transform: translateX(-100%);
     transition: transform 0.6s ease;
   }
-  
+
   .btn-primary:hover::before {
     transform: translateX(100%);
   }
-  
+
   .btn-primary:hover {
-    box-shadow: 
+    box-shadow:
       0 0 0 4px hsl(var(--primary) / 0.15),
       0 8px 24px -2px hsl(var(--primary) / 0.4);
     transform: translateY(-1px);
   }
-  
+
   .btn-primary:active {
     transform: translateY(0);
-    box-shadow: 
+    box-shadow:
       0 0 0 2px hsl(var(--primary) / 0.2),
       0 2px 8px -2px hsl(var(--primary) / 0.3);
   }
-  
+
   .btn-outline {
-    @apply border border-white/10 hover:border-white/20 text-white;
+    @apply border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900;
     @apply px-6 py-2.5 rounded-xl font-semibold;
     @apply transition-all duration-200;
     @apply flex items-center justify-center gap-2;
-    background: hsl(var(--surface-1) / 0.5);
+    background: transparent;
   }
-  
+
   .btn-outline:hover {
-    background: hsl(var(--surface-2) / 0.8);
+    background: hsl(var(--surface-2) / 0.5);
     transform: translateY(-1px);
   }
-  
+
+  /* ... (keeping ghost button as is regarding structure but updating colors) ... */
+
   .btn-ghost {
-    @apply text-slate-400 hover:text-white;
+    @apply text-slate-500 hover:text-slate-900;
     @apply px-4 py-2 rounded-lg font-medium;
     @apply transition-all duration-200;
   }
-  
+
   .btn-ghost:hover {
-    background: hsl(var(--surface-1) / 0.5);
+    background: hsl(var(--surface-2) / 0.5);
   }
 
   /* ===========================================
      CARD SYSTEM
      =========================================== */
-  
+
   .card {
     @apply rounded-2xl p-6;
     @apply transition-all duration-300;
-    background: linear-gradient(
-      165deg,
-      hsl(var(--surface-1)) 0%,
-      hsl(var(--surface-0)) 100%
-    );
+    background: linear-gradient(165deg,
+        hsl(var(--surface-1)) 0%,
+        hsl(var(--surface-0)) 100%);
     border: 1px solid hsl(var(--border-subtle));
-    box-shadow: 
+    box-shadow:
       0 2px 8px -2px hsl(var(--shadow-color) / 0.2),
       0 4px 24px -4px hsl(var(--shadow-color) / 0.15);
   }
-  
+
   .card:hover {
     border-color: hsl(var(--border-default));
-    box-shadow: 
+    box-shadow:
       0 4px 12px -2px hsl(var(--shadow-color) / 0.25),
       0 8px 32px -4px hsl(var(--shadow-color) / 0.2);
   }
-  
+
   .card-elevated {
     @apply card;
     background: hsl(var(--surface-2));
-    box-shadow: 
+    box-shadow:
       0 8px 24px -4px hsl(var(--shadow-color) / 0.3),
       0 16px 48px -8px hsl(var(--shadow-color) / 0.2);
   }
-  
+
   .card-interactive {
     @apply card cursor-pointer;
   }
-  
+
   .card-interactive:hover {
     transform: translateY(-2px);
     border-color: hsl(var(--primary) / 0.3);
   }
-  
+
   .card-interactive:active {
     transform: translateY(0);
   }
@@ -302,29 +293,29 @@
   /* ===========================================
      INPUT SYSTEM
      =========================================== */
-  
+
   .input-field {
     @apply w-full px-4 py-3 rounded-xl;
-    @apply text-white font-medium;
+    @apply text-slate-900 font-medium;
     @apply outline-none;
     @apply transition-all duration-200;
     background: hsl(var(--surface-1) / 0.5);
     border: 1px solid hsl(var(--border-subtle));
   }
-  
+
   .input-field::placeholder {
     @apply text-slate-600;
   }
-  
+
   .input-field:hover {
     border-color: hsl(var(--border-default));
     background: hsl(var(--surface-1) / 0.7);
   }
-  
+
   .input-field:focus {
     border-color: hsl(var(--primary) / 0.6);
     background: hsl(var(--surface-1) / 0.8);
-    box-shadow: 
+    box-shadow:
       0 0 0 3px hsl(var(--primary) / 0.1),
       0 2px 12px -2px hsl(var(--primary) / 0.15);
   }
@@ -332,34 +323,34 @@
   /* ===========================================
      BADGE SYSTEM
      =========================================== */
-  
+
   .badge {
     @apply inline-flex items-center gap-1.5;
     @apply px-2.5 py-1 rounded-lg;
     @apply text-xs font-bold uppercase tracking-wider;
   }
-  
+
   .badge-primary {
     @apply badge;
     background: hsl(var(--primary) / 0.15);
     color: hsl(var(--primary-light));
     border: 1px solid hsl(var(--primary) / 0.2);
   }
-  
+
   .badge-success {
     @apply badge;
     background: hsl(var(--success) / 0.15);
     color: hsl(var(--success));
     border: 1px solid hsl(var(--success) / 0.2);
   }
-  
+
   .badge-warning {
     @apply badge;
     background: hsl(var(--warning) / 0.15);
     color: hsl(var(--warning));
     border: 1px solid hsl(var(--warning) / 0.2);
   }
-  
+
   .badge-danger {
     @apply badge;
     background: hsl(var(--danger) / 0.15);
@@ -370,12 +361,12 @@
   /* ===========================================
      STAT CARD COMPONENT
      =========================================== */
-  
+
   .stat-card {
     @apply relative overflow-hidden;
     @apply glass-card rounded-2xl p-6;
   }
-  
+
   .stat-card::after {
     content: '';
     position: absolute;
@@ -383,37 +374,35 @@
     right: 0;
     width: 50%;
     height: 100%;
-    background: radial-gradient(
-      ellipse at top right,
-      hsl(var(--primary) / 0.05) 0%,
-      transparent 60%
-    );
+    background: radial-gradient(ellipse at top right,
+        hsl(var(--primary) / 0.05) 0%,
+        transparent 60%);
     pointer-events: none;
   }
-  
+
   .stat-value {
     @apply text-4xl font-bold text-white;
     @apply tracking-tight;
     font-variant-numeric: tabular-nums;
   }
-  
+
   .stat-label {
     @apply text-sm font-medium text-slate-500;
     @apply uppercase tracking-wider mt-1;
   }
-  
+
   .stat-trend {
     @apply inline-flex items-center gap-1.5;
     @apply text-xs font-semibold;
     @apply px-2 py-1 rounded-lg mt-3;
   }
-  
+
   .stat-trend-up {
     @apply stat-trend;
     background: hsl(var(--success) / 0.1);
     color: hsl(var(--success));
   }
-  
+
   .stat-trend-down {
     @apply stat-trend;
     background: hsl(var(--danger) / 0.1);
@@ -423,29 +412,29 @@
   /* ===========================================
      DATA TABLE STYLES
      =========================================== */
-  
+
   .data-table {
     @apply w-full;
   }
-  
+
   .data-table thead {
     @apply border-b border-white/5;
   }
-  
+
   .data-table th {
     @apply text-left py-4 px-6;
     @apply text-xs font-bold uppercase tracking-wider text-slate-500;
   }
-  
+
   .data-table tbody tr {
     @apply border-b border-white/[0.03];
     @apply transition-all duration-200;
   }
-  
+
   .data-table tbody tr:hover {
     background: hsl(var(--surface-1) / 0.5);
   }
-  
+
   .data-table td {
     @apply py-4 px-6;
   }
@@ -453,16 +442,16 @@
   /* ===========================================
      CYBER GRID BACKGROUND
      =========================================== */
-  
+
   .cyber-grid {
-    background-image: 
+    background-image:
       linear-gradient(hsl(var(--primary) / 0.03) 1px, transparent 1px),
       linear-gradient(90deg, hsl(var(--primary) / 0.03) 1px, transparent 1px);
     background-size: 50px 50px;
   }
-  
+
   .cyber-grid-dense {
-    background-image: 
+    background-image:
       linear-gradient(hsl(var(--primary) / 0.05) 1px, transparent 1px),
       linear-gradient(90deg, hsl(var(--primary) / 0.05) 1px, transparent 1px);
     background-size: 20px 20px;
@@ -471,23 +460,23 @@
   /* ===========================================
      GLOW EFFECTS
      =========================================== */
-  
+
   .glow-primary {
-    box-shadow: 
+    box-shadow:
       0 0 20px hsl(var(--primary) / 0.3),
       0 0 40px hsl(var(--primary) / 0.1);
   }
-  
+
   .glow-subtle {
     box-shadow: 0 0 30px hsl(var(--primary) / 0.15);
   }
-  
+
   .hover-glow {
     transition: box-shadow var(--duration-normal) var(--easing-default);
   }
-  
+
   .hover-glow:hover {
-    box-shadow: 
+    box-shadow:
       0 0 24px hsl(var(--primary) / 0.25),
       0 0 48px hsl(var(--primary) / 0.1);
   }
@@ -495,17 +484,17 @@
   /* ===========================================
      TEXT UTILITIES
      =========================================== */
-  
+
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 100%);
   }
-  
+
   .text-gradient-subtle {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, white 0%, hsl(var(--text-secondary)) 100%);
   }
-  
+
   .text-balance {
     text-wrap: balance;
   }
@@ -513,14 +502,14 @@
   /* ===========================================
      FOCUS STATES (Accessibility)
      =========================================== */
-  
+
   .focus-ring {
     @apply outline-none;
     transition: box-shadow var(--duration-fast) var(--easing-default);
   }
-  
+
   .focus-ring:focus-visible {
-    box-shadow: 
+    box-shadow:
       0 0 0 2px hsl(var(--background)),
       0 0 0 4px hsl(var(--primary));
   }
@@ -528,31 +517,31 @@
   /* ===========================================
      SCROLLBAR CUSTOMIZATION
      =========================================== */
-  
+
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
-  
+
   ::-webkit-scrollbar-track {
     background: hsl(var(--surface-0));
     border-radius: 8px;
   }
-  
+
   ::-webkit-scrollbar-thumb {
     background: hsl(var(--surface-3));
     border-radius: 8px;
     border: 2px solid hsl(var(--surface-0));
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--surface-elevated));
   }
-  
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
   }
-  
+
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background: hsl(var(--surface-2));
     border: none;
@@ -564,114 +553,139 @@
    =========================================== */
 
 @keyframes fadeIn {
-  from { 
-    opacity: 0; 
+  from {
+    opacity: 0;
   }
-  to { 
-    opacity: 1; 
+
+  to {
+    opacity: 1;
   }
 }
 
 @keyframes fadeInUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(16px); 
+  from {
+    opacity: 0;
+    transform: translateY(16px);
   }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 @keyframes fadeInDown {
-  from { 
-    opacity: 0; 
-    transform: translateY(-16px); 
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
   }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 @keyframes slideInLeft {
-  from { 
-    opacity: 0; 
-    transform: translateX(-24px); 
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
   }
-  to { 
-    opacity: 1; 
-    transform: translateX(0); 
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
 @keyframes slideInRight {
-  from { 
-    opacity: 0; 
-    transform: translateX(24px); 
+  from {
+    opacity: 0;
+    transform: translateX(24px);
   }
-  to { 
-    opacity: 1; 
-    transform: translateX(0); 
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
 @keyframes scaleIn {
-  from { 
-    opacity: 0; 
-    transform: scale(0.95); 
+  from {
+    opacity: 0;
+    transform: scale(0.95);
   }
-  to { 
-    opacity: 1; 
-    transform: scale(1); 
+
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { 
-    box-shadow: 0 0 20px hsl(var(--primary) / 0.3); 
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
   }
-  50% { 
-    box-shadow: 0 0 40px hsl(var(--primary) / 0.5); 
+
+  50% {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.5);
   }
 }
 
 @keyframes shimmer {
-  0% { 
-    background-position: -200% 0; 
+  0% {
+    background-position: -200% 0;
   }
-  100% { 
-    background-position: 200% 0; 
+
+  100% {
+    background-position: 200% 0;
   }
 }
 
 @keyframes float {
-  0%, 100% { 
-    transform: translateY(0); 
+
+  0%,
+  100% {
+    transform: translateY(0);
   }
-  50% { 
-    transform: translateY(-10px); 
+
+  50% {
+    transform: translateY(-10px);
   }
 }
 
 @keyframes shake {
-  0%, 100% { 
-    transform: translateX(0); 
+
+  0%,
+  100% {
+    transform: translateX(0);
   }
-  10%, 30%, 50%, 70%, 90% { 
-    transform: translateX(-4px); 
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-4px);
   }
-  20%, 40%, 60%, 80% { 
-    transform: translateX(4px); 
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(4px);
   }
 }
 
 @keyframes spin-slow {
-  from { 
-    transform: rotate(0deg); 
+  from {
+    transform: rotate(0deg);
   }
-  to { 
-    transform: rotate(360deg); 
+
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -705,12 +719,10 @@
 }
 
 .animate-shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    hsl(var(--text-primary) / 0.05) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      hsl(var(--text-primary) / 0.05) 50%,
+      transparent 100%);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
 }
@@ -728,11 +740,25 @@
 }
 
 /* Animation Delays */
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
-.delay-500 { animation-delay: 500ms; }
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
 
 /* ===========================================
    SKELETON LOADING STATES
@@ -748,12 +774,10 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    hsl(var(--surface-3) / 0.5) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      hsl(var(--surface-3) / 0.5) 50%,
+      transparent 100%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
@@ -784,6 +808,7 @@
    =========================================== */
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -802,7 +827,7 @@
     background: white;
     color: black;
   }
-  
+
   .no-print {
     display: none !important;
   }

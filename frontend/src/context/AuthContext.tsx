@@ -7,6 +7,7 @@ interface AuthContextType {
     isAuthenticated: boolean;
     isLoading: boolean;
     login: (credentials: LoginCredentials) => Promise<void>;
+
     register: (data: RegisterData) => Promise<void>;
     logout: () => void;
 }
@@ -53,6 +54,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }
     };
 
+
+
     const register = async (data: RegisterData) => {
         setIsLoading(true);
         try {
@@ -78,6 +81,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 isAuthenticated: !!user,
                 isLoading,
                 login,
+
                 register,
                 logout,
             }}

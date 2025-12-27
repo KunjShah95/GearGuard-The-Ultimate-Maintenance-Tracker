@@ -37,7 +37,7 @@ export function Input({
             )}
             <div className="relative group">
                 {icon && iconPosition === 'left' && (
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-primary transition-colors">
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">
                         {icon}
                     </div>
                 )}
@@ -50,8 +50,8 @@ export function Input({
                         'focus:bg-white/[0.06] focus:border-primary/50',
                         'focus:ring-2 focus:ring-primary/10',
                         'disabled:opacity-50 disabled:cursor-not-allowed',
-                        icon && iconPosition === 'left' && 'pl-12 pr-4',
-                        icon && iconPosition === 'right' && 'pl-4 pr-12',
+                        !!icon && iconPosition === 'left' && 'pl-12 pr-4',
+                        !!icon && iconPosition === 'right' && 'pl-4 pr-12',
                         !icon && 'px-4',
                         error && 'border-danger/50 focus:border-danger/50 focus:ring-danger/10',
                         className

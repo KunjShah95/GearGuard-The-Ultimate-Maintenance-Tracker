@@ -20,6 +20,10 @@ export function RegisterPage() {
     const [error, setError] = useState('');
     const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
+
+
+
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -131,9 +135,9 @@ export function RegisterPage() {
     };
 
     return (
-        <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-surface-dark overflow-hidden">
+        <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-slate-50 overflow-hidden">
             {/* Right Side: Form (Flipped) */}
-            <div className="flex flex-col justify-center items-center p-8 bg-surface-dark relative order-2 lg:order-1">
+            <div className="flex flex-col justify-center items-center p-8 bg-slate-50 relative order-2 lg:order-1">
                 <div className="w-full max-w-md animate-slide-up">
                     {/* Clickable Logo */}
                     <div className="flex justify-center mb-8">
@@ -141,12 +145,12 @@ export function RegisterPage() {
                             <div className="w-11 h-11 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/30 group-hover:scale-105 transition-transform">
                                 <Shield className="w-6 h-6 text-white" />
                             </div>
-                            <span className="text-xl font-bold text-white group-hover:text-primary transition-colors">GearGuard</span>
+                            <span className="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">GearGuard</span>
                         </Link>
                     </div>
 
                     <div className="text-center mb-10">
-                        <h2 className="text-4xl font-black text-white mb-3">Deploy Infrastructure</h2>
+                        <h2 className="text-4xl font-black text-slate-900 mb-3">Deploy Infrastructure</h2>
                         <p className="text-slate-500 font-medium">Join the asset intelligence network.</p>
                     </div>
 
@@ -164,12 +168,12 @@ export function RegisterPage() {
                                     OPERATOR_NAME
                                 </label>
                                 <div className="relative group">
-                                    <User className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${fieldErrors.name ? 'text-danger' : 'text-slate-600 group-focus-within:text-primary'}`} />
+                                    <User className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${fieldErrors.name ? 'text-danger' : 'text-slate-400 group-focus-within:text-primary'}`} />
                                     <input
                                         type="text"
-                                        className={`w-full pl-10 pr-4 h-12 bg-white/[0.03] border rounded-2xl outline-none transition-all text-white text-sm ${fieldErrors.name
+                                        className={`w-full pl-10 pr-4 h-12 bg-white border rounded-2xl outline-none transition-all text-slate-900 text-sm ${fieldErrors.name
                                             ? 'border-danger/50 focus:border-danger'
-                                            : 'border-white/5 focus:border-primary/50'
+                                            : 'border-slate-200 focus:border-primary/50'
                                             }`}
                                         placeholder="John Smith"
                                         value={formData.name}
@@ -190,12 +194,12 @@ export function RegisterPage() {
                                     SECTOR_ID (EMAIL)
                                 </label>
                                 <div className="relative group">
-                                    <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${fieldErrors.email ? 'text-danger' : 'text-slate-600 group-focus-within:text-primary'}`} />
+                                    <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${fieldErrors.email ? 'text-danger' : 'text-slate-400 group-focus-within:text-primary'}`} />
                                     <input
                                         type="email"
-                                        className={`w-full pl-10 pr-4 h-12 bg-white/[0.03] border rounded-2xl outline-none transition-all text-white text-sm ${fieldErrors.email
+                                        className={`w-full pl-10 pr-4 h-12 bg-white border rounded-2xl outline-none transition-all text-slate-900 text-sm ${fieldErrors.email
                                             ? 'border-danger/50 focus:border-danger'
-                                            : 'border-white/5 focus:border-primary/50'
+                                            : 'border-slate-200 focus:border-primary/50'
                                             }`}
                                         placeholder="john@corp.com"
                                         value={formData.email}
@@ -217,18 +221,18 @@ export function RegisterPage() {
                                 OPERATIONAL_SECTOR
                             </label>
                             <div className="relative group">
-                                <Building className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${fieldErrors.department ? 'text-danger' : 'text-slate-600 group-focus-within:text-primary'}`} />
+                                <Building className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${fieldErrors.department ? 'text-danger' : 'text-slate-400 group-focus-within:text-primary'}`} />
                                 <select
-                                    className={`w-full pl-10 pr-4 h-12 bg-white/[0.03] border rounded-2xl outline-none transition-all text-white text-sm appearance-none cursor-pointer ${fieldErrors.department
+                                    className={`w-full pl-10 pr-4 h-12 bg-white border rounded-2xl outline-none transition-all text-slate-900 text-sm appearance-none cursor-pointer ${fieldErrors.department
                                         ? 'border-danger/50 focus:border-danger'
-                                        : 'border-white/5 focus:border-primary/50'
+                                        : 'border-slate-200 focus:border-primary/50'
                                         }`}
                                     value={formData.department}
                                     onChange={(e) => handleFieldChange('department', e.target.value)}
                                 >
-                                    <option value="" disabled className="bg-surface-dark">Select Department</option>
+                                    <option value="" disabled className="bg-white">Select Department</option>
                                     {DEPARTMENT_OPTIONS.map(opt => (
-                                        <option key={opt.value} value={opt.value} className="bg-surface-dark">{opt.label}</option>
+                                        <option key={opt.value} value={opt.value} className="bg-white">{opt.label}</option>
                                     ))}
                                 </select>
                             </div>
@@ -246,16 +250,17 @@ export function RegisterPage() {
                                 AUTH_CIPHER
                             </label>
                             <div className="relative group">
-                                <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${fieldErrors.password ? 'text-danger' : 'text-slate-600 group-focus-within:text-primary'}`} />
+                                <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${fieldErrors.password ? 'text-danger' : 'text-slate-400 group-focus-within:text-primary'}`} />
                                 <input
                                     type="password"
-                                    className={`w-full pl-10 pr-4 h-12 bg-white/[0.03] border rounded-2xl outline-none transition-all text-white text-sm font-mono text-center ${fieldErrors.password
+                                    className={`w-full pl-10 pr-4 h-12 bg-white border rounded-2xl outline-none transition-all text-slate-900 text-sm font-mono text-center ${fieldErrors.password
                                         ? 'border-danger/50 focus:border-danger'
-                                        : 'border-white/5 focus:border-primary/50'
+                                        : 'border-slate-200 focus:border-primary/50'
                                         }`}
                                     placeholder="••••••••"
                                     value={formData.password}
                                     onChange={(e) => handleFieldChange('password', e.target.value)}
+                                    autoComplete="new-password"
                                 />
                             </div>
                             {fieldErrors.password && (
@@ -272,16 +277,17 @@ export function RegisterPage() {
                                 CONFIRM_CIPHER
                             </label>
                             <div className="relative group">
-                                <CheckCircle className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${fieldErrors.confirmPassword ? 'text-danger' : 'text-slate-600 group-focus-within:text-primary'}`} />
+                                <CheckCircle className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors ${fieldErrors.confirmPassword ? 'text-danger' : 'text-slate-400 group-focus-within:text-primary'}`} />
                                 <input
                                     type="password"
-                                    className={`w-full pl-10 pr-4 h-12 bg-white/[0.03] border rounded-2xl outline-none transition-all text-white text-sm font-mono text-center ${fieldErrors.confirmPassword
+                                    className={`w-full pl-10 pr-4 h-12 bg-white border rounded-2xl outline-none transition-all text-slate-900 text-sm font-mono text-center ${fieldErrors.confirmPassword
                                         ? 'border-danger/50 focus:border-danger'
-                                        : 'border-white/5 focus:border-primary/50'
+                                        : 'border-slate-200 focus:border-primary/50'
                                         }`}
                                     placeholder="••••••••"
                                     value={formData.confirmPassword}
                                     onChange={(e) => handleFieldChange('confirmPassword', e.target.value)}
+                                    autoComplete="new-password"
                                 />
                             </div>
                             {fieldErrors.confirmPassword && (

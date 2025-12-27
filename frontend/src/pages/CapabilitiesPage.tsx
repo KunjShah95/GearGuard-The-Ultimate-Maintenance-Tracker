@@ -1,7 +1,6 @@
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Button } from '../components/ui/Button';
+
 import { MarketingNavbar } from '../components/layout/MarketingNavbar';
 import { MarketingFooter } from '../components/layout/MarketingFooter';
 
@@ -34,7 +33,7 @@ const capabilities = [
 
 export function CapabilitiesPage() {
     return (
-        <div className="min-h-screen bg-zinc-950 text-zinc-200 selection:bg-primary/30 font-sans">
+        <div className="min-h-screen bg-slate-50 text-slate-600 selection:bg-primary/30 font-sans">
             <MarketingNavbar />
 
             <main className="pt-48 pb-32 px-6">
@@ -43,14 +42,14 @@ export function CapabilitiesPage() {
                         <motion.span
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="section-number mb-6 block"
+                            className="section-number mb-6 block text-primary font-mono"
                         >
                             // CORE_CAPABILITIES
                         </motion.span>
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="text-6xl md:text-8xl font-display font-bold text-white tracking-tight mb-8 leading-[0.9]"
+                            className="text-6xl md:text-8xl font-display font-bold text-slate-900 tracking-tight mb-8 leading-[0.9]"
                         >
                             Engineering <br />
                             <span className="text-primary italic">Absolute</span> Control.
@@ -59,7 +58,7 @@ export function CapabilitiesPage() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-xl text-zinc-500 font-bold leading-relaxed"
+                            className="text-xl text-slate-500 font-bold leading-relaxed"
                         >
                             Our platform isn't just a dashboard; it's a high-performance engine designed to eliminate industrial friction and maximize uptime across your entire asset portfolio.
                         </motion.p>
@@ -73,7 +72,7 @@ export function CapabilitiesPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
-                                className="p-10 rounded-[3rem] bg-zinc-900/30 border border-zinc-800/50 hover:border-primary/30 transition-all group relative overflow-hidden"
+                                className="p-10 rounded-[3rem] bg-white border border-slate-200 hover:border-primary/30 transition-all group relative overflow-hidden shadow-sm hover:shadow-lg"
                             >
                                 <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
                                     <Icon icon={cap.icon} className="w-32 h-32" />
@@ -83,12 +82,12 @@ export function CapabilitiesPage() {
                                     <Icon icon={cap.icon} className="w-8 h-8 text-primary" />
                                 </div>
 
-                                <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">{cap.title}</h3>
-                                <p className="text-zinc-500 font-bold leading-relaxed mb-8">{cap.desc}</p>
+                                <h3 className="text-3xl font-bold text-slate-900 mb-4 tracking-tight">{cap.title}</h3>
+                                <p className="text-slate-500 font-bold leading-relaxed mb-8">{cap.desc}</p>
 
                                 <div className="flex flex-wrap gap-2">
                                     {cap.features.map(f => (
-                                        <span key={f} className="px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-xl text-[10px] font-black text-zinc-400 uppercase tracking-widest">
+                                        <span key={f} className="px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-[10px] font-black text-slate-500 uppercase tracking-widest">
                                             {f}
                                         </span>
                                     ))}

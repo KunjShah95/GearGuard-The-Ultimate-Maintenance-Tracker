@@ -44,8 +44,9 @@ export function Button({
             before:transition-transform before:duration-500
         `,
         secondary: `
-            bg-surface-light hover:bg-surface-elevated text-white
-            border border-white/10 hover:border-white/20
+            bg-white hover:bg-slate-50 text-slate-900
+            border border-slate-200 hover:border-slate-300
+            shadow-sm hover:shadow-md
             focus-visible:ring-primary
         `,
         danger: `
@@ -59,12 +60,12 @@ export function Button({
             focus-visible:ring-success
         `,
         ghost: `
-            bg-transparent hover:bg-white/[0.05] text-slate-400 hover:text-white
+            bg-transparent hover:bg-slate-100 text-slate-500 hover:text-slate-900
             focus-visible:ring-primary
         `,
         outline: `
-            bg-transparent border border-white/10 hover:border-white/20
-            text-white hover:bg-white/[0.04]
+            bg-transparent border border-slate-200 hover:border-slate-300
+            text-slate-600 hover:text-slate-900 hover:bg-slate-50
             focus-visible:ring-primary
         `,
     };
@@ -127,10 +128,10 @@ export function IconButton({
 
     const variants: Record<string, string> = {
         primary: 'bg-primary hover:bg-primary-dark text-white shadow-lg shadow-primary/20 focus-visible:ring-primary',
-        secondary: 'bg-surface-light hover:bg-surface-elevated text-white border border-white/10 focus-visible:ring-primary',
-        ghost: 'bg-transparent hover:bg-white/[0.06] text-slate-400 hover:text-white focus-visible:ring-primary',
-        outline: 'bg-transparent border border-white/10 hover:border-white/20 text-slate-400 hover:text-white focus-visible:ring-primary',
-        danger: 'bg-transparent hover:bg-danger/10 text-slate-400 hover:text-danger focus-visible:ring-danger',
+        secondary: 'bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 hover:border-slate-300 focus-visible:ring-primary',
+        ghost: 'bg-transparent hover:bg-slate-100 text-slate-500 hover:text-slate-900 focus-visible:ring-primary',
+        outline: 'bg-transparent border border-slate-200 hover:border-slate-300 text-slate-600 hover:text-slate-900 focus-visible:ring-primary',
+        danger: 'bg-transparent hover:bg-danger/10 text-slate-600 hover:text-danger focus-visible:ring-danger',
     };
 
     const sizes: Record<string, string> = {
@@ -158,14 +159,15 @@ interface ButtonGroupProps {
 
 export function ButtonGroup({ children, className }: ButtonGroupProps) {
     return (
-        <div className={cn('inline-flex rounded-xl overflow-hidden border border-white/10', className)}>
+        <div className={cn('inline-flex rounded-xl overflow-hidden border border-slate-200', className)}>
             {React.Children.map(children, (child, index) => {
                 if (React.isValidElement(child)) {
-                    return React.cloneElement(child as React.ReactElement<any>, {
+                    const c = child as React.ReactElement<{ className?: string }>;
+                    return React.cloneElement(c, {
                         className: cn(
-                            child.props.className,
+                            c.props.className,
                             'rounded-none border-0',
-                            index > 0 && 'border-l border-white/10'
+                            index > 0 && 'border-l border-slate-200'
                         ),
                     });
                 }

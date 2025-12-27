@@ -245,7 +245,7 @@ export function EquipmentPage() {
                 <motion.div variants={itemVariants} className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     {stats.map((stat) => (
                         <div key={stat.label} className="glass-card rounded-2xl p-5">
-                            <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
+                            <div className="text-3xl font-bold text-slate-900 mb-1">{stat.value}</div>
                             <div className="text-sm text-slate-500 font-medium">{stat.label}</div>
                         </div>
                     ))}
@@ -259,11 +259,11 @@ export function EquipmentPage() {
                     {/* Search & Filters */}
                     <div className="flex flex-1 flex-col md:flex-row gap-4 w-full">
                         <div className="relative flex-1 group">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600 group-focus-within:text-primary transition-colors" />
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary transition-colors" />
                             <input
                                 type="text"
                                 placeholder="Search by name or serial number..."
-                                className="w-full pl-11 pr-4 h-12 bg-white/[0.03] border border-white/[0.06] rounded-xl outline-none focus:border-primary/50 focus:bg-white/[0.06] text-sm text-white transition-all placeholder:text-slate-600"
+                                className="w-full pl-11 pr-4 h-12 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:bg-white text-sm text-slate-900 transition-all placeholder:text-slate-400"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
@@ -289,12 +289,12 @@ export function EquipmentPage() {
                     {/* Actions */}
                     <div className="flex items-center gap-3">
                         {/* View Toggle */}
-                        <div className="flex items-center p-1 bg-white/[0.03] rounded-xl border border-white/[0.06]">
+                        <div className="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200">
                             <button
                                 onClick={() => setViewMode('grid')}
                                 className={cn(
                                     'p-2 rounded-lg transition-all',
-                                    viewMode === 'grid' ? 'bg-primary text-white' : 'text-slate-500 hover:text-white'
+                                    viewMode === 'grid' ? 'bg-primary text-white' : 'text-slate-500 hover:text-slate-900'
                                 )}
                             >
                                 <Grid className="w-4 h-4" />
@@ -303,7 +303,7 @@ export function EquipmentPage() {
                                 onClick={() => setViewMode('list')}
                                 className={cn(
                                     'p-2 rounded-lg transition-all',
-                                    viewMode === 'list' ? 'bg-primary text-white' : 'text-slate-500 hover:text-white'
+                                    viewMode === 'list' ? 'bg-primary text-white' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
                                 )}
                             >
                                 <List className="w-4 h-4" />
@@ -345,7 +345,7 @@ export function EquipmentPage() {
                                                     <CategoryIcon className={cn('w-7 h-7', categoryStyle.color)} />
                                                 </div>
                                                 <div className="flex-1 min-w-0">
-                                                    <h3 className="text-lg font-bold text-white group-hover:text-primary transition-colors truncate">
+                                                    <h3 className="text-lg font-bold text-slate-900 group-hover:text-primary transition-colors truncate">
                                                         {eq.name}
                                                     </h3>
                                                     <p className="text-xs text-slate-500 font-mono mt-0.5">{eq.serialNumber}</p>
@@ -354,23 +354,23 @@ export function EquipmentPage() {
                                         </div>
 
                                         {/* Details */}
-                                        <div className="px-6 py-4 space-y-3 bg-white/[0.02]">
+                                        <div className="px-6 py-4 space-y-3 bg-slate-50/50">
                                             <div className="flex items-center gap-3 text-sm">
-                                                <MapPin className="w-4 h-4 text-slate-600" />
-                                                <span className="text-slate-400">{eq.location}</span>
+                                                <MapPin className="w-4 h-4 text-slate-400" />
+                                                <span className="text-slate-600">{eq.location}</span>
                                             </div>
                                             <div className="flex items-center gap-3 text-sm">
-                                                <Building className="w-4 h-4 text-slate-600" />
-                                                <span className="text-slate-400">{eq.department}</span>
+                                                <Building className="w-4 h-4 text-slate-400" />
+                                                <span className="text-slate-600">{eq.department}</span>
                                             </div>
                                             <div className="flex items-center gap-3 text-sm">
-                                                <Calendar className="w-4 h-4 text-slate-600" />
-                                                <span className="text-slate-400">{formatDate(eq.purchaseDate)}</span>
+                                                <Calendar className="w-4 h-4 text-slate-400" />
+                                                <span className="text-slate-600">{formatDate(eq.purchaseDate)}</span>
                                             </div>
                                         </div>
 
                                         {/* Footer with Smart Button */}
-                                        <div className="p-6 pt-4 border-t border-white/[0.05]">
+                                        <div className="p-6 pt-4 border-t border-slate-100">
                                             <div className="flex items-center justify-between mb-3">
                                                 <StatusBadge status={eq.status} />
                                                 <div className="flex items-center gap-2 text-slate-500 text-xs font-medium">
@@ -418,7 +418,7 @@ export function EquipmentPage() {
                     <motion.div variants={itemVariants} className="glass-card rounded-2xl overflow-hidden">
                         <table className="w-full">
                             <thead>
-                                <tr className="border-b border-white/[0.05]">
+                                <tr className="border-b border-slate-200">
                                     <th className="text-left py-4 px-6 text-xs font-bold uppercase tracking-wider text-slate-500">Asset</th>
                                     <th className="text-left py-4 px-6 text-xs font-bold uppercase tracking-wider text-slate-500">Category</th>
                                     <th className="text-left py-4 px-6 text-xs font-bold uppercase tracking-wider text-slate-500">Location</th>
@@ -433,7 +433,7 @@ export function EquipmentPage() {
                                     const CategoryIcon = categoryStyle.icon;
 
                                     return (
-                                        <tr key={eq.id} className="border-b border-white/[0.03] hover:bg-white/[0.02] transition-colors">
+                                        <tr key={eq.id} className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
                                             <td className="py-4 px-6">
                                                 <div className="flex items-center gap-4">
                                                     <div className={cn(
@@ -443,16 +443,16 @@ export function EquipmentPage() {
                                                         <CategoryIcon className={cn('w-5 h-5', categoryStyle.color)} />
                                                     </div>
                                                     <div>
-                                                        <div className="font-semibold text-white">{eq.name}</div>
+                                                        <div className="font-semibold text-slate-900">{eq.name}</div>
                                                         <div className="text-xs text-slate-500 font-mono">{eq.serialNumber}</div>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="py-4 px-6 text-sm text-slate-400">{eq.category.replace('_', ' ')}</td>
-                                            <td className="py-4 px-6 text-sm text-slate-400">{eq.location}</td>
-                                            <td className="py-4 px-6 text-sm text-slate-400">{eq.department}</td>
+                                            <td className="py-4 px-6 text-sm text-slate-600">{eq.category.replace('_', ' ')}</td>
+                                            <td className="py-4 px-6 text-sm text-slate-600">{eq.location}</td>
+                                            <td className="py-4 px-6 text-sm text-slate-600">{eq.department}</td>
                                             <td className="py-4 px-6"><StatusBadge status={eq.status} /></td>
-                                            <td className="py-4 px-6 text-sm text-slate-400">{eq.requestCount}</td>
+                                            <td className="py-4 px-6 text-sm text-slate-600">{eq.requestCount}</td>
                                         </tr>
                                     );
                                 })}
@@ -468,10 +468,10 @@ export function EquipmentPage() {
                         animate={{ opacity: 1 }}
                         className="text-center py-20"
                     >
-                        <div className="w-20 h-20 rounded-2xl bg-white/[0.03] flex items-center justify-center mx-auto mb-6">
-                            <Wrench className="w-10 h-10 text-slate-600" />
+                        <div className="w-20 h-20 rounded-2xl bg-slate-50 flex items-center justify-center mx-auto mb-6">
+                            <Wrench className="w-10 h-10 text-slate-400" />
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-2">No assets found</h3>
+                        <h3 className="text-xl font-bold text-slate-900 mb-2">No assets found</h3>
                         <p className="text-slate-500 mb-6">Try adjusting your filters or add a new asset.</p>
                         <div className="flex items-center justify-center gap-3">
                             <Button variant="outline" onClick={() => {
@@ -533,13 +533,13 @@ export function EquipmentPage() {
                 <div className="space-y-4">
                     {/* Equipment Info Header */}
                     {selectedEquipment && (
-                        <div className="p-4 bg-white/[0.02] border border-white/[0.06] rounded-xl">
+                        <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl">
                             <div className="flex items-center gap-4">
                                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-warning/20 to-orange-500/20 flex items-center justify-center">
                                     <Settings className="w-6 h-6 text-warning" />
                                 </div>
                                 <div className="flex-1">
-                                    <h4 className="font-semibold text-white">{selectedEquipment.name}</h4>
+                                    <h4 className="font-semibold text-slate-900">{selectedEquipment.name}</h4>
                                     <p className="text-xs text-slate-500 font-mono">{selectedEquipment.serialNumber}</p>
                                 </div>
                                 <StatusBadge status={selectedEquipment.status} />
@@ -581,7 +581,7 @@ export function EquipmentPage() {
                                             {req.status.replace('_', ' ')}
                                         </Badge>
                                     </div>
-                                    <h5 className="font-medium text-white mb-1">{req.subject}</h5>
+                                    <h5 className="font-medium text-slate-900 mb-1">{req.subject}</h5>
                                     <p className="text-xs text-slate-500 mb-3 line-clamp-2">{req.description}</p>
                                     <div className="flex items-center justify-between text-xs text-slate-500">
                                         <div className="flex items-center gap-1">
@@ -594,10 +594,10 @@ export function EquipmentPage() {
                             ))
                         ) : (
                             <div className="text-center py-12">
-                                <div className="w-16 h-16 rounded-2xl bg-white/[0.03] flex items-center justify-center mx-auto mb-4">
-                                    <Settings className="w-8 h-8 text-slate-700" />
+                                <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center mx-auto mb-4">
+                                    <Settings className="w-8 h-8 text-slate-400" />
                                 </div>
-                                <h4 className="font-semibold text-white mb-1">No Maintenance Requests</h4>
+                                <h4 className="font-semibold text-slate-900 mb-1">No Maintenance Requests</h4>
                                 <p className="text-sm text-slate-500">This equipment has no maintenance history.</p>
                             </div>
                         )}

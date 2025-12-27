@@ -142,13 +142,6 @@ const columns: { id: RequestStatus; title: string; color: string; icon: typeof I
 ];
 
 // Animation variants
-const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: { staggerChildren: 0.05 }
-    }
-};
 
 const itemVariants = {
     hidden: { opacity: 0, scale: 0.95, y: 10 },
@@ -386,15 +379,15 @@ export function RequestsPage() {
             </AnimatePresence>
 
             {/* Toolbar */}
-            <div className="px-8 py-5 flex flex-col lg:flex-row items-center justify-between gap-4 border-b border-white/[0.05]">
+            <div className="px-8 py-5 flex flex-col lg:flex-row items-center justify-between gap-4 border-b border-slate-200 bg-white shadow-sm">
                 <div className="flex items-center gap-6 w-full lg:w-auto">
                     {/* Stats */}
-                    <div className="hidden md:flex items-center gap-4 px-4 py-2 bg-white/[0.02] rounded-xl border border-white/[0.06]">
+                    <div className="hidden md:flex items-center gap-4 px-4 py-2 bg-slate-50 rounded-xl border border-slate-200">
                         <div className="text-center">
-                            <div className="text-lg font-bold text-white">{totalRequests}</div>
+                            <div className="text-lg font-bold text-slate-900">{totalRequests}</div>
                             <div className="text-[10px] text-slate-500 uppercase tracking-wider">Total</div>
                         </div>
-                        <div className="w-px h-8 bg-white/[0.06]" />
+                        <div className="w-px h-8 bg-slate-200" />
                         <div className="text-center">
                             <div className="text-lg font-bold text-warning">{pendingCount}</div>
                             <div className="text-[10px] text-slate-500 uppercase tracking-wider">Pending</div>
@@ -412,11 +405,11 @@ export function RequestsPage() {
 
                     {/* Search */}
                     <div className="relative group flex-1 lg:w-80">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600 group-focus-within:text-primary transition-colors" />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary transition-colors" />
                         <input
                             type="text"
                             placeholder="Search requests..."
-                            className="w-full pl-11 pr-4 h-11 bg-white/[0.03] border border-white/[0.06] rounded-xl outline-none focus:border-primary/50 text-sm text-white transition-all placeholder:text-slate-600"
+                            className="w-full pl-11 pr-4 h-11 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 text-sm text-slate-900 transition-all placeholder:text-slate-400 focus:bg-white focus:shadow-sm"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
@@ -444,7 +437,7 @@ export function RequestsPage() {
             </div>
 
             {/* Drag & Drop Instructions */}
-            <div className="px-8 py-3 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 border-b border-white/[0.03]">
+            <div className="px-8 py-3 bg-gradient-to-r from-primary/5 via-white to-primary/5 border-b border-slate-100">
                 <div className="flex items-center justify-center gap-2 text-xs text-slate-500">
                     <GripVertical className="w-3.5 h-3.5" />
                     <span>Drag cards between columns to update status • Cards with red indicator are overdue</span>
@@ -491,7 +484,7 @@ export function RequestsPage() {
                                             <ColumnIcon className={cn('w-5 h-5', `text-${column.color}`)} />
                                         </div>
                                         <div>
-                                            <h3 className="font-bold text-white">{column.title}</h3>
+                                            <h3 className="font-bold text-slate-800">{column.title}</h3>
                                             <p className="text-xs text-slate-500">{columnRequests.length} items</p>
                                         </div>
                                     </div>
@@ -536,16 +529,16 @@ export function RequestsPage() {
                                                     "h-40 flex flex-col items-center justify-center rounded-2xl border-2 border-dashed transition-colors",
                                                     isDragOver
                                                         ? "border-primary/50 bg-primary/5"
-                                                        : "border-white/[0.06] bg-white/[0.01]"
+                                                        : "border-slate-200 bg-slate-50/50"
                                                 )}
                                             >
                                                 <ColumnIcon className={cn(
                                                     "w-8 h-8 mb-3 transition-colors",
-                                                    isDragOver ? "text-primary" : "text-slate-700"
+                                                    isDragOver ? "text-primary" : "text-slate-300"
                                                 )} />
                                                 <span className={cn(
                                                     "text-sm transition-colors",
-                                                    isDragOver ? "text-primary" : "text-slate-600"
+                                                    isDragOver ? "text-primary" : "text-slate-400"
                                                 )}>
                                                     {isDragOver ? "Drop here" : "No requests"}
                                                 </span>
@@ -581,7 +574,7 @@ export function RequestsPage() {
                         placeholder="Provide detailed information about the problem..."
                         rows={4}
                         value={newRequestForm.description}
-                        onChange={(e) => setNewRequestForm(prev => ({ ...prev, description: e.target.value }))}
+                        onChange={(e: { target: { value: any; }; }) => setNewRequestForm(prev => ({ ...prev, description: e.target.value }))}
                     />
                     <div className="grid grid-cols-2 gap-4">
                         <Select
@@ -627,14 +620,14 @@ export function RequestsPage() {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <div className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Category</div>
-                                        <div className="text-sm font-medium text-white flex items-center gap-2">
+                                        <div className="text-sm font-medium text-slate-900 flex items-center gap-2">
                                             <Wrench className="w-4 h-4 text-primary" />
                                             {categoryLabels[newRequestForm.category] || newRequestForm.category}
                                         </div>
                                     </div>
                                     <div>
                                         <div className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Assigned Team</div>
-                                        <div className="text-sm font-medium text-white flex items-center gap-2">
+                                        <div className="text-sm font-medium text-slate-900 flex items-center gap-2">
                                             <User className="w-4 h-4 text-warning" />
                                             {newRequestForm.teamName || 'No team assigned'}
                                         </div>
@@ -685,10 +678,10 @@ export function RequestsPage() {
                             <AlertTriangle className="w-6 h-6 text-danger flex-shrink-0 mt-0.5" />
                             <div>
                                 <h4 className="font-semibold text-danger mb-1">Warning: Irreversible Action</h4>
-                                <p className="text-sm text-slate-400">
+                                <p className="text-sm text-slate-500">
                                     Moving this request to <strong className="text-danger">Scrap</strong> will:
                                 </p>
-                                <ul className="mt-2 space-y-1 text-sm text-slate-400">
+                                <ul className="mt-2 space-y-1 text-sm text-slate-500">
                                     <li>• Mark the equipment as <strong className="text-danger">SCRAPPED</strong></li>
                                     <li>• Flag the equipment as no longer usable</li>
                                     <li>• Log this action in the maintenance history</li>
@@ -698,20 +691,20 @@ export function RequestsPage() {
                     </div>
 
                     {pendingScrapRequest && (
-                        <div className="p-4 bg-white/[0.02] border border-white/[0.06] rounded-xl">
+                        <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl">
                             <div className="text-xs text-slate-500 uppercase tracking-wider mb-2">Equipment Details</div>
                             <div className="space-y-2">
                                 <div className="flex justify-between">
-                                    <span className="text-slate-400">Name:</span>
-                                    <span className="text-white font-medium">{pendingScrapRequest.equipment.name}</span>
+                                    <span className="text-slate-500">Name:</span>
+                                    <span className="text-slate-900 font-medium">{pendingScrapRequest.equipment.name}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-slate-400">Serial:</span>
-                                    <span className="text-white font-mono">{pendingScrapRequest.equipment.serialNumber}</span>
+                                    <span className="text-slate-500">Serial:</span>
+                                    <span className="text-slate-900 font-mono">{pendingScrapRequest.equipment.serialNumber}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-slate-400">Request:</span>
-                                    <span className="text-white">{pendingScrapRequest.subject}</span>
+                                    <span className="text-slate-500">Request:</span>
+                                    <span className="text-slate-900">{pendingScrapRequest.subject}</span>
                                 </div>
                             </div>
                         </div>
@@ -761,20 +754,20 @@ export function RequestsPage() {
                     </div>
 
                     {pendingCompleteRequest && (
-                        <div className="p-4 bg-white/[0.02] border border-white/[0.06] rounded-xl">
+                        <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl">
                             <div className="text-xs text-slate-500 uppercase tracking-wider mb-2">Request Details</div>
                             <div className="space-y-2">
                                 <div className="flex justify-between">
-                                    <span className="text-slate-400">Subject:</span>
-                                    <span className="text-white font-medium">{pendingCompleteRequest.subject}</span>
+                                    <span className="text-slate-500">Subject:</span>
+                                    <span className="text-slate-900 font-medium">{pendingCompleteRequest.subject}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-slate-400">Equipment:</span>
-                                    <span className="text-white">{pendingCompleteRequest.equipment.name}</span>
+                                    <span className="text-slate-500">Equipment:</span>
+                                    <span className="text-slate-900">{pendingCompleteRequest.equipment.name}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-slate-400">Priority:</span>
-                                    <span className="text-white">{pendingCompleteRequest.priority}</span>
+                                    <span className="text-slate-500">Priority:</span>
+                                    <span className="text-slate-900">{pendingCompleteRequest.priority}</span>
                                 </div>
                             </div>
                         </div>
@@ -793,7 +786,7 @@ export function RequestsPage() {
                                 placeholder="e.g., 2.5"
                                 value={hoursSpent}
                                 onChange={(e) => setHoursSpent(e.target.value)}
-                                className="w-full pl-12 pr-16 py-4 bg-white/[0.03] border border-white/[0.06] rounded-xl text-lg text-white placeholder:text-slate-600 focus:outline-none focus:border-success/50 transition-colors"
+                                className="w-full pl-12 pr-16 py-4 bg-slate-50 border border-slate-200 rounded-xl text-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-success/50 transition-colors"
                             />
                             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm">hours</span>
                         </div>
@@ -890,7 +883,7 @@ function RequestCard({ request, isOverdue: overdueStatus, onMoveToNext, currentS
                 {/* Title */}
                 <h4 className={cn(
                     "font-semibold mb-2 transition-colors line-clamp-2",
-                    overdueStatus ? "text-danger" : "text-white group-hover:text-primary"
+                    overdueStatus ? "text-danger" : "text-slate-900 group-hover:text-primary"
                 )}>
                     {request.subject}
                 </h4>
@@ -905,7 +898,7 @@ function RequestCard({ request, isOverdue: overdueStatus, onMoveToNext, currentS
                 </div>
 
                 {/* Footer */}
-                <div className="pt-4 border-t border-white/[0.05] flex items-center justify-between">
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
                     <div className="flex items-center gap-2 text-xs text-slate-500">
                         <Clock className={cn("w-3.5 h-3.5", overdueStatus && "text-danger")} />
                         <span className={cn(overdueStatus && "text-danger font-medium")}>
@@ -939,7 +932,7 @@ function RequestCard({ request, isOverdue: overdueStatus, onMoveToNext, currentS
                                     {request.assignedTo.name}
                                 </span>
                                 <div
-                                    className="w-8 h-8 rounded-lg flex items-center justify-center text-[10px] font-bold text-white shadow-lg border border-white/10"
+                                    className="w-8 h-8 rounded-lg flex items-center justify-center text-[10px] font-bold text-white shadow-lg border border-white/20"
                                     style={{ backgroundColor: stringToColor(request.assignedTo.name) }}
                                     title={`Assigned to: ${request.assignedTo.name}`}
                                 >
@@ -948,10 +941,10 @@ function RequestCard({ request, isOverdue: overdueStatus, onMoveToNext, currentS
                             </div>
                         ) : (
                             <button
-                                className="w-8 h-8 rounded-lg bg-white/[0.03] border border-dashed border-white/10 flex items-center justify-center hover:border-primary/50 transition-colors"
+                                className="w-8 h-8 rounded-lg bg-slate-50 border border-dashed border-slate-300 flex items-center justify-center hover:border-primary/50 transition-colors"
                                 title="Assign technician"
                             >
-                                <User className="w-4 h-4 text-slate-600" />
+                                <User className="w-4 h-4 text-slate-400" />
                             </button>
                         )}
                     </div>

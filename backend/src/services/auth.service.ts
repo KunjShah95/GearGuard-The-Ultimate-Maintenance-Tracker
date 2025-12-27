@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import prisma from '../config/database.js';
 import { env } from '../config/env.js';
 
+
 export const register = async (email: string, password: string, name: string) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -42,3 +43,4 @@ export const login = async (email: string, password: string) => {
     const { password: _, ...userWithoutPassword } = user;
     return { user: userWithoutPassword, token };
 };
+

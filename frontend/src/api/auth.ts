@@ -15,3 +15,5 @@ export const getMe = async (): Promise<User> => {
     const { data } = await client.get<User>('/auth/me');
     return data;
 };
+
+
