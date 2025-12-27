@@ -4,382 +4,534 @@
 
 ## 📋 Table of Contents
 
-1. [Project Overview](#-project-overview)
-2. [Key Features](#-key-features)
-   - [Authentication & Security](#authentication--security)
-   - [Dashboard & Analytics](#dashboard--analytics)
-   - [Equipment Management](#equipment-management)
-   - [Maintenance Requests](#maintenance-requests)
-   - [Team Management](#team-management)
-   - [Reporting Module](#reporting-module)
-3. [Technology Stack](#-technology-stack)
-   - [Frontend Architecture](#frontend-architecture)
-   - [Backend Architecture](#backend-architecture)
-   - [Database Design](#database-design)
-4. [System Architecture](#-system-architecture)
-5. [Prerequisites](#-prerequisites)
-6. [Installation & Setup](#-installation--setup)
-   - [Cloning the Repository](#1-cloning-the-repository)
-   - [Backend Setup](#2-backend-setup)
-   - [Frontend Setup](#3-frontend-setup)
-   - [Database Initialization](#4-database-initialization)
-7. [Environment Configuration](#-environment-configuration)
-8. [Running the Application](#-running-the-application)
-9. [API Documentation](#-api-documentation)
-   - [Auth Endpoints](#auth-endpoints)
-   - [Equipment Endpoints](#equipment-endpoints)
-   - [Requests Endpoints](#requests-endpoints)
-   - [Teams Endpoints](#teams-endpoints)
-10. [Database Schema](#-database-schema)
-11. [Project Structure](#-project-structure)
-12. [Contributing](#-contributing)
-13. [License](#-license)
-14. [Contact & Support](#-contact--support)
+1. [📖 Project Overview](#-project-overview)
+    - [The Problem](#the-problem)
+    - [The Solution](#the-solution)
+    - [Target Audience](#target-audience)
+2. [✨ Key Features](#-key-features)
+    - [🔐 Authentication & Security](#-authentication--security)
+    - [📊 Dashboard & Analytics](#-dashboard--analytics)
+    - [🚜 Equipment Management](#-equipment-management)
+    - [🔧 Maintenance Requests](#-maintenance-requests)
+    - [👥 Team & User Management](#-team--user-management)
+    - [📈 Reports & Exporting](#-reports--exporting)
+3. [💻 Technology Stack](#-technology-stack)
+    - [Frontend Architecture](#frontend-architecture)
+    - [Backend Architecture](#backend-architecture)
+    - [Database & ORM](#database--orm)
+    - [DevOps & Tools](#devops--tools)
+4. [🏗 System Architecture](#-system-architecture)
+    - [High-Level Design](#high-level-design)
+    - [Data Flow](#data-flow)
+    - [Design Patterns Used](#design-patterns-used)
+5. [✅ Prerequisites](#-prerequisites)
+6. [🚀 Installation & Setup Guide](#-installation--setup-guide)
+    - [1. Clone the Codebase](#1-clone-the-codebase)
+    - [2. Backend Configuration](#2-backend-configuration)
+    - [3. Database Setup](#3-database-setup)
+    - [4. Frontend Configuration](#4-frontend-configuration)
+    - [5. Running Locally](#5-running-locally)
+7. [🔧 Environment Variables](#-environment-variables)
+8. [📡 API Documentation](#-api-documentation)
+    - [Authentication Endpoints](#authentication-endpoints)
+    - [Equipment Endpoints](#equipment-endpoints)
+    - [Maintenance Request Endpoints](#maintenance-request-endpoints)
+    - [Team Endpoints](#team-endpoints)
+9. [🗄 Database Schema Design](#-database-schema-design)
+    - [Entity Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
+    - [Model Details](#model-details)
+10. [📂 Project Structure Deep Dive](#-project-structure-deep-dive)
+    - [Backend Structure](#backend-structure)
+    - [Frontend Structure](#frontend-structure)
+11. [🛠 Development Guide](#-development-guide)
+    - [Coding Standards](#coding-standards)
+    - [Adding a New Feature](#adding-a-new-feature)
+    - [Testing](#testing)
+12. [🔮 Future Roadmap](#-future-roadmap)
+13. [🤝 Contributing](#-contributing)
+14. [📄 License](#-license)
+15. [📞 Contact & Support](#-contact--support)
 
 ---
 
-## 🚀 Project Overview
+## 📖 Project Overview
 
-**GearGuard** is a state-of-the-art **Industrial Maintenance Management System (IMMS)** designed to streamline the complex workflows of tracking machinery, scheduling maintenance, and managing technical teams in a manufacturing or industrial setting.
+### The Problem
+In the modern industrial sector, **unplanned downtime** is a silent killer of productivity. Factories and plants often rely on disjointed systems—spreadsheets, whiteboards, and legacy software—to track equipment health and maintenance schedules. This leads to:
+-   **Inefficiency:** Technicians don't know what to prioritize.
+-   **Data Silos:** Managers lack a real-time view of the floor.
+-   **Compliance Risks:** Missed preventive maintenance schedules.
+-   **High Costs:** Reactive repairs are 10x more expensive than preventive ones.
 
-Built for the **Odoo Hackathon (Adani)**, this solution addresses the critical need for zero-downtime manufacturing by providing real-time visibility into equipment health, automating maintenance workflows, and ensuring that the right technicians are assigned to the right tasks at the right time.
+### The Solution
+**GearGuard** is a comprehensive **Industrial Maintenance Management System (IMMS)** designed to solve these challenges. It serves as a unified digital platform that connects:
+1.  **Assets**: A digital twin of every machine.
+2.  **People**: Technicians, managers, and admins.
+3.  **Processes**: Work orders, schedules, and approvals.
 
-GearGuard replaces legacy spreadsheet-based tracking with a modern, reactive, and beautiful web application that works seamlessly across desktop and tablet devices, empowering floor managers and technicians alike.
+By digitizing these workflows, GearGuard enables "Zero Downtime" manufacturing, ensuring critical assets are monitored, maintained, and repaired efficiently.
+
+### Target Audience
+-   **Plant Managers**: For high-level visibility of operations.
+-   **Maintenance Supervisors**: To assign teams and track SLAs.
+-   **Technicians**: To view their daily tasks and log work.
+-   **Auditors**: To verify maintenance history for compliance.
 
 ---
 
 ## ✨ Key Features
 
-GearGuard is packed with enterprise-grade features designed for scalability and ease of use.
+GearGuard is built with a "Premium Enterprise" aesthetic and functionality.
 
-### Authentication & Security
-- **Secure Login/Registration**: Role-based access control (RBAC) ensures users only see what they are supposed to see.
-- **JWT Authentication**: Stateless, secure token-based authentication (JSON Web Tokens) for session management.
-- **Password Encryption**: All passwords are hashed using **Bcrypt** before storage.
-- **Role Management**: Distinguish between `ADMIN`, `MANAGER`, `TECHNICIAN`, and generic `USER` roles.
+### 🔐 Authentication & Security
+Security is paramount in industrial systems.
+-   **JWT (JSON Web Tokens)**: We use stateless authentication. Upon login, the client receives an `accessToken` valid for the session.
+-   **Bcrypt Hashing**: User passwords are irreversibly hashed before storage using `bcrypt` with a salt round of 10.
+-   **Role-Based Access Control (RBAC)**:
+    -   `ADMIN`: Full system access, invite users, delete data, configure system settings.
+    -   `MANAGER`: Can create equipment, assign teams, and view all reports.
+    -   `TECHNICIAN`: Read-only view of assets, can only update assigned requests.
+    -   `USER`: Basic view access (if applicable).
+-   **Protected Routes**: Frontend `AuthGuard` components prevent unauthorized access to specific pages.
 
-### Dashboard & Analytics
-- **Real-Time Overview**: View critical KPIs such as "Open Requests", "Equipment Status", and "Team Availability" at a glance.
-- **Visual Graphs**: Interactive charts showing maintenance trends over time.
-- **Actionable Insights**: Highlights overdue maintenance and critical failures immediately upon login.
+### 📊 Dashboard & Analytics
+The landing command center for operations.
+-   **KPI Cards**: Immediate visibility into:
+    -   Total Equipment Count
+    -   Open Maintenance Requests
+    -   Critical Alerts
+    -   Team Efficiency
+-   **Interactive Charts**:
+    -   *Equipment Health Index*: A time-series graph showing uptime trends.
+    -   *Work Order Distribution*: Pie charts breaking down request types (Corrective vs. Preventive).
+-   **Real-Time Alerts**: A scrolling notifications panel for immediate attention items.
 
-### Equipment Management
-- **Centralized Asset Registry**: Maintain a digital twin of all physical assets (Machinery, Vehicles, HVAC, etc.).
-- **Detailed Asset Profiles**: Store metadata like Serial Numbers, Purchase Dates, Warranty Expiry, and Location.
-- **Status Tracking**: Monitor whether equipment is `OPERATIONAL`, `UNDER_MAINTENANCE`, `SCRAPPED`, or `DECOMMISSIONED`.
-- **Category Filtering**: Easily filter assets by category (e.g., Electrical, Plumbing, IT).
+### 🚜 Equipment Management
+A full lifecycle management module for physical assets.
+-   **Asset Registry**: CRUD operations for equipment.
+-   **Detailed Metadata**:
+    -   *Static Data*: Name, Serial Number, Model, Purchase Date.
+    -   *Dynamic Data*: Current Status (`OPERATIONAL`, `DOWN`, `MAINTENANCE`), Next Scheduled Service.
+-   **Categorization**: Filter assets by 'HVAC', 'Electrical', 'Mechanical', etc.
+-   **QR Code Integration** (Planned): Fields available to link physical QR codes to digital records.
 
-### Maintenance Requests
-- **Kanban Board View**: Drag-and-drop interface to manage request lifecycles (New -> In Progress -> Repaired).
-- **Priority Handling**: Flag requests as `LOW`, `MEDIUM`, `HIGH`, or `CRITICAL`.
-- **Corrective & Preventive**: Support for both breakdown repairs and scheduled maintenance.
-- **Smart Assignment**: Automatically or manually assign requests to specialized teams or specific technicians.
+### 🔧 Maintenance Requests
+The core workflow engine of GearGuard.
+-   **Kanban Board**: A Trello-like drag-and-drop interface for moving requests through states: `NEW` -> `IN_PROGRESS` -> `PENDING_PARTS` -> `COMPLETED`.
+-   **Smart Prioritization**: Algorithms to highlight `CRITICAL` requests that have been open too long.
+-   **Work Order Details**:
+    -   Subject & Description.
+    -   Assigned Technician.
+    -   Estimated vs. Actual Duration.
+    -   Spare Parts Used.
+-   **Validation**: Logic to prevent closing a request without a resolution note.
 
-### Team Management
-- **Department Organization**: Create and manage specialized maintenance teams (e.g., "Electrical Repair Unit").
-- **Member Roles**: Assign Team Leads and Members.
-- **Workload Balancing**: View how many active requests strictly assigned per team.
+### 👥 Team & User Management
+Organizing the workforce.
+-   **Skill-Based Teams**: Create teams like "Alpha Squad - Electrical" or "Beta Squad - HVAC".
+-   **Workload Balancing**: Visual indicators showing if a team is over-capacity before assignment.
+-   **Profile Management**: Users can update their specialization and contact details.
 
-### Reporting Module
-- **Custom Reports**: Generate detailed reports on equipment downtime, team performance, and request volume.
-- **Export Functionality**: Ability to export data for external analysis (CSV/PDF support planned).
-- **Search & Filter**: Powerful search capabilities to dig into historical data.
+### 📈 Reports & Exporting
+Data-driven decision making.
+-   **Downtime Analysis**: Calculate MTTR (Mean Time To Repair) and MTBF (Mean Time Between Failures).
+-   **Cost Reporting**: estimated costs based on hours logged.
+-   **Export**: One-click generic CSV export for further analysis in Excel/PowerBI.
 
 ---
 
-## 🛠 Technology Stack
+## 💻 Technology Stack
 
-We chose a modern, type-safe stack to ensure reliability and developer velocity.
+We selected a stack that balances **Developer Experience (DX)** with **Performance** and **Type Safety**.
 
 ### Frontend Architecture
-- **Framework**: [React](https://react.dev/) (v18) with [Vite](https://vitejs.dev/) for lightning-fast HMR and builds.
-- **Language**: [TypeScript](https://www.typescriptlang.org/) for strict type safety and cleaner code.
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) for utility-first, responsive design.
-- **Animations**: [Framer Motion](https://www.framer.com/motion/) for smooth, engaging UI transitions.
-- **Icons**: [Lucide React](https://lucide.dev/) for consistent, modern iconography.
-- **Routing**: [React Router DOM](https://reactrouter.com/) for declarative client-side routing.
-- **State Management**: React Context API & Hooks.
+| Tech | Purpose | Why we chose it |
+| :--- | :--- | :--- |
+| **React 18** | UI Library | Component-based, vast ecosystem, declarative UI. |
+| **TypeScript** | Language | Static typing prevents 90% of runtime errors. |
+| **Vite** | Build Tool | Instant server start, lightning-fast HMR (Hot Module Replacement). |
+| **Tailwind CSS** | Styling | Utility-first CSS allows for rapid prototyping and consistent design tokens. |
+| **Framer Motion** | Animations | Production-ready animation library for complex gestures and transitions. |
+| **React Router 6** | Routing | Standard for client-side routing with nested route support. |
+| **Lucide React** | Icons | Lightweight, consistent, and tree-shakeable SVG icons. |
+| **Axios** | HTTP Client | Better error handling and interceptors compared to `fetch`. |
+| **Zustand** | State Mgmt | (If applicable) Minimalist alternative to Redux for global state. |
 
 ### Backend Architecture
-- **Runtime**: [Node.js](https://nodejs.org/) (LTS) & [Express.js](https://expressjs.com/) for a robust REST API.
-- **Language**: TypeScript for shared types with the frontend and backend safety.
-- **Validation**: [Zod](https://zod.dev/) for rigorous runtime request validation.
-- **Security**: `cors`, `helmet` (recommended), `bcrypt`, `jsonwebtoken`.
+| Tech | Purpose | Why we chose it |
+| :--- | :--- | :--- |
+| **Node.js** | Runtime | Non-blocking I/O, perfect for real-time applications. |
+| **Express.js** | Framework | Unopinionated, flexible, and robust standard for Node APIs. |
+| **TypeScript** | Language | Shared types with frontend (DTOs) ensures contract safety. |
+| **Zod** | Validation | Runtime schema validation for request bodies and env variables. |
+| **Bcrypt** | Security | Standard library for password hashing. |
+| **JWT** | Auth | Standard for stateless API authentication. |
+| **Cors** | Security | Handling Cross-Origin Resource Sharing logic. |
 
-### Database Design
-- **ORM**: [Prisma](https://www.prisma.io/) for intuitive data modeling and type-safe database queries.
-- **Database Engine**: **SQLite** (configured for easy local dev) / **PostgreSQL** (production ready).
-- **Schema Management**: Automated migrations via Prisma Migrate.
+### Database & ORM
+| Tech | Purpose | Why we chose it |
+| :--- | :--- | :--- |
+| **SQLite** | Database | Zero-configuration SQL engine. Perfect for hackathons/dev/embedded. |
+| **Prisma ORM** | Data Access | Best-in-class TypeScript auto-completion and migration management. |
+| **Prisma Studio** | GUI | Built-in database visualizer. |
 
 ---
 
 ## 🏗 System Architecture
 
-The application follows a standard **Client-Server** architecture:
-
-1.  **Client (Frontend)**: Runs in the user's browser. Makes HTTP calls (`fetch`/`axios`) to the backend API.
-2.  **Server (Backend)**: Exposes a RESTful API at `/api`. Handles business logic, auth, and database interactions.
-3.  **Database**: Stores all persistent data. Managed via Prisma Client.
+### High-Level Design
+The system follows a classic **Monolithic REST API** pattern with a **Single Page Application (SPA)** frontend.
 
 ```mermaid
 graph TD
-    Client[React Frontend] <-->|REST API / JSON| Server[Express Backend]
-    Server <-->|Prisma Client| DB[(SQLite/Postgres Database)]
-    Server -->|Auth| JWT[JWT Token Issue/Verify]
+    User((User)) -->|HTTPS| CDN[CDN/Hosting]
+    CDN -->|Serve Static Files| Browser[React SPA]
+    
+    Browser -->|JSON REST Requests| API[Express API Gateway]
+    
+    subgraph "Backend Layer"
+        API -->|Validate| Middleware[Auth & Validation Middleware]
+        Middleware -->|Route| Controllers[Controllers]
+        Controllers -->|Business Logic| Services[Service Layer]
+        Services -->|Query| ORM[Prisma Client]
+    end
+    
+    subgraph "Data Layer"
+        ORM -->|SQL| DB[(SQLite Database)]
+    end
 ```
+
+### Data Flow
+1.  **Request**: User clicks "Create Request" on frontend.
+2.  **Validation (Client)**: React Hook Form validates inputs (non-empty, length).
+3.  **Transmission**: Axios sends `POST /api/requests` with Bearer Token.
+4.  **Gateway**: Express receives request. `cors` checks origin.
+5.  **Middleware**: `authenticateToken` validates JWT. `validateRequest` checks Zod schema.
+6.  **Controller**: Extracts body, calls `RequestService.create()`.
+7.  **Service**: Adds business logic (e.g., set default status to NEW, log activity).
+8.  **Database**: Prisma executes `INSERT INTO MaintenanceRequest...`.
+9.  **Response**: 201 Created sent back with the new object.
+10. **Update**: Frontend React Query / State updates the list locally.
 
 ---
 
 ## ✅ Prerequisites
 
-Before running the project, ensure you have the following installed on your machine:
+Ensure your development environment meets these requirements:
 
-1.  **Node.js**: Version 18.x or higher. [Download Here](https://nodejs.org/)
-2.  **npm** or **yarn**: Package manager (comes with Node.js).
-3.  **Git**: For version control.
-4.  **VS Code** (Optional): Recommended editor with ESLint and Prettier extensions.
+1.  **Operating System**: Windows 10/11, macOS, or Linux.
+2.  **Node.js**: Version **18.x** or **20.x** (LTS).
+    -   Verify with `node -v`
+3.  **npm**: Version **9.x** or higher.
+    -   Verify with `npm -v`
+4.  **Git**: For version control.
+5.  **VS Code Extensions** (Recommended):
+    -   ESLint
+    -   Prettier
+    -   Prisma
+    -   Tailwind CSS IntelliSense
 
 ---
 
-## 📦 Installation & Setup
+## 🚀 Installation & Setup Guide
 
-Follow these steps to get GearGuard running on your local machine.
-
-### 1. Cloning the Repository
+### 1. Clone the Codebase
+Start by getting the code on your local machine.
 
 ```bash
 git clone https://github.com/KunjShah95/odoo-hackathon-adani.git
 cd odoo-hackathon-adani
 ```
 
-### 2. Backend Setup
-
-The backend handles the API and database integration.
+### 2. Backend Configuration
+Set up the API server and database.
 
 ```bash
-# Navigate to backend directory
+# Move to backend folder
 cd backend
 
-# Install dependencies
+# Install NPM dependencies
 npm install
 
-# Initialize Environment Variables
+# Create environment file
+# Windows
+copy .env.example .env
+# Mac/Linux
 cp .env.example .env
-# Open .env and verify the configuration (see Environment Configuration section)
 
-# Run Database Migrations (creates the SQLite file)
+# Edit .env and set your secrets (see Environment Variables section below)
+```
+
+### 3. Database Setup
+Initialize the SQLite database using Prisma.
+
+```bash
+# Run migrations (This creates dev.db and applying SQL schema)
 npx prisma migrate dev --name init
 
-# (Optional) Seed the database with dummy data
+# (Optional) Seed the database with sample data
+# This creates default Admin/Manager users and sample equipment
 npm run prisma:seed
 ```
 
-### 3. Frontend Setup
+Start the backend server:
+```bash
+npm run dev
+# Output should say: "🚀 Server running in development mode on port 5000"
+```
 
-The frontend delivers the user interface.
+### 4. Frontend Configuration
+Set up the React application.
 
 ```bash
-# Open a new terminal tab/window
+# Open a NEW terminal window
 cd frontend
 
 # Install dependencies
 npm install
 
-# Start the development server
+# Start the dev server
 npm run dev
 ```
 
-### 4. Verification
-
-- Backend should be running on `http://localhost:5000` (or your configured port).
-- Frontend should be running on `http://localhost:5173`.
-- Open your browser to `http://localhost:5173` to see the application.
+### 5. Running Locally
+-   Open your browser to `http://localhost:5173`.
+-   Login with the seeded credentials (check `backend/prisma/seed.ts` for default logins, usually `admin@gearguard.com` / `password123`).
 
 ---
 
-## 🔧 Environment Configuration
+## 🔧 Environment Variables
 
-You need to configure the `.env` file in the `backend` directory.
+The application relies on these variables in `backend/.env`.
 
-### Backend `.env`
+| Variable | Description | Default / Example |
+| :--- | :--- | :--- |
+| `PORT` | The port the Express server listens on. | `5000` |
+| `NODE_ENV` | Environment mode (`development` or `production`). | `development` |
+| `DATABASE_URL` | Connection string for Prisma. | `"file:./dev.db"` |
+| `JWT_SECRET` | **CRITICAL**. String used to sign/verify JWTs. | `super_secret_key_123!` |
+| `CORS_ORIGIN` | Allowed frontend origin for CORS. | `http://localhost:5173` |
 
-```ini
-# Server Configuration
-PORT=5000
-NODE_ENV=development
-
-# Database Configuration (Defaults to local SQLite file)
-DATABASE_URL="file:./dev.db"
-
-# Authentication Secrets
-# WARNING: Change this in production!
-JWT_SECRET="gearguard-secret-key-CHANGE-THIS-IN-PROD"
-
-# Usage Settings
-ALLOWED_ORIGINS="http://localhost:5173"
-```
-
----
-
-## 🏃 Running the Application
-
-### Development Mode
-
-To run both servers in development mode (with "hot reload"):
-
-**Backend Terminal:**
-```bash
-npm run dev
-```
-*Uses `nodemon` to restart on file changes.*
-
-**Frontend Terminal:**
-```bash
-npm run dev
-```
-*Uses Vite to HMR changes instantly.*
-
-### Production Build
-
-To act like a production environment:
-
-1.  **Build Backend:**
-    ```bash
-    cd backend
-    npm run build
-    npm start
-    ```
-
-2.  **Build Frontend:**
-    ```bash
-    cd frontend
-    npm run build
-    npx vite preview
-    ```
+**Security Note**: Never commit `.env` to version control. It is already in `.gitignore`.
 
 ---
 
 ## 📡 API Documentation
 
-The backend exposes the following RESTful endpoints. All protected routes require a valid `Authorization: Bearer <token>` header.
+Below is a detailed specification of the primary API endpoints.
 
-### Auth Endpoints
-| Method | Endpoint | Description | Auth Required |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/api/auth/register` | Register a new user account | No |
-| `POST` | `/api/auth/login` | Log in and receive JWT token | No |
-| `GET` | `/api/auth/me` | Get current user's profile | Yes |
+### Authentication Endpoints
+
+#### `POST /api/auth/register`
+Create a new user account.
+*   **Body**:
+    ```json
+    {
+      "email": "jane@example.com",
+      "password": "strongpassword",
+      "name": "Jane Doe",
+      "role": "TECHNICIAN" // Optional, default USER
+    }
+    ```
+*   **Response**: `201 Created` with User object (minus password).
+
+#### `POST /api/auth/login`
+Authenticate and retrieve a token.
+*   **Body**:
+    ```json
+    {
+      "email": "jane@example.com",
+      "password": "strongpassword"
+    }
+    ```
+*   **Response**: `200 OK`
+    ```json
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsIn...",
+      "user": { "id": "...", "email": "..." }
+    }
+    ```
 
 ### Equipment Endpoints
-| Method | Endpoint | Description | Auth Required |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/equipment` | List all equipment | Yes |
-| `POST` | `/api/equipment` | Create new equipment | Yes (Mgr/Admin) |
-| `GET` | `/api/equipment/:id` | Get single equipment details | Yes |
-| `PUT` | `/api/equipment/:id` | Update equipment details | Yes (Mgr/Admin) |
-| `DELETE` | `/api/equipment/:id` | Delete equipment | Yes (Admin) |
 
-### Requests Endpoints
-| Method | Endpoint | Description | Auth Required |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/requests` | List all maintenance requests | Yes |
-| `POST` | `/api/requests` | Create a new request | Yes |
-| `PUT` | `/api/requests/:id/status` | Update request status (e.g. to DONE) | Yes |
-| `PUT` | `/api/requests/:id/assign` | Assign request to a user/team | Yes |
-| `GET` | `/api/requests/stats` | Get KPI stats for dashboard | Yes |
+#### `GET /api/equipment`
+List all equipment. Supports filtering.
+*   **Query Params**: `category` (optional), `status` (optional).
+*   **Headers**: `Authorization: Bearer <token>`
+*   **Response**: `200 OK` - Array of Equipment objects.
 
-### Teams Endpoints
-| Method | Endpoint | Description | Auth Required |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/teams` | List maintenance teams | Yes |
-| `POST` | `/api/teams` | Create a new team | Yes (Admin) |
-| `POST` | `/api/teams/:id/members` | Add member to team | Yes (Admin) |
+#### `POST /api/equipment`
+Register new equipment (Manager only).
+*   **Body**:
+    ```json
+    {
+      "name": "Hydraulic Press X1",
+      "serialNumber": "HPC-2024-001",
+      "category": "MACHINERY",
+      "location": "Floor B, Section 2",
+      "purchaseDate": "2023-01-15T00:00:00Z"
+    }
+    ```
 
----
+### Maintenance Request Endpoints
 
-## 🗄 Database Schema
+#### `GET /api/requests`
+Get all requests.
+*   **Response**: `200 OK`. Includes relations (`equipment`, `assignedTo`).
 
-The data model is defined in `prisma/schema.prisma`. Key models include:
+#### `POST /api/requests`
+Create a ticket.
+*   **Body**:
+    ```json
+    {
+      "subject": "Oil Leak in Engine",
+      "description": "Observed oil pool under unit.",
+      "priority": "HIGH",
+      "equipmentId": "clq3..."
+    }
+    ```
 
-### `User`
-Represents system users (Admins, Managers, Technicians).
-- `id`: Unique CUID.
-- `role`: Role based access (ADMIN, MANAGER, etc).
-- `teamMemberships`: Link to Maintenance Teams.
-
-### `Equipment`
-Represents physical assets.
-- `status`: Operational status enum.
-- `category`: Classification of equipment.
-- `maintenanceTeam`: The team creating default responsibility for this asset.
-
-### `MaintenanceRequest`
-The core work order.
-- `priority`: Urgency level.
-- `status`: Workflow state (NEW -> IN_PROGRESS -> REPAIRED).
-- `logs`: Audit trail of work done (Duration, completion date).
-
-### `MaintenanceTeam`
-Groups of users.
-- `specialization`: E.g., "High Voltage", "Hydraulics".
+#### `PATCH /api/requests/:id/status`
+Move a ticket on the Kanban board.
+*   **Body**: `{"status": "IN_PROGRESS"}`
 
 ---
 
-## 📂 Project Structure
+## 🗄 Database Schema Design
 
+### Entity Relationship Diagram (ERD)
+*   **User** (1) ↔ (N) **MaintenanceRequest** (Requested By / Assigned To)
+*   **User** (N) ↔ (M) **MaintenanceTeam** (Many users belong to many teams)
+*   **MaintenanceTeam** (1) ↔ (N) **Equipment** (Team manages Equipment)
+*   **Equipment** (1) ↔ (N) **MaintenanceRequest** (Ticket belongs to Equipment)
+
+### Model Details
+
+#### User
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `id` | String (CUID) | Primary Key. |
+| `email` | String | Unique identifier. |
+| `role` | Enum | `ADMIN`, `MANAGER`, `TECHNICIAN`. |
+
+#### Equipment
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `id` | String (CUID) | Primary Key. |
+| `status` | Enum | `OPERATIONAL`, `MAINTENANCE`, `SCRAP`. |
+| `category` | Enum | `ELECTRICAL`, `MECHANICAL`, `IT`, ... |
+| `location` | String | Physical location string. |
+
+#### MaintenanceRequest
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `priority` | Enum | `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`. |
+| `status` | Enum | `NEW`, `IN_PROGRESS`, `REPAIRED`. |
+| `duration` | Float | Hours spent on the task. |
+
+---
+
+## 📂 Project Structure Deep Dive
+
+We use a feature-folder/modular approach.
+
+### Backend Structure
 ```text
-odoo-hackathon-adani/
-├── backend/                # Backend Server Code
-│   ├── src/
-│   │   ├── config/         # Env usage and formatting
-│   │   ├── controllers/    # API Request Handlers
-│   │   ├── middleware/     # Auth & Error handling
-│   │   ├── routes/         # Express Route Definitions
-│   │   ├── services/       # Business Logic Layer
-│   │   └── types/          # Shared TypeScript Interfaces
-│   ├── prisma/
-│   │   ├── schema.prisma   # Database Model Definitions
-│   │   └── seed.ts         # Dummy Data Population
-│   └── package.json
-│
-├── frontend/               # Frontend Application Code
-│   ├── src/
-│   │   ├── components/     # Reusable UI Components (Cards, Buttons)
-│   │   ├── layouts/        # Page Layout Wrappers
-│   │   ├── pages/          # Full Page Views (Login, Dashboard)
-│   │   ├── types/          # TypeScript Definitions
-│   │   └── App.tsx         # Root Component & Routing
-│   ├── public/             # Static Assets
-│   └── tailwind.config.js  # Styling Configuration
+backend/
+├── prisma/
+│   ├── schema.prisma # The single source of truth for data models.
+│   └── seed.ts       # Script to populate dev database.
+├── src/
+│   ├── config/       # Env var parsing and constant definitions.
+│   ├── controllers/  # Request handlers. Input/Output logic only.
+│   ├── middleware/   # Authentication, error handling, logging.
+│   ├── routes/       # Express Router definitions.
+│   ├── services/     # Pure business logic, database calls.
+│   ├── types/        # TypeScript interfaces and global overrides.
+│   ├── utils/        # Helper functions (hashing, date formatting).
+│   ├── app.ts        # Express app setup (cors, middleware).
+│   └── index.ts      # Server entry point.
+└── package.json
+```
+
+### Frontend Structure
+```text
+frontend/
+├── src/
+│   ├── components/   #
+│   │   ├── common/   # Reusable atoms (Buttons, Inputs, Cards).
+│   │   ├── layout/   # Sidebar, Header, PageWrapper.
+│   │   └── features/ # Complex components (KanbanBoard, Charts).
+│   ├── contexts/     # React Contexts (AuthContext, ThemeContext).
+│   ├── hooks/        # Custom React Hooks (useAuth, useFetch).
+│   ├── pages/        # Full page views mapped to Routes.
+│   ├── services/     # Axios instances and API endpoint files.
+│   ├── styles/       # Global CSS and Tailwind directives.
+│   ├── types/        # Front-end specific TS definitions.
+│   ├── utils/        # Helper functions.
+│   └── App.tsx       # Root component and Router provider.
+└── tailwind.config.js
 ```
 
 ---
 
-## 👥 Contributing
+## 🛠 Development Guide
 
-We welcome contributions to GearGuard!
+### Coding Standards
+1.  **Naming**: Use `CamelCase` for components, `camelCase` for variables/functions.
+2.  **Files**: One component per file. Name file same as component.
+3.  **Commits**: Use Conventional Commits (e.g., `feat: add new login page`, `fix: request validation`).
+4.  **Types**: Avoid `any`. Define interfaces for all props and API responses.
 
-1.  **Fork** the repository.
-2.  **Create a branch** for your feature: `git checkout -b feature/amazing-feature`.
-3.  **Commit** your changes: `git commit -m 'Add some amazing feature'`.
-4.  **Push** to the branch: `git push origin feature/amazing-feature`.
-5.  **Open a Pull Request**.
+### Adding a New Feature
+1.  **Backend**:
+    -   Define Model in `schema.prisma`.
+    -   Run `npx prisma migrate dev`.
+    -   Create Service function in `services/`.
+    -   Create Controller in `controllers/`.
+    -   Add Route in `routes/`.
+2.  **Frontend**:
+    -   Create API function in `services/api.ts`.
+    -   Create UI Component in `components/`.
+    -   Add Page route in `App.tsx`.
 
-Please ensure your code follows the existing style, uses TypeScript, and that all linting checks pass.
+### Testing
+-   Currently, manual testing via Postman (Backend) and Browser (Frontend) is used.
+-   Planning to add `Jest` unit tests and `Cypress` E2E tests.
+
+---
+
+## 🔮 Future Roadmap
+
+-   [ ] **Mobile App**: React Native version for technicians on the go.
+-   [ ] **IoT Integration**: MQTT real-time sensor data from machines.
+-   [ ] **AI Prediction**: Predictive maintenance based on historical failure data.
+-   [ ] **Push Notifications**: Real-time browser alerts for critical failures.
+-   [ ] **Multi-Tenancy**: Serving multiple organizations from one instance.
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+1.  Fork the repository.
+2.  Create a feature branch: `git checkout -b feature/amazing-feature`.
+3.  Commit your changes: `git commit -m 'feat: add amazing feature'`.
+4.  Push to the branch: `git push origin feature/amazing-feature`.
+5.  Open a Pull Request.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
 ## 📞 Contact & Support
 
-**Team/Developer Logic**  
-Project maintained by **KunjShah95** for the Odoo Hackathon.
+**Team Logic** - Odoo Hackathon Participants
+-   **Kunj Shah** - Full Stack Developer
+-   **Project Link**: [GitHub Repo](https://github.com/KunjShah95/odoo-hackathon-adani)
 
-If you encounter issues, please check the [GitHub Issues](https://github.com/KunjShah95/odoo-hackathon-adani/issues) page or contact the team directly via the hackathon portal.
-
-Happy Coding! 🚀
+For any queries, raise an issue on GitHub or reach out via hackathon channels.
